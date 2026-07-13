@@ -327,7 +327,75 @@
         </div>
     </div>
 </section>
+<!-- START: Content Hero Image Block -->
+<div class="content-image-wrapper">
+    <div class="image-accent-bracket"></div>
+    <figure class="site-image-container">
+        <!-- Replace 'path/to/your-racing-media.jpg' with your asset path -->
+        <img src="path/to/your-racing-media.jpg" alt="Motorsport team testing on-track analytics" class="responsive-site-img" loading="lazy">
+        <figcaption class="image-telemetry-caption">
+            <span class="caption-marker">//</span> FIG. 04 — Dynamic Trackside Telemetry Systems Analysis
+        </figcaption>
+    </figure>
+</div>
 
+<style>
+    .content-image-wrapper {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 10;
+    }
+    .image-accent-bracket {
+        position: absolute;
+        top: -8px;
+        left: 12px;
+        width: 40px;
+        height: 40px;
+        border-top: 3px solid #Da2e29;
+        border-left: 3px solid #Da2e29;
+        pointer-events: none;
+    }
+    .site-image-container {
+        margin: 0;
+        padding: 0;
+        background: rgba(12, 14, 18, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 4px;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    .responsive-site-img {
+        width: 100%;
+        height: auto;
+        max-height: 550px;
+        object-fit: cover;
+        display: block;
+        opacity: 0.95;
+        transition: opacity 0.3s ease;
+    }
+    .site-image-container:hover .responsive-site-img {
+        opacity: 1;
+    }
+    .image-telemetry-caption {
+        font-family: Arial, sans-serif;
+        font-size: 0.85rem;
+        color: #b0b5c0;
+        background: rgba(7, 8, 10, 0.85);
+        padding: 15px 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        letter-spacing: 0.5px;
+    }
+    .caption-marker {
+        color: #Da2e29;
+        font-weight: bold;
+        font-family: 'Oswald', sans-serif;
+        margin-right: 4px;
+    }
+</style>
+<!-- END: Content Hero Image Block -->
 <style>
     .countdown-section {
         padding: 60px 20px;
