@@ -243,94 +243,27 @@
             </div>
         </section>
 
-       <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Motorsport</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Core Team Styles */
-        body {
-            font-family: 'Oswald', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-        }
+       <!-- SUPPORTER TIER -->
+        <section class="tier-section supporter">
+            <div class="tier-header">// Team Supporters</div>
+            <div class="logo-grid">
+                <div class="sponsor-card">
+                    <img src="images/placeholder-logo.png" alt="Sponsor Logo">
+                    <div class="sponsor-name">Supporter Brand A</div>
+                </div>
+            </div>
+        </section>
 
-        /* Sticky Header */
-        .top-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 70px;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a {
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 700;
-            font-style: italic;
-            text-transform: uppercase;
-            color: #ffffff;
-            letter-spacing: 1.5px;
-            padding: 10px 15px;
-            transition: all 0.2s ease;
-            position: relative;
-        }
-        .nav-links a.active { color: #Da2e29; }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
-            bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
-        }
-        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
-        .nav-links a:hover { color: #Da2e29; }
-
-        /* Main Section Container */
-        main {
-            padding: 120px 50px 50px 50px;
-            max-width: 600px; /* Constrains form width to look professional centered */
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-style: italic;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-            color: #ffffff;
-            border-left: 5px solid #Da2e29;
-            padding-left: 15px;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: #a0a0a0; 
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            padding-left: 20px;
-        } 
+        <!-- JOIN US TIER / CALL TO ACTION -->
+        <section class="tier-section supporter" style="margin-top: 60px; border-color: rgba(218, 46, 41, 0.2);">
+            <div class="tier-header">// Interested in becoming a sponsor?</div>
+            <div style="font-family: Arial, sans-serif; color: #d1d5db; font-size: 1.2rem; padding-left: 15px; margin-top: 15px;">
+                Connect with our team directly:
+                <div style="font-family: 'Oswald', Arial, sans-serif; font-size: 1.5rem; font-weight: 700; font-style: italic; color: #Da2e29; margin-top: 15px; letter-spacing: 1px;">
+                    EMAIL: <a href="mailto:yourteam@email.com" style="color: #ffffff; text-decoration: none; border-bottom: 1px dashed #Da2e29; transition: color 0.2s;" onmouseover="this.style.color='#Da2e29'" onmouseout="this.style.color='#ffffff'">yourteam@email.com</a>
+                </div>
+            </div>
+        </section>
     </main>
-
 </body>
 </html>
