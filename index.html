@@ -290,43 +290,6 @@
             document.getElementById('shard7').style.transform = `translateX(${scrollPercent * 15}px)`;
             document.getElementById('shard8').style.transform = `translateX(${scrollPercent * -75}px) skewX(${scrollPercent * -2}deg)`;
         }
-
-        // Window interaction event connections
-        window.addEventListener('scroll', updateMultiLayerPaddock);
-        window.addEventListener('resize', updateMultiLayerPaddock);
-        document.addEventListener("DOMContentLoaded", updateMultiLayerPaddock);
-    </script>
-<section class="countdown-section">
-    <div class="countdown-container">
-        <div class="countdown-header">
-            <span class="live-indicator"></span>
-            <h2>2026 FSAE Competition Countdown</h2>
-            <p class="target-location">// Formula Student Australasian Finals</p>
-        </div>
-        
-        <div class="timer-grid">
-            <div class="timer-segment">
-                <div class="timer-number" id="days">00</div>
-                <div class="timer-label">Days</div>
-            </div>
-            <div class="timer-divider">:</div>
-            <div class="timer-segment">
-                <div class="timer-number" id="hours">00</div>
-                <div class="timer-label">Hours</div>
-            </div>
-            <div class="timer-divider">:</div>
-            <div class="timer-segment">
-                <div class="timer-number" id="minutes">00</div>
-                <div class="timer-label">Mins</div>
-            </div>
-            <div class="timer-divider">:</div>
-            <div class="timer-segment">
-                <div class="timer-number" id="seconds">00</div>
-                <div class="timer-label">Secs</div>
-            </div>
-        </div>
-    </div>
-</section>
 <!-- START: Content Hero Image Block -->
 <div class="content-image-wrapper">
     <div class="image-accent-bracket"></div>
@@ -396,6 +359,43 @@
     }
 </style>
 <!-- END: Content Hero Image Block -->
+        // Window interaction event connections
+        window.addEventListener('scroll', updateMultiLayerPaddock);
+        window.addEventListener('resize', updateMultiLayerPaddock);
+        document.addEventListener("DOMContentLoaded", updateMultiLayerPaddock);
+    </script>
+<section class="countdown-section">
+    <div class="countdown-container">
+        <div class="countdown-header">
+            <span class="live-indicator"></span>
+            <h2>2026 FSAE Competition Countdown</h2>
+            <p class="target-location">// Formula Student Australasian Finals</p>
+        </div>
+        
+        <div class="timer-grid">
+            <div class="timer-segment">
+                <div class="timer-number" id="days">00</div>
+                <div class="timer-label">Days</div>
+            </div>
+            <div class="timer-divider">:</div>
+            <div class="timer-segment">
+                <div class="timer-number" id="hours">00</div>
+                <div class="timer-label">Hours</div>
+            </div>
+            <div class="timer-divider">:</div>
+            <div class="timer-segment">
+                <div class="timer-number" id="minutes">00</div>
+                <div class="timer-label">Mins</div>
+            </div>
+            <div class="timer-divider">:</div>
+            <div class="timer-segment">
+                <div class="timer-number" id="seconds">00</div>
+                <div class="timer-label">Secs</div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <style>
     .countdown-section {
         padding: 60px 20px;
