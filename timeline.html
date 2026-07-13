@@ -85,34 +85,38 @@
             padding: 60px 0;
         }
 
-        /* The Ultra-Smooth Vertical Line */
-        .timeline-container::after {
+        /* Fixed structural background line (hidden behind the mask line) */
+        .timeline-container::before {
             content: '';
+            position: absolute;
+            width: 4px;
+            background: rgba(255, 255, 255, 0.05); /* Very faint trace line */
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            z-index: 1;
+        }
+
+        /* Dynamic Masking Line for Scroll Highlight */
+        .scroll-mask-line {
             position: absolute;
             width: 4px;
             top: 0;
             bottom: 0;
             left: 50%;
             margin-left: -2px;
-            z-index: 1;
-            
-            /* Ultra-smooth fade transition (long transparent zones at top and bottom) */
-            background: linear-gradient(
-                to bottom, 
-                rgba(255, 255, 255, 0) 0%, 
-                rgba(255, 255, 255, 0.2) 8%, 
-                rgba(255, 255, 255, 1) 25%, 
-                rgba(255, 255, 255, 1) 75%, 
-                rgba(255, 255, 255, 0.2) 92%, 
-                rgba(255, 255, 255, 0) 100++%
-            );
+            z-index: 2;
+            pointer-events: none;
+            /* Driven dynamically by JavaScript gradient updating values below */
+            background: linear-gradient(to bottom, rgba(218, 46, 41, 0) 0%, rgba(218, 46, 41, 0) 40%, rgba(218, 46, 41, 1) 50%, rgba(218, 46, 41, 0) 60%, rgba(218, 46, 41, 0) 100%);
         }
 
         /* Increased margins between rows to lengthen the track */
         .timeline-block {
             position: relative;
             width: 100%;
-            margin-bottom: 100px; /* Pushes the events further apart */
+            margin-bottom: 120px; 
             display: flex;
         }
 
@@ -156,6 +160,7 @@
             z-index: 10;
             letter-spacing: 1px;
             box-shadow: 0 0 12px rgba(218, 46, 41, 0.4);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         /* Card Typography */
@@ -214,7 +219,7 @@
 
         /* Responsive design for mobile devices */
         @media screen and (max-width: 768px) {
-            .timeline-container::after { left: 30px; }
+            .timeline-container::before, .scroll-mask-line { left: 30px; }
             .timeline-date-node { left: 30px; transform: translateX(-50%); top: -45px; }
             .timeline-block { width: 100%; margin-bottom: 80px; }
             .timeline-block:nth-child(even), .timeline-block:nth-child(odd) { justify-content: flex-end; }
@@ -224,7 +229,6 @@
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
     <nav class="top-navbar">
         <div class="nav-links">
             <a href="index.html">Home</a>
@@ -236,13 +240,12 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main>
         <h1>Our Legacy</h1>
 
         <div class="timeline-container">
+            <div class="scroll-mask-line" id="scrollLine"></div>
 
-            <!-- 2001 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2001</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -252,7 +255,6 @@
                 </div>
             </div>
 
-            <!-- 2002 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2002</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -262,7 +264,6 @@
                 </div>
             </div>
 
-            <!-- 2014 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2014</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -272,7 +273,6 @@
                 </div>
             </div>
 
-            <!-- 2015 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2015</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -282,7 +282,6 @@
                 </div>
             </div>
 
-            <!-- 2016 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2016</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -292,7 +291,6 @@
                 </div>
             </div>
 
-            <!-- 2017 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2017</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -302,7 +300,6 @@
                 </div>
             </div>
 
-            <!-- 2018 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2018</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -312,7 +309,6 @@
                 </div>
             </div>
 
-            <!-- 2019 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2019</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -322,7 +318,6 @@
                 </div>
             </div>
 
-            <!-- 2022 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2022</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -332,7 +327,6 @@
                 </div>
             </div>
 
-            <!-- 2023 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2023</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -342,7 +336,6 @@
                 </div>
             </div>
 
-            <!-- 2024 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2024</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -352,7 +345,6 @@
                 </div>
             </div>
 
-            <!-- 2025 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2025</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -362,7 +354,6 @@
                 </div>
             </div>
 
-            <!-- 2026 -->
             <div class="timeline-block">
                 <div class="timeline-date-node">2026</div>
                 <div class="timeline-card" onclick="toggleCard(this)">
@@ -379,6 +370,47 @@
         function toggleCard(card) {
             card.classList.toggle('expanded');
         }
+
+        // Real-time Track Scrolling Engine
+        function updateTimelineLine() {
+            const line = document.getElementById('scrollLine');
+            const container = document.querySelector('.timeline-container');
+            
+            // Get boundaries of the container relative to the screen view port
+            const rect = container.getBoundingClientRect();
+            const containerHeight = rect.height;
+            
+            // Determine the exact midpoint center line of the user's screen
+            const screenCenterY = window.innerHeight / 2;
+            
+            // Calculate where the screen center intersects our track line container in pixels
+            let activePixelY = screenCenterY - rect.top;
+            
+            // Convert pixels into percentage markers relative to total container height
+            let centerPercent = (activePixelY / containerHeight) * 100;
+            
+            // Define smooth fade ranges above and below center focus (12% spread either side)
+            let fadeTopStart = centerPercent - 12;
+            let fadeTopEnd = centerPercent - 2;
+            let fadeBottomStart = centerPercent + 2;
+            let fadeBottomEnd = centerPercent + 12;
+            
+            // Push updated CSS Linear Gradient syntax dynamically to the line layout
+            line.style.background = `linear-gradient(to bottom, 
+                rgba(218, 46, 41, 0) 0%, 
+                rgba(218, 46, 41, 0) ${fadeTopStart}%, 
+                rgba(218, 46, 41, 1) ${fadeTopEnd}%, 
+                rgba(218, 46, 41, 1) ${fadeBottomStart}%, 
+                rgba(218, 46, 41, 0) ${fadeBottomEnd}%, 
+                rgba(218, 46, 41, 0) 100%)`;
+        }
+
+        // Listeners to recalculate positions safely during active scrolling or sizing adjustments
+        window.addEventListener('scroll', updateTimelineLine);
+        window.addEventListener('resize', updateTimelineLine);
+        
+        // Run once on load to initialize positioning
+        document.addEventListener("DOMContentLoaded", updateTimelineLine);
     </script>
 
 </body>
