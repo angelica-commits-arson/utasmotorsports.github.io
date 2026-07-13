@@ -1,22 +1,99 @@
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About the Team | Motorsport</title>
+    <title>Welcome to the team</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Core Team Styles */
+        /* Base Styles using Team Colors: Black & White */
         body {
             font-family: 'Oswald', Arial, sans-serif;
             margin: 0;
-            padding: 50px;
-            background-color: #000000;
-            color: #ffffff;
+            padding: 0; /* Removed default padding so header can span full width */
+            background-color: #000000; /* Pure Black Background */
+            color: #ffffff; /* Pure White Text */
             letter-spacing: 0.5px;
+        }
+
+        /* Permanent Transparent Top Navigation Bar */
+        .top-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            
+            /* Layout styling */
+            display: flex;
+            justify-content: center; /* Centers the links across the page */
+            align-items: center;
+            height: 70px;
+            
+            /* Semi-transparent pure black overlay + futuristic blur effect */
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Nav Bar Links Containers */
+        .nav-links {
+            display: flex;
+            gap: 20px; /* Space between each tab */
+        }
+
+        /* Navigation Links Styling */
+        .nav-links a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            font-style: italic;
+            text-transform: uppercase;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            padding: 10px 15px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        /* Active tab indicator (Custom Team Red) */
+        .nav-links a.active {
+            color: #Da2e29;
+        }
+
+        /* Hover effect - Mechanical kinetic underline in Team Red */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #Da2e29;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .nav-links a:hover {
+            color: #Da2e29;
+        }
+
+        /* Main Content Area - Pushed down so it doesn't hide behind the navbar */
+        main {
+            padding: 120px 50px 50px 50px; /* Top padding accounts for 70px header + 50px spacing */
         }
 
         h1 {
@@ -24,120 +101,39 @@
             text-transform: uppercase;
             font-weight: 700;
             font-style: italic;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             letter-spacing: -1px;
             color: #ffffff;
-            border-left: 5px solid #Da2e29; /* Team Red */
+            border-left: 5px solid #Da2e29; /* Custom Team Red Accent */
             padding-left: 15px;
         }
 
-        /* Sidepanel Navigation Styles */
-        .menu-btn {
-            font-size: 24px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            position: fixed;
-            top: 30px;
-            right: 40px;
-            z-index: 1001;
-            color: #ffffff;
-            transition: transform 0.2s ease, color 0.2s ease;
-        }
-        .menu-btn:hover { transform: scale(1.1); color: #Da2e29; }
-
-        .side-panel {
-            height: 100%;
-            width: 300px;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            right: -320px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-            overflow-x: hidden;
-            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            padding-top: 80px;
-        }
-
-        .side-panel a {
-            padding: 18px 30px;
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: 700;
-            font-style: italic;
-            text-transform: uppercase;
-            color: #ffffff;
-            display: block;
-            letter-spacing: 1px;
-            transition: 0.2s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .side-panel a:hover {
-            color: #Da2e29;
-            background: rgba(255, 255, 255, 0.02);
-            padding-left: 40px;
-            border-bottom: 1px solid rgba(218, 46, 41, 0.3);
-        }
-
-        /* Highlights the current active page in the menu */
-        .side-panel a.active {
-            color: #Da2e29;
-            border-left: 4px solid #Da2e29;
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .side-panel .close-btn {
-            position: absolute;
-            top: 20px;
-            left: 25px;
-            font-size: 28px;
-            cursor: pointer;
-            color: #a0a0a0;
-        }
-        .side-panel .close-btn:hover { color: #ffffff; }
-        .side-panel.open { right: 0; }
-
-        /* Content layouts helper */
-        .content-block {
-            max-width: 800px;
-            margin-top: 40px;
-            font-family: Arial, sans-serif; /* Cleaner font for reading paragraphs */
-            color: #d1d5db;
-            line-height: 1.6;
+        p {
             font-size: 1.1rem;
+            color: #a0a0a0; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-left: 20px;
         }
     </style>
 </head>
 <body>
 
-    <button class="menu-btn" onclick="toggleNav()">☰ MENU</button>
-
-    <div id="mySidepanel" class="side-panel">
-        <span class="close-btn" onclick="toggleNav()">&times;</span>
-        <a href="index.html">Home</a>
-        <a href="about.html" class="active">About the team</a>
-        <a href="departments.html">Departments</a>
-        <a href="sponsors.html">Sponsors</a>
-        <a href="timeline.html">Timeline</a>
-        <a href="contact.html">Contact us</a>
-    </div>
+    <nav class="top-navbar">
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About the team</a>
+            <a href="departments.html">Departments</a>
+            <a href="sponsors.html">Sponsors</a>
+            <a href="timeline.html">Timeline</a>
+            <a href="contact.html">Contact us</a>
+        </div>
+    </nav>
 
     <main>
-        <h1>About the Team</h1>
-        <div class="content-block">
-            <p>Welcome to our team overview page. Formed with a passion for speed and engineering excellence...</p>
-            </div>
+        <h1>Welcome to the team</h1>
+        <p>// Currently under construction.</p>
     </main>
 
-    <script>
-        function toggleNav() {
-            const panel = document.getElementById("mySidepanel");
-            panel.classList.toggle("open");
-        }
-    </script>
 </body>
 </html>
