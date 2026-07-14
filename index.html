@@ -328,7 +328,116 @@
     </div>
 </section>
 <!-- START: Content Hero Image Block -->
-<div class="content-image-wrapper">
+<section class="welcome-hero-section">
+    <div class="welcome-hero-container">
+        <!-- Logo Column -->
+        <div class="hero-logo-frame">
+            <!-- Ensure you save your logo as 'utas-motorsport-logo.png' in your project folder -->
+            <img src="utas-motorsport-logo.png" alt="University of Tasmania Motorsport Logo" class="hero-brand-logo">
+        </div>
+        
+        <!-- Text Column -->
+        <div class="hero-text-content">
+            <div class="telemetry-tag">// SYSTEM INITIALIZED // RUNNING STATUS: ACTIVE</div>
+            <h2 class="welcome-heading">Welcome to UTAS Motorsport</h2>
+            <p class="welcome-body">
+                We are the University of Tasmania's premier Formula Student engineering team. By fusing advanced digital telemetry, high-yield powertrain optimization, and custom aerodynamic manufacturing, we push the physical limits of kinetic racing. Explore our systems, meet our drivers, and track our build timeline as we prepare for the world stage.
+            </p>
+        </div>
+    </div>
+</section>
+
+<style>
+    .welcome-hero-section {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 10;
+    }
+    .welcome-hero-container {
+        background: rgba(12, 14, 18, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-right: 4px solid #Da2e29; /* Red accent bar balancing the left logo */
+        padding: 40px;
+        border-radius: 4px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    
+    @media (min-width: 768px) {
+        .welcome-hero-container {
+            flex-direction: row;
+            align-items: center;
+            text-align: left;
+        }
+    }
+
+    /* Logo Styling */
+    .hero-logo-frame {
+        flex-shrink: 0;
+        width: 180px;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .hero-brand-logo {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.05));
+    }
+
+    /* Text Content Styling */
+    .hero-text-content {
+        flex: 1;
+    }
+    .telemetry-tag {
+        font-family: Arial, sans-serif;
+        font-size: 0.8rem;
+        color: #Da2e29;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        margin-bottom: 10px;
+    }
+    .welcome-heading {
+        font-size: 2.5rem;
+        text-transform: uppercase;
+        font-style: italic;
+        margin: 0 0 15px 0;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+    }
+    .welcome-body {
+        font-family: Arial, sans-serif;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #b0b5c0;
+        margin: 0;
+    }
+
+    /* Responsive scaling for mobile screens */
+    @media (max-width: 767px) {
+        .welcome-hero-container {
+            text-align: center;
+        }
+        .hero-logo-frame {
+            width: 140px;
+            height: 140px;
+        }
+        .welcome-heading {
+            font-size: 2rem;
+        }
+    }
+</style>
+<!-- END: Welcome Hero Block -->
+    <div class="content-image-wrapper">
     <div class="image-accent-bracket"></div>
     <figure class="site-image-container">
         <!-- Replace 'path/to/your-racing-media.jpg' with your asset path -->
