@@ -442,7 +442,6 @@
     <div class="content-image-wrapper">
     <div class="image-accent-bracket"></div>
     <figure class="site-image-container">
-        <!-- Replace 'path/to/your-racing-media.jpg' with your asset path -->
         <img src="bc8d0619-fff7-484e-baaf-9d86a1906114.jpg" alt="Motorsport team testing on-track analytics" class="responsive-site-img" loading="lazy">
         <figcaption class="image-telemetry-caption">
             <span class="caption-marker">//</span> FIG. 04 — Dynamic Trackside Telemetry Systems Analysis
@@ -450,6 +449,109 @@
     </figure>
 </div>
 
+<!-- START: Monochromatic Interactive Image Block -->
+<div class="interactive-media-wrapper">
+    <div class="media-frame">
+        <img src="bc8d0619-fff7-484e-baaf-9d86a1906114.jpg" alt="UTAS Motorsport vehicle analytics" class="chroma-shift-img" loading="lazy">
+        
+        <div class="media-telemetry-overlay">
+            <span class="status-node"></span>
+            <span class="overlay-label">SYSTEM_ENGAGED // CHROMA_PREVIEW</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .interactive-media-wrapper {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 10;
+    }
+    
+    .media-frame {
+        position: relative;
+        background: #07080a;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 4px;
+        overflow: hidden;
+        cursor: pointer;
+        /* Hardware acceleration styling */
+        transform: translateZ(0);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    
+    .chroma-shift-img {
+        width: 100%;
+        height: auto;
+        max-height: 550px;
+        object-fit: cover;
+        display: block;
+        
+        /* The Core Logic: Default to 100% grayscale and slightly dark/subdued */
+        filter: grayscale(100%) brightness(0.85) contrast(1.1);
+        
+        /* Smooth telemetry transition timing */
+        transition: filter 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        will-change: filter;
+    }
+    
+    /* Hover state: Restores full color and normalization instantly/smoothly */
+    .media-frame:hover .chroma-shift-img {
+        filter: grayscale(0%) brightness(1) contrast(1);
+    }
+    
+    /* Stylized UI overlay overlaying the asset */
+    .media-telemetry-overlay {
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        background: rgba(0, 0, 0, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        padding: 6px 12px;
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        pointer-events: none;
+        transition: border-color 0.3s ease;
+    }
+    
+    .media-frame:hover .media-telemetry-overlay {
+        border-color: #Da2e29;
+    }
+    
+    .status-node {
+        width: 6px;
+        height: 6px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .media-frame:hover .status-node {
+        background-color: #Da2e29;
+        box-shadow: 0 0 6px #Da2e29;
+    }
+    
+    .overlay-label {
+        font-family: Arial, sans-serif;
+        font-size: 0.7rem;
+        font-weight: bold;
+        color: #b0b5c0;
+        letter-spacing: 1px;
+        transition: color 0.3s ease;
+    }
+    
+    .media-frame:hover .overlay-label {
+        color: #ffffff;
+    }
+</style>
+<!-- END: Monochromatic Interactive Image Block -->
+    
 <style>
     .content-image-wrapper {
         max-width: 1200px;
