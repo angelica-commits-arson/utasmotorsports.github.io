@@ -18,11 +18,15 @@
         .glow-wash { position: fixed; bottom: -30%; right: -10%; width: 80vw; height: 80vh; background: radial-gradient(circle, rgba(218, 46, 41, 0.12) 0%, rgba(0, 0, 0, 0) 70%); z-index: -9; pointer-events: none; }
         
         /* Structural Parallax Geometric Shards */
-        .geo-shard { position: fixed; top: 0; height: 100vh; pointer-events: none; will-change: transform, opacity; transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.2, 1), opacity 0.15s linear; }
-        .shard-1 { right: 0; width: 65vw; background: rgba(218, 46, 41, 0.03); clip-path: polygon(45% 0%, 100% 0%, 90% 100%, 20% 100%); z-index: -8; }
+         .shard-1 { right: 0; width: 65vw; background: rgba(218, 46, 41, 0.03); clip-path: polygon(45% 0%, 100% 0%, 90% 100%, 20% 100%); z-index: -8; }
         .shard-2 { right: 8vw; width: 50vw; background: rgba(10, 11, 14, 0.8); border-left: 1px solid rgba(255, 255, 255, 0.02); clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 10% 100%); z-index: -7; }
         .shard-3 { right: 2vw; width: 42vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.1) 0%, rgba(0, 0, 0, 0) 80%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 30% 100%); z-index: -6; }
         .shard-4 { right: 0; width: 35vw; background: #07080a; border-left: 1px solid rgba(218, 46, 41, 0.1); clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%); z-index: -5; }
+        .shard-5 { right: 12vw; width: 20vw; background: linear-gradient(90deg, rgba(255, 255, 255, 0.01) 0%, rgba(218, 46, 41, 0.05) 100%); clip-path: polygon(0% 0%, 100% 0%, 60% 100%, 20% 100%); z-index: -4; }
+        .shard-6 { right: 0; width: 25vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.22) 0%, rgba(15, 3, 3, 0.6) 60%, rgba(0, 0, 0, 0.95) 100%); clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 5% 100%); backdrop-filter: brightness(0.95) contrast(1.05); z-index: -3; }
+        .shard-7 { right: -3vw; width: 18vw; background: rgba(5, 6, 8, 0.9); border-left: 1px solid rgba(255, 255, 255, 0.04); clip-path: polygon(45% 0%, 100% 0%, 80% 100%, 0% 100%); z-index: -2; }
+        .shard-8 { right: -8vw; width: 15vw; background: linear-gradient(90deg, rgba(218, 46, 41, 0.12) 0%, rgba(0, 0, 0, 0) 100%); clip-path: polygon(60% 0%, 100% 0%, 50% 100%, 0% 100%); z-index: -1; }
+
         
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
@@ -80,6 +84,8 @@
     <div class="paddock-bg"></div><div class="glow-wash"></div>
     <div class="geo-shard shard-1" id="shard1"></div><div class="geo-shard shard-2" id="shard2"></div>
     <div class="geo-shard shard-3" id="shard3"></div><div class="geo-shard shard-4" id="shard4"></div>
+    <div class="geo-shard shard-5" id="shard5"></div><div class="geo-shard shard-6" id="shard6"></div>
+    <div class="geo-shard shard-7" id="shard7"></div><div class="geo-shard shard-8" id="shard8"></div>
 
     <nav class="top-navbar">
         <div class="nav-links">
@@ -116,17 +122,24 @@
         </div>
     </main>
 
-    <script>
-        function updatePaddock() {
-            const total = document.documentElement.scrollHeight - window.innerHeight; if (total <= 0) return;
-            const pct = window.scrollY / total;
-            document.getElementById('shard1').style.transform = `translateX(${pct * -45}px) skewX(${pct * 1}deg)`;
-            document.getElementById('shard2').style.transform = `translateX(${pct * 25}px)`;
-            document.getElementById('shard3').style.transform = `translateX(${pct * -15}px) translateY(${pct * 20}px)`;
-            document.getElementById('shard4').style.transform = `translateX(${pct * 35}px) scaleX(${1 + pct * 0.03})`;
+     <script>
+        function updateMultiLayerPaddock() {
+            const totalScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (totalScrollableHeight <= 0) return;
+            const scrollPercent = window.scrollY / totalScrollableHeight;
+            document.getElementById('shard1').style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
+            document.getElementById('shard2').style.transform = `translateX(${scrollPercent * 25}px)`;
+            document.getElementById('shard3').style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
+            document.getElementById('shard4').style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
+            document.getElementById('shard5').style.transform = `translateX(${scrollPercent * -60}px)`;
+            const s6 = document.getElementById('shard6');
+            s6.style.transform = `translateX(${scrollPercent * -30}px)`; s6.style.opacity = `${0.7 + (scrollPercent * 0.3)}`;
+            document.getElementById('shard7').style.transform = `translateX(${scrollPercent * 15}px)`;
+            document.getElementById('shard8').style.transform = `translateX(${scrollPercent * -75}px) skewX(${scrollPercent * -2}deg)`;
         }
-        window.addEventListener('scroll', updatePaddock); window.addEventListener('resize', updatePaddock);
-        document.addEventListener("DOMContentLoaded", updatePaddock);
+        window.addEventListener('scroll', updateMultiLayerPaddock);
+        window.addEventListener('resize', updateMultiLayerPaddock);
+        document.addEventListener("DOMContentLoaded", updateMultiLayerPaddock);
     </script>
 </body>
 </html>
