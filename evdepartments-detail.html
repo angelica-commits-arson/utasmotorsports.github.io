@@ -22,24 +22,108 @@
         .shard-3 { right: 2vw; width: 42vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.1) 0%, rgba(0, 0, 0, 0) 80%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 30% 100%); z-index: -6; }
         .shard-4 { right: 0; width: 35vw; background: #07080a; border-left: 1px solid rgba(218, 46, 41, 0.1); clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%); z-index: -5; }
         
-        .top-navbar {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            display: flex; justify-content: center; align-items: center; height: 70px;
-            background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a {
-            text-decoration: none; font-size: 16px; font-weight: 700; font-style: italic;
-            text-transform: uppercase; color: #ffffff; letter-spacing: 1.5px; padding: 10px 15px;
-            transition: all 0.2s ease; position: relative;
-        }
-        .nav-links a.active { color: #Da2e29; }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px; bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
-        }
-        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
-        .nav-links a:hover { color: #Da2e29; }
+       /* --- STICKY NAV RENEWAL --- */
+.top-navbar {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 1000;
+    height: 80px; /* Marginally widened to sit comfortably above your enlarged welcome block */
+    background: rgba(0, 0, 0, 0.75); 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+}
+
+/* Flexbox Matrix Container */
+.nav-container {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between; /* Pushes logo left and links right */
+    align-items: center;
+}
+
+/* Brand Identity Layout */
+.nav-logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    height: 100%;
+}
+
+.nav-logo-img {
+    height: 48px; /* Scales your logo to fit perfectly within the 80px bar height */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
+    transition: transform 0.2s ease;
+}
+
+.nav-logo-link:hover .nav-logo-img {
+    transform: scale(1.05); /* Micro-interaction when users hover over logo */
+}
+
+.nav-logo-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+.accent-red {
+    color: #Da2e29;
+}
+
+/* Nav links alignment alignment adjustments */
+.nav-links { 
+    display: flex; 
+    gap: 15px; 
+}
+
+.nav-links a {
+    text-decoration: none; 
+    font-size: 15px; 
+    font-weight: 700; 
+    font-style: italic;
+    text-transform: uppercase; 
+    color: #ffffff; 
+    letter-spacing: 1.2px; 
+    padding: 8px 12px;
+    transition: all 0.2s ease; 
+    position: relative;
+}
+
+.nav-links a.active { color: #Da2e29; }
+.nav-links a::after {
+    content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
+    bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
+.nav-links a:hover { color: #Da2e29; }
+
+/* Responsive Mobile Compression Layer */
+@media (max-width: 991px) {
+    .nav-container {
+        padding: 0 20px;
+    }
+    .nav-logo-text {
+        display: none; /* Hides text title on small tablets/mobile to ensure links have full width room */
+    }
+    .nav-links a {
+        font-size: 13px;
+        padding: 6px 8px;
+        gap: 8px;
+    }
+}
 
         main { padding: 140px 50px 80px 50px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
         h1 { font-size: 4rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 10px; letter-spacing: -1px; color: #ffffff; border-left: 6px solid #Da2e29; padding-left: 20px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); }
@@ -79,15 +163,22 @@
     <div class="geo-shard shard-3" id="shard3"></div><div class="geo-shard shard-4" id="shard4"></div>
 
     <nav class="top-navbar">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo-link">
+            <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
+            <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
+        </a>
+
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="about.html">About the team</a>
-            <a href="departments.html" class="active">Departments</a>
+            <a href="departments.html">Departments</a>
             <a href="sponsors.html">Sponsors</a>
             <a href="timeline.html">Timeline</a>
             <a href="contact.html">Contact us</a>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <main id="events">
         <h1>Events</h1>
