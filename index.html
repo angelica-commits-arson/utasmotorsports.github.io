@@ -409,48 +409,39 @@
 <section class="location-tracker-section">
     <div class="tracker-container">
         
-        <!-- Dynamic Header Matrix -->
         <div class="tracker-header">
             <span class="telemetry-node">// REALTIME_GEO_TRACKING</span>
             <h2 id="status-title">We are currently: Loading Status...</h2>
         </div>
 
         <div class="tracker-layout">
-            <!-- Left Side: Custom Inline SVG Vector Map of Australia -->
             <div class="map-frame">
-                <svg viewBox="0 0 800 650" class="au-vector-map" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Simplified High-Performance Path Matrix of Australia -->
-                    <path d="M230,80 L290,70 L380,110 L480,90 L600,160 L680,240 L700,320 L770,420 L730,510 L650,490 L560,500 L500,470 L480,480 L380,470 L280,480 L180,470 L110,400 L70,330 L50,220 L70,160 L140,150 Z" class="mainland-path" />
-                    <!-- Tasmania isolated vector array -->
-                    <path d="M520,540 L570,530 L590,580 L540,600 L510,570 Z" class="tasmania-path" />
+                <div class="map-render-container">
+                    <img src="au-03.png" alt="Map of Australia" class="au-highfi-map">
                     
-                    <!-- Tracker Node Anchors -->
-                    <g id="node-hobart" class="geo-node-group">
-                        <circle cx="560" cy="570" r="25" class="radar-ping" />
-                        <circle cx="560" cy="570" r="6" class="core-dot" />
-                    </g>
-                    <g id="node-adelaide" class="geo-node-group">
-                        <circle cx="485" cy="455" r="25" class="radar-ping" />
-                        <circle cx="485" cy="455" r="6" class="core-dot" />
-                    </g>
-                </svg>
+                    <div id="node-hobart" class="geo-overlay-node">
+                        <div class="radar-ping"></div>
+                        <div class="core-dot"></div>
+                    </div>
+
+                    <div id="node-adelaide" class="geo-overlay-node">
+                        <div class="radar-ping"></div>
+                        <div class="core-dot"></div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Right Side: Expandable Dynamic Data Modules -->
             <div class="telemetry-data-column">
-                <!-- Box 1: Active Operations Data -->
                 <div class="telemetry-card active-card">
                     <div class="card-accent"></div>
                     <div class="card-title">// CURRENT OPERATIONAL BASE</div>
                     <div class="card-value" id="base-location-text">Detecting Position...</div>
                 </div>
 
-                <!-- Box 2: Contextual Metrics Breakdown -->
                 <div class="telemetry-card expandable-details" id="metrics-card">
                     <div class="card-title">// DEPLOYMENT SPECIFICATIONS</div>
                     <div class="details-content" id="metrics-content">
-                        <!-- Loaded dynamically by Javascript engine -->
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -501,43 +492,83 @@
         }
     }
     
-    /* Map Layout Framework */
+    /* Responsive Map Container with Precise Coordinate System */
     .map-frame {
         flex: 1;
         background: rgba(7, 8, 10, 0.4);
         border: 1px solid rgba(255, 255, 255, 0.03);
         padding: 20px;
         border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    .au-vector-map {
+    .map-render-container {
+        position: relative;
+        width: 100%;
+        max-width: 500px; /* Keep the map sharp and balanced */
+        display: inline-block;
+    }
+    .au-highfi-map {
         width: 100%;
         height: auto;
-    }
-    .mainland-path, .tasmania-path {
-        fill: rgba(255, 255, 255, 0.04);
-        stroke: rgba(255, 255, 255, 0.15);
-        stroke-width: 2;
-        transition: fill 0.3s ease;
+        display: block;
+        opacity: 0.25; /* Blends perfectly into your dark paddock aesthetic */
+        filter: brightness(1.1) contrast(1.1);
     }
     
-    /* Telemetry Target Pings */
-    .geo-node-group {
-        display: none; /* Controlled via state engine logic */
+    /* Telemetry Overlay Nodes */
+    .geo-overlay-node {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        transform: translate(-50%, -50%); /* Centering anchor */
+        display: none; /* Controlled by state manager */
+        pointer-events: none;
     }
-    .geo-node-group.active-node {
+    .geo-overlay-node.active-node {
         display: block;
     }
-    .core-dot {
-        fill: #Da2e29;
-        filter: drop-shadow(0 0 4px #Da2e29);
+    
+    /* Map Location Coordinates (Calibrated for au-03.png aspect ratio) */
+    #node-hobart {
+        left: 77.5%;
+        top: 92.5%;
     }
-    .radar-ping {
-        fill: rgba(218, 46, 41, 0.25);
-        transform-origin: center;
-        animation: telemetryPulse 1.8s infinite cubic-bezier(0.215, 0.610, 0.355, 1);
+    #node-adelaide {
+        left: 61.3%;
+        top: 76.5%;
     }
 
-    /* Expandable Right Side Panel Elements */
+    /* Target Node Styling */
+    .core-dot {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 8px;
+        height: 8px;
+        margin-top: -4px;
+        margin-left: -4px;
+        background-color: #Da2e29;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #Da2e29;
+        z-index: 2;
+    }
+    .radar-ping {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #Da2e29;
+        border-radius: 50%;
+        background-color: rgba(218, 46, 41, 0.15);
+        opacity: 0;
+        animation: radarPulse 1.8s infinite cubic-bezier(0.215, 0.610, 0.355, 1);
+        z-index: 1;
+    }
+
+    /* Right Side Panel Design */
     .telemetry-data-column {
         flex: 1;
         display: flex;
@@ -569,10 +600,8 @@
         color: #ffffff;
     }
     
-    /* Smooth height expandable state */
     .expandable-details {
         border-top: 1px solid rgba(218, 46, 41, 0.1);
-        transition: background-color 0.4s ease;
     }
     .details-content {
         font-family: Arial, sans-serif;
@@ -589,14 +618,13 @@
         font-weight: bold;
     }
 
-    @keyframes telemetryPulse {
-        0% { transform: scale(0.1); opacity: 1; }
-        70% { opacity: 0.4; }
-        100% { transform: scale(1.2); opacity: 0; }
+    @keyframes radarPulse {
+        0% { transform: scale(0.2); opacity: 0; }
+        50% { opacity: 0.8; }
+        100% { transform: scale(2.4); opacity: 0; }
     }
 </style>
-<!-- END: Interactive Telemetry Location Tracker -->
-    
+    /* map end */
     <section class="countdown-section">
     <div class="countdown-container">
         <div class="countdown-header">
