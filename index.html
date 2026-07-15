@@ -347,6 +347,198 @@
         }
     }
 
+/* Hardcore map graphics section */
+<section class="location-tracker-section">
+    <div class="tracker-container">
+        
+        <!-- Dynamic Header Matrix -->
+        <div class="tracker-header">
+            <span class="telemetry-node">// REALTIME_GEO_TRACKING</span>
+            <h2 id="status-title">We are currently: Loading Status...</h2>
+        </div>
+
+        <div class="tracker-layout">
+            <!-- Left Side: Custom Inline SVG Vector Map of Australia -->
+            <div class="map-frame">
+                <svg viewBox="0 0 800 650" class="au-vector-map" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Simplified High-Performance Path Matrix of Australia -->
+                    <path d="M230,80 L290,70 L380,110 L480,90 L600,160 L680,240 L700,320 L770,420 L730,510 L650,490 L560,500 L500,470 L480,480 L380,470 L280,480 L180,470 L110,400 L70,330 L50,220 L70,160 L140,150 Z" class="mainland-path" />
+                    <!-- Tasmania isolated vector array -->
+                    <path d="M520,540 L570,530 L590,580 L540,600 L510,570 Z" class="tasmania-path" />
+                    
+                    <!-- Tracker Node Anchors -->
+                    <g id="node-hobart" class="geo-node-group">
+                        <circle cx="560" cy="570" r="25" class="radar-ping" />
+                        <circle cx="560" cy="570" r="6" class="core-dot" />
+                    </g>
+                    <g id="node-adelaide" class="geo-node-group">
+                        <circle cx="485" cy="455" r="25" class="radar-ping" />
+                        <circle cx="485" cy="455" r="6" class="core-dot" />
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Right Side: Expandable Dynamic Data Modules -->
+            <div class="telemetry-data-column">
+                <!-- Box 1: Active Operations Data -->
+                <div class="telemetry-card active-card">
+                    <div class="card-accent"></div>
+                    <div class="card-title">// CURRENT OPERATIONAL BASE</div>
+                    <div class="card-value" id="base-location-text">Detecting Position...</div>
+                </div>
+
+                <!-- Box 2: Contextual Metrics Breakdown -->
+                <div class="telemetry-card expandable-details" id="metrics-card">
+                    <div class="card-title">// DEPLOYMENT SPECIFICATIONS</div>
+                    <div class="details-content" id="metrics-content">
+                        <!-- Loaded dynamically by Javascript engine -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .location-tracker-section {
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 10;
+    }
+    .tracker-container {
+        background: rgba(12, 14, 18, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 40px;
+        border-radius: 4px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    .telemetry-node {
+        font-family: Arial, sans-serif;
+        font-size: 0.8rem;
+        color: #Da2e29;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+    #status-title {
+        font-size: 2.4rem;
+        text-transform: uppercase;
+        font-style: italic;
+        margin: 5px 0 30px 0;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+    }
+    .tracker-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    @media (min-width: 768px) {
+        .tracker-layout {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+    
+    /* Map Layout Framework */
+    .map-frame {
+        flex: 1;
+        background: rgba(7, 8, 10, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        padding: 20px;
+        border-radius: 4px;
+    }
+    .au-vector-map {
+        width: 100%;
+        height: auto;
+    }
+    .mainland-path, .tasmania-path {
+        fill: rgba(255, 255, 255, 0.04);
+        stroke: rgba(255, 255, 255, 0.15);
+        stroke-width: 2;
+        transition: fill 0.3s ease;
+    }
+    
+    /* Telemetry Target Pings */
+    .geo-node-group {
+        display: none; /* Controlled via state engine logic */
+    }
+    .geo-node-group.active-node {
+        display: block;
+    }
+    .core-dot {
+        fill: #Da2e29;
+        filter: drop-shadow(0 0 4px #Da2e29);
+    }
+    .radar-ping {
+        fill: rgba(218, 46, 41, 0.25);
+        transform-origin: center;
+        animation: telemetryPulse 1.8s infinite cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+
+    /* Expandable Right Side Panel Elements */
+    .telemetry-data-column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .telemetry-card {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 4px;
+        position: relative;
+    }
+    .active-card {
+        border-left: 3px solid #Da2e29;
+    }
+    .card-title {
+        font-family: Arial, sans-serif;
+        font-size: 0.75rem;
+        color: #b0b5c0;
+        letter-spacing: 1.5px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    .card-value {
+        font-size: 1.8rem;
+        text-transform: uppercase;
+        font-style: italic;
+        color: #ffffff;
+    }
+    
+    /* Smooth height expandable state */
+    .expandable-details {
+        border-top: 1px solid rgba(218, 46, 41, 0.1);
+        transition: background-color 0.4s ease;
+    }
+    .details-content {
+        font-family: Arial, sans-serif;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #b0b5c0;
+        margin-top: 10px;
+    }
+    .metric-line {
+        margin-bottom: 6px;
+    }
+    .metric-highlight {
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    @keyframes telemetryPulse {
+        0% { transform: scale(0.1); opacity: 1; }
+        70% { opacity: 0.4; }
+        100% { transform: scale(1.2); opacity: 0; }
+    }
+</style>
+<!-- END: Interactive Telemetry Location Tracker -->
+    
     /* Logo Styling */
     .hero-logo-frame {
         flex-shrink: 0;
@@ -738,6 +930,49 @@
     }
     
     document.addEventListener("DOMContentLoaded", initCompetitionCountdown);
+</script>
+    <script>
+    function initializeDynamicTracker() {
+        // STATE CONTROLLER: Change to true when team shifts away to Adelaide competition
+        const isAtCompetition = false; 
+
+        const titleElement = document.getElementById("status-title");
+        const baseLocationText = document.getElementById("base-location-text");
+        const metricsContent = document.getElementById("metrics-content");
+        
+        const hobartNode = document.getElementById("node-hobart");
+        const adelaideNode = document.getElementById("node-adelaide");
+
+        if (isAtCompetition) {
+            // Configuration Matrix: Away Sequence
+            titleElement.innerHTML = "We are currently: <span style='color: #Da2e29;'>Away</span>";
+            baseLocationText.innerText = "The Bend Motorsport Park";
+            
+            adelaideNode.classList.add("active-node");
+            hobartNode.classList.remove("active-node");
+
+            metricsContent.innerHTML = `
+                <div class="metric-line">📍 <span class="metric-highlight">Location:</span> Adelaide, South Australia</div>
+                <div class="metric-line">🏎️ <span class="metric-highlight">Deployment:</span> Formula Student Australiasian Competition</div>
+                <div class="metric-line">📊 <span class="metric-highlight">Telemetry Status:</span> Live Team Results</div>
+            `;
+        } else {
+            // Configuration Matrix: Home Base Sequence
+            titleElement.innerHTML = "We are currently: <span style='color: #ffffff;'>Home</span>";
+            baseLocationText.innerText = "UTAS Engineering Precinct";
+            
+            hobartNode.classList.add("active-node");
+            adelaideNode.classList.remove("active-node");
+
+            metricsContent.innerHTML = `
+                <div class="metric-line">📍 <span class="metric-highlight">Location:</span> Hobart, Tasmania</div>
+                <div class="metric-line">🛠️ <span class="metric-highlight">Current Stage:</span> Chassis Structural Assembly</div>
+                <div class="metric-line">📆 <span class="metric-highlight">Next Event:</span> Baskerville Historics</div>
+            `;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", initializeDynamicTracker);
 </script>
 </body>
 </html>
