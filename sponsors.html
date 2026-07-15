@@ -74,6 +74,30 @@
         .sponsor-card img { max-width: 100%; height: auto; max-height: 120px; object-fit: contain; filter: grayscale(20%); transition: filter 0.2s ease; }
         .sponsor-card:hover img { filter: grayscale(0%); }
         .sponsor-name { font-size: 1.1rem; margin-top: 15px; text-transform: uppercase; font-weight: 700; color: #a0a0a0; }
+   /* --- SUPPLIER MATRIX SPECIFIC LAYOUT --- */
+.supplier-matrix .tier-header {
+    color: #8e94a0; /* Neutral telemetry gray instead of tier colors */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.supplier-grid {
+    display: grid;
+    gap: 16px; /* Tighter spacing for high volume */
+    align-items: center;
+    justify-content: center;
+    /* Denser matrix sizing: shrinks spaces to fit significantly more items per row */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+}
+
+/* Slightly compact padding adjustments for the larger asset list */
+.supplier-grid .sponsor-card {
+    padding: 12px;
+}
+
+.supplier-grid .sponsor-name {
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
     </style>
 </head>
 <body>
@@ -96,7 +120,7 @@
     </nav>
 
     <main>
-        <h1>Our Partners</h1>
+        <h1>Our Financial Partners</h1>
 
         <section class="tier-section platinum">
             <div class="tier-header">// Platinum Partner</div>
@@ -127,11 +151,11 @@
                 </div>
                 <div class="sponsor-card">
                     <img src="JMC-Volkswagon.png" alt="JMC Volkswagon Division">
-                    <div class="Jackson Volkwagon Division">Car dealership</div>
+                    <div class="Jackson Volkwagon Division">Quality Autos</div>
                 </div>
                 <div class="sponsor-card">
                     <img src="IGNITE_LOGO.png.avif" alt="Ignite Digi">
-                    <div class="Ignite Digi">Industry camera and gimble suppliers</div>
+                    <div class="Ignite Digi">Industry Camera and Gimble Suppliers</div>
                 </div>
                 <div class="sponsor-card">
                     <img src="Spirit-of-tas.png" alt="Spirit of Tasmania">
@@ -159,7 +183,54 @@
                 </div>
             </div>
         </section>
+<!-- --- UNCLASSED TEAM SUPPLIERS SECTION --- -->
+<section class="tier-section supplier-matrix">
+    <div class="tier-header">// Official Team Suppliers</div>
+    <div class="supplier-grid">
+        
+        <!-- Repeat this block for as many suppliers as you need -->
+        <div class="sponsor-card">
+            <img src="CSIRO.png" alt="CSIRO">
+            <div class="sponsor-name">Australia's National Science Agency</div>
+        </div>
+        
+        <div class="sponsor-card">
+            <img src="leap.png" alt="LEAP">
+            <div class="sponsor-name">CAD, CAE, and PLM technologies</div>
+        </div>
 
+        <div class="sponsor-card">
+            <img src="Ansys.png" alt="ANSYS">
+            <div class="sponsor-name">Engineering Simulation Software</div>
+        </div>
+
+        <div class="sponsor-card">
+            <img src="images/placeholder-logo.png" alt="Supplier Logo">
+            <div class="sponsor-name">Supplier Delta</div>
+        </div>
+
+        <div class="sponsor-card">
+            <img src="images/placeholder-logo.png" alt="Supplier Logo">
+            <div class="sponsor-name">Supplier Epsilon</div>
+        </div>
+
+        <div class="sponsor-card">
+            <img src="images/placeholder-logo.png" alt="Supplier Logo">
+            <div class="sponsor-name">Supplier Zeta</div>
+        </div>
+
+        <div class="sponsor-card">
+            <img src="images/placeholder-logo.png" alt="Supplier Logo">
+            <div class="sponsor-name">Supplier Eta</div>
+        </div>
+
+        <div class="sponsor-card">
+            <img src="images/placeholder-logo.png" alt="Supplier Logo">
+            <div class="sponsor-name">Supplier Theta</div>
+        </div>
+
+    </div>
+</section>
         <section class="tier-section supporter" style="margin-top: 60px; border-color: rgba(218, 46, 41, 0.2);">
             <div class="tier-header">// Interested in becoming a sponsor?</div>
             <div style="font-family: Arial, sans-serif; color: #d1d5db; font-size: 1.2rem; padding-left: 15px; margin-top: 15px;">UTAS Motorsport is committed to maximising sponsor exposure through strong community engagement, media presence and participation in major public events with our vehicle and team attracting attention from students, industry professionals and the wider Tasmanian community.<p>Supporting UTAS Motorsport demonstrates a commitment to education, innovation and the future of Tasmania, with sponsorship helping to develop students and promote STEM and business pathways to young Tasmanians.
