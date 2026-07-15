@@ -303,8 +303,8 @@
 
 <style>
     .welcome-hero-section {
-        max-width: 1200px;
-        margin: 60px auto;
+        max-width: 1250px; /* Expanded slightly to accommodate the larger layout footprint */
+        margin: 110px auto 60px auto; /* Increased top margin from 60px to 110px to clear the nav bar */
         padding: 0 40px;
         position: relative;
         z-index: 10;
@@ -312,30 +312,31 @@
     .welcome-hero-container {
         background: rgba(12, 14, 18, 0.4);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        border-right: 4px solid #Da2e29; /* Red accent bar balancing the left logo */
-        padding: 40px;
-        border-radius: 30px;
+        border-right: 4px solid #Da2e29; 
+        padding: 50px; /* Increased internal padding for a roomier, premium grid feel */
+        border-radius: 4px; /* Unrounded the sharp corners from 20px down to a aggressive 4px */
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 40px;
+        gap: 50px;
     }
     
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
         .welcome-hero-container {
             flex-direction: row;
             align-items: center;
             text-align: left;
         }
     }
-    /* Logo Styling */
+    
+    /* Scaled-up Logo Frame Layout */
     .hero-logo-frame {
         flex-shrink: 0;
-        width: 180px;
-        height: 180px;
+        width: 240px; /* Increased from 180px */
+        height: 240px; /* Increased from 180px */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -344,48 +345,50 @@
         width: 100%;
         height: auto;
         object-fit: contain;
-        filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.05));
+        filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.06));
     }
 
-    /* Text Content Styling */
+    /* Text Content Upscaling */
     .hero-text-content {
         flex: 1;
     }
     .telemetry-tag {
         font-family: Arial, sans-serif;
-        font-size: 0.8rem;
+        font-size: 0.85rem; /* Marginally boosted */
         color: #Da2e29;
         font-weight: bold;
-        letter-spacing: 1.5px;
-        margin-bottom: 10px;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
     }
     .welcome-heading {
-        font-size: 2.5rem;
+        font-size: 3rem; /* Scaled up from 2.5rem */
         text-transform: uppercase;
         font-style: italic;
-        margin: 0 0 15px 0;
+        margin: 0 0 18px 0;
         color: #ffffff;
         letter-spacing: -0.5px;
+        line-height: 1.1;
     }
     .welcome-body {
         font-family: Arial, sans-serif;
-        font-size: 1.05rem;
-        line-height: 1.7;
+        font-size: 1.15rem; /* Scaled up from 1.05rem for enhanced readability */
+        line-height: 1.75;
         color: #b0b5c0;
         margin: 0;
     }
 
     /* Responsive scaling for mobile screens */
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
         .welcome-hero-container {
             text-align: center;
+            padding: 35px;
         }
         .hero-logo-frame {
-            width: 140px;
-            height: 140px;
+            width: 180px;
+            height: 180px;
         }
         .welcome-heading {
-            font-size: 2rem;
+            font-size: 2.3rem;
         }
     }
 </style>
