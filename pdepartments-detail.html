@@ -22,16 +22,35 @@
         .shard-3 { right: 2vw; width: 42vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.1) 0%, rgba(0, 0, 0, 0) 80%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 30% 100%); z-index: -6; }
         .shard-4 { right: 0; width: 35vw; background: #07080a; border-left: 1px solid rgba(218, 46, 41, 0.1); clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%); z-index: -5; }
         
+        /* --- HIGH PERFORMANCE STICKY NAVBAR BRANDED CSS --- */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            display: flex; justify-content: center; align-items: center; height: 70px;
-            background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            display: flex; align-items: center; height: 80px;
+            background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .nav-links { display: flex; gap: 20px; }
+        .nav-container {
+            width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo-link {
+            display: flex; align-items: center; gap: 12px; text-decoration: none; height: 100%;
+        }
+        .nav-logo-img {
+            height: 48px; width: auto; object-fit: contain;
+            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
+            transition: transform 0.2s ease;
+        }
+        .nav-logo-link:hover .nav-logo-img { transform: scale(1.05); }
+        .nav-logo-text {
+            font-size: 1.3rem; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; letter-spacing: 0.5px;
+        }
+        .accent-red { color: #Da2e29; }
+        
+        .nav-links { display: flex; gap: 15px; }
         .nav-links a {
-            text-decoration: none; font-size: 16px; font-weight: 700; font-style: italic;
-            text-transform: uppercase; color: #ffffff; letter-spacing: 1.5px; padding: 10px 15px;
+            text-decoration: none; font-size: 15px; font-weight: 700; font-style: italic;
+            text-transform: uppercase; color: #ffffff; letter-spacing: 1.2px; padding: 8px 12px;
             transition: all 0.2s ease; position: relative;
         }
         .nav-links a.active { color: #Da2e29; }
@@ -41,13 +60,13 @@
         .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
         .nav-links a:hover { color: #Da2e29; }
 
+        /* --- CONTENT WRAPPER FRAMEWORK --- */
         main { padding: 140px 50px 80px 50px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
         h1 { font-size: 4rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 10px; letter-spacing: -1px; color: #ffffff; border-left: 6px solid #Da2e29; padding-left: 20px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); }
         .subtitle { font-size: 1.1rem; color: #b0b5c0; text-transform: uppercase; letter-spacing: 2px; padding-left: 26px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); margin-bottom: 40px; }
         
         .intro {
-            background: rgba(12, 14, 18, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(12, 14, 18, 0.4); border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 25px; border-radius: 4px; backdrop-filter: blur(10px);
             font-family: Arial, sans-serif; font-size: 1.1rem; line-height: 1.7; color: #d1d5db; margin-bottom: 50px;
         }
@@ -55,7 +74,7 @@
         .feature-split { display: flex; gap: 40px; margin-bottom: 80px; align-items: stretch; }
         .image-box { flex: 1; min-height: 350px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .image-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
-        .image-placeholder-text { font-size: 1.2rem; color: rgba(255, 255, 255, 0.2); text-transform: uppercase; font-weight: 700; font-style: italic; }
+        .image-placeholder-text { font-size: 1.2rem; color: rgba(255, 255, 255, 0.2); text-transform: uppercase; font-weight: 700; font-style: italic; text-align: center; padding: 0 10px; }
 
         .side-writing-box { flex: 1; background: rgba(12, 14, 18, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px; border-radius: 4px; backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: center; }
         .side-writing-box h2 { font-size: 2rem; text-transform: uppercase; font-style: italic; margin-top: 0; margin-bottom: 20px; color: #ffffff; border-bottom: 1px solid rgba(218, 46, 41, 0.3); padding-bottom: 10px; }
@@ -70,7 +89,18 @@
         .team-name { font-size: 1.3rem; text-transform: uppercase; font-weight: 700; font-style: italic; color: #ffffff; margin-bottom: 2px; }
         .team-role { font-family: Arial, sans-serif; font-size: 0.85rem; color: #Da2e29; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
 
-        @media screen and (max-width: 900px) { .feature-split { flex-direction: column; } .image-box { min-height: 250px; } }
+        /* --- MOBILE MEDIA COMPRESSION RESPONSIVENESS --- */
+        @media (max-width: 991px) {
+            .nav-container { padding: 0 20px; }
+            .nav-logo-text { display: none; } /* Drops text signature so navigation elements don't collapse */
+            .nav-links a { font-size: 13px; padding: 6px 8px; }
+        }
+        @media screen and (max-width: 900px) { 
+            .feature-split { flex-direction: column; } 
+            .image-box { min-height: 250px; } 
+            main { padding: 120px 20px 60px 20px; }
+            h1 { font-size: 3rem; }
+        }
     </style>
 </head>
 <body>
@@ -79,22 +109,22 @@
     <div class="geo-shard shard-3" id="shard3"></div><div class="geo-shard shard-4" id="shard4"></div>
 
     <nav class="top-navbar">
-    <div class="nav-container">
-        <a href="index.html" class="nav-logo-link">
-            <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
-            <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
-        </a>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo-link">
+                <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
+                <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
+            </a>
 
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About the team</a>
-            <a href="departments.html">Departments</a>
-            <a href="sponsors.html">Sponsors</a>
-            <a href="timeline.html">Timeline</a>
-            <a href="contact.html">Contact us</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About the team</a>
+                <a href="departments.html" class="active">Departments</a>
+                <a href="sponsors.html">Sponsors</a>
+                <a href="timeline.html">Timeline</a>
+                <a href="contact.html">Contact us</a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <main id="powertrain">
         <h1>Powertrain</h1>
