@@ -3,1036 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Motorsport Team</title>
+    <title>Aerodynamics | Motorsport</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Core Layout Elements */
         body {
             font-family: 'Oswald', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-            min-height: 180vh; /* Provides necessary vertical runway for scrolling transitions */
-            position: relative;
-            overflow-x: hidden;
+            margin: 0; padding: 0; background-color: #000000; color: #ffffff;
+            letter-spacing: 0.5px; min-height: 150vh; position: relative; overflow-x: hidden;
         }
 
-        /* -------------------------------------------------------------
-           AMBIEINT BACKGROUND LAYERS
-           ------------------------------------------------------------- */
-        .paddock-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(135deg, #040507 0%, #000000 100%);
-            z-index: -10;
-        }
-
-        .glow-wash {
-            position: fixed;
-            bottom: -30%;
-            right: -10%;
-            width: 80vw;
-            height: 80vh;
-            background: radial-gradient(circle, rgba(218, 46, 41, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
-            z-index: -9;
-            pointer-events: none;
-        }
-
-        /* -------------------------------------------------------------
-           8-LAYER GEOMETRIC FRACTURES (THE PADDOCK SHARDS)
-           ------------------------------------------------------------- */
-        .geo-shard {
-            position: fixed;
-            top: 0;
-            height: 100vh;
-            pointer-events: none;
-            will-change: transform, opacity;
-            transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.2, 1), opacity 0.15s linear;
-        }
-
-        /* SHARD 1: Deep Red Structural Horizon */
-        .shard-1 {
-            right: 0;
-            width: 65vw;
-            background: rgba(218, 46, 41, 0.03);
-            clip-path: polygon(45% 0%, 100% 0%, 90% 100%, 20% 100%);
-            z-index: -8;
-        }
-
-        /* SHARD 2: Dark Charcoal Shield */
-        .shard-2 {
-            right: 8vw;
-            width: 50vw;
-            background: rgba(10, 11, 14, 0.8);
-            border-left: 1px solid rgba(255, 255, 255, 0.02);
-            clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 10% 100%);
-            z-index: -7;
-        }
-
-        /* SHARD 3: Secondary Red Ambient Track */
-        .shard-3 {
-            right: 2vw;
-            width: 42vw;
-            background: linear-gradient(180deg, rgba(218, 46, 41, 0.1) 0%, rgba(0, 0, 0, 0) 80%);
-            clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 30% 100%);
-            z-index: -6;
-        }
-
-        /* SHARD 4: Heavy Tech Core Wall */
-        .shard-4 {
-            right: 0;
-            width: 35vw;
-            background: #07080a;
-            border-left: 1px solid rgba(218, 46, 41, 0.1);
-            clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%);
-            z-index: -5;
-        }
-
-        /* SHARD 5: High-Contrast Blade Accent */
-        .shard-5 {
-            right: 12vw;
-            width: 20vw;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.01) 0%, rgba(218, 46, 41, 0.05) 100%);
-            clip-path: polygon(0% 0%, 100% 0%, 60% 100%, 20% 100%);
-            z-index: -4;
-        }
-
-        /* SHARD 6: Core Primary Team Red Stripe */
-        .shard-6 {
-            right: 0;
-            width: 25vw;
-            background: linear-gradient(180deg, rgba(218, 46, 41, 0.22) 0%, rgba(15, 3, 3, 0.6) 60%, rgba(0, 0, 0, 0.95) 100%);
-            clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 5% 100%);
-            backdrop-filter: brightness(0.95) contrast(1.05);
-            z-index: -3;
-        }
-
-        /* SHARD 7: Outer Paddock Fractured Shadow Split */
-        .shard-7 {
-            right: -3vw;
-            width: 18vw;
-            background: rgba(5, 6, 8, 0.9);
-            border-left: 1px solid rgba(255, 255, 255, 0.04);
-            clip-path: polygon(45% 0%, 100% 0%, 80% 100%, 0% 100%);
-            z-index: -2;
-        }
-
-        /* SHARD 8: Foreground Speed Vignette Glow */
-        .shard-8 {
-            right: -8vw;
-            width: 15vw;
-            background: linear-gradient(90deg, rgba(218, 46, 41, 0.12) 0%, rgba(0, 0, 0, 0) 100%);
-            clip-path: polygon(60% 0%, 100% 0%, 50% 100%, 0% 100%);
-            z-index: -1;
-        }
-
-        /* -------------------------------------------------------------
-           NAVIGATION BAR STYLING
-           ------------------------------------------------------------- */
+        /* --- GEOMETRIC BACKGROUND FRAMEWORK --- */
+        .paddock-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(135deg, #040507 0%, #000000 100%); z-index: -10; }
+        .glow-wash { position: fixed; bottom: -30%; right: -10%; width: 80vw; height: 80vh; background: radial-gradient(circle, rgba(218, 46, 41, 0.15) 0%, rgba(0, 0, 0, 0) 70%); z-index: -9; pointer-events: none; }
+        .geo-shard { position: fixed; top: 0; height: 100vh; pointer-events: none; will-change: transform, opacity; transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.2, 1), opacity 0.15s linear; }
+        .shard-1 { right: 0; width: 65vw; background: rgba(218, 46, 41, 0.03); clip-path: polygon(45% 0%, 100% 0%, 90% 100%, 20% 100%); z-index: -8; }
+        .shard-2 { right: 8vw; width: 50vw; background: rgba(10, 11, 14, 0.8); border-left: 1px solid rgba(255, 255, 255, 0.02); clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 10% 100%); z-index: -7; }
+        .shard-3 { right: 2vw; width: 42vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.1) 0%, rgba(0, 0, 0, 0) 80%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 30% 100%); z-index: -6; }
+        .shard-4 { right: 0; width: 35vw; background: #07080a; border-left: 1px solid rgba(218, 46, 41, 0.1); clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%); z-index: -5; }
+        
         /* --- STICKY NAV RENEWAL --- */
-.top-navbar {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    z-index: 1000;
-    height: 80px; /* Marginally widened to sit comfortably above your enlarged welcome block */
-    background: rgba(0, 0, 0, 0.75); 
-    backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-}
+        .top-navbar {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 1000;
+            height: 80px; 
+            background: rgba(0, 0, 0, 0.75); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+        }
 
-/* Flexbox Matrix Container */
-.nav-container {
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    justify-content: space-between; /* Pushes logo left and links right */
-    align-items: center;
-}
+        .nav-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
 
-/* Brand Identity Layout */
-.nav-logo-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    height: 100%;
-}
+        .nav-logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            height: 100%;
+        }
 
-.nav-logo-img {
-    height: 48px; /* Scales your logo to fit perfectly within the 80px bar height */
-    width: auto;
-    object-fit: contain;
-    filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
-    transition: transform 0.2s ease;
-}
+        .nav-logo-img {
+            height: 48px; 
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
+            transition: transform 0.2s ease;
+        }
 
-.nav-logo-link:hover .nav-logo-img {
-    transform: scale(1.05); /* Micro-interaction when users hover over logo */
-}
+        .nav-logo-link:hover .nav-logo-img { transform: scale(1.05); }
+        .nav-logo-text { font-size: 1.3rem; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; letter-spacing: 0.5px; }
+        .accent-red { color: #Da2e29; }
+        .nav-links { display: flex; gap: 15px; }
 
-.nav-logo-text {
-    font-size: 1.3rem;
-    font-weight: 700;
-    font-style: italic;
-    text-transform: uppercase;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-}
+        .nav-links a {
+            text-decoration: none; 
+            font-size: 15px; 
+            font-weight: 700; 
+            font-style: italic;
+            text-transform: uppercase; 
+            color: #ffffff; 
+            letter-spacing: 1.2px; 
+            padding: 8px 12px;
+            transition: all 0.2s ease; 
+            position: relative;
+        }
 
-.accent-red {
-    color: #Da2e29;
-}
+        .nav-links a.active { color: #Da2e29; }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
+            bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
+        .nav-links a:hover { color: #Da2e29; }
 
-/* Nav links alignment alignment adjustments */
-.nav-links { 
-    display: flex; 
-    gap: 15px; 
-}
+        /* --- CONTENT CONTAINERS --- */
+        main { padding: 140px 40px 80px 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; box-sizing: border-box; }
+        
+        h1 { font-size: 4rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 10px; letter-spacing: -1px; color: #ffffff; border-left: 6px solid #Da2e29; padding-left: 20px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); }
+        .subtitle { font-size: 1.1rem; color: #b0b5c0; text-transform: uppercase; letter-spacing: 2px; padding-left: 26px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); margin-bottom: 40px; }
+        
+        .intro {
+            background: rgba(12, 14, 18, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            font-family: Arial, sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #d1d5db;
+            margin-bottom: 50px;
+            outline: none;
+        }
 
-.nav-links a {
-    text-decoration: none; 
-    font-size: 15px; 
-    font-weight: 700; 
-    font-style: italic;
-    text-transform: uppercase; 
-    color: #ffffff; 
-    letter-spacing: 1.2px; 
-    padding: 8px 12px;
-    transition: all 0.2s ease; 
-    position: relative;
-}
+        /* Side-by-Side Desktop Presentation Layout */
+        .feature-split {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+        
+        .image-box {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-.nav-links a.active { color: #Da2e29; }
-.nav-links a::after {
-    content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
-    bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
-}
-.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
-.nav-links a:hover { color: #Da2e29; }
+        .side-writing-box {
+            flex: 1;
+            background: rgba(12, 14, 18, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 35px;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .side-writing-box h2 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            font-style: italic;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(218, 46, 41, 0.3);
+            padding-bottom: 10px;
+        }
+        .side-writing-box p {
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #a0a0a0;
+            margin: 0;
+        }
 
-/* Responsive Mobile Compression Layer */
-@media (max-width: 991px) {
-    .nav-container {
-        padding: 0 20px;
-    }
-    .nav-logo-text {
-        display: none; /* Hides text title on small tablets/mobile to ensure links have full width room */
-    }
-    .nav-links a {
-        font-size: 13px;
-        padding: 6px 8px;
-        gap: 8px;
-    }
-}
-
-        /* -------------------------------------------------------------
-           PAGE CONTENT MAIN WRAPPER
-           ------------------------------------------------------------- */
-        h1 {
-            font-size: 4rem;
+        /* Meet the Team Section */
+        .section-divider-title {
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+        .team-card {
+            background: rgba(12, 14, 18, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: border-color 0.2s ease;
+        }
+        .team-card:hover { border-color: #Da2e29; }
+        .team-photo-frame {
+            width: 100%;
+            height: 260px;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .team-photo-frame .image-placeholder-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.2);
             text-transform: uppercase;
             font-weight: 700;
             font-style: italic;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-            color: #ffffff;
-            border-left: 6px solid #Da2e29;
-            padding-left: 20px;
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+        }
+        .team-info { padding: 15px 20px; }
+        .team-name { font-size: 1.3rem; text-transform: uppercase; font-weight: 700; font-style: italic; color: #ffffff; margin-bottom: 2px; }
+        .team-role { font-family: Arial, sans-serif; font-size: 0.85rem; color: #Da2e29; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+
+        /* --- MOBILE TARGETED OVERRIDES --- */
+        @media (max-width: 991px) {
+            .nav-container { padding: 0 20px; }
+            .nav-logo-text { display: none; }
+            .nav-links { gap: 8px; }
+            .nav-links a { font-size: 12px; padding: 6px 8px; letter-spacing: 0.5px; }
         }
 
-        .subtitle {
-            font-size: 1.1rem;
-            color: #b0b5c0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            padding-left: 26px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-            margin-bottom: 50px;
+        @media screen and (max-width: 900px) {
+            main { padding: 120px 20px 60px 20px; }
+            h1 { font-size: 2.8rem; }
+            .subtitle { padding-left: 0; font-size: 1rem; margin-bottom: 25px; }
+            
+            .feature-split { 
+                flex-direction: column; 
+                gap: 20px; 
+                margin-bottom: 40px;
+            } 
+            
+            .image-box { 
+                width: 100%;
+                min-height: auto;
+                aspect-ratio: 16 / 10; /* Enforces clean proportions on modern iPhones */
+            } 
+            .image-box img {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            .side-writing-box {
+                padding: 25px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- 8-Layer Geometric Paddock Elements -->
-    <div class="paddock-bg"></div>
-    <div class="glow-wash"></div>
-    
-    <div class="geo-shard shard-1" id="shard1"></div>
-    <div class="geo-shard shard-2" id="shard2"></div>
-    <div class="geo-shard shard-3" id="shard3"></div>
-    <div class="geo-shard shard-4" id="shard4"></div>
-    <div class="geo-shard shard-5" id="shard5"></div>
-    <div class="geo-shard shard-6" id="shard6"></div>
-    <div class="geo-shard shard-7" id="shard7"></div>
-    <div class="geo-shard shard-8" id="shard8"></div>
+    <div class="paddock-bg"></div><div class="glow-wash"></div>
+    <div class="geo-shard shard-1" id="shard1"></div><div class="geo-shard shard-2" id="shard2"></div>
+    <div class="geo-shard shard-3" id="shard3"></div><div class="geo-shard shard-4" id="shard4"></div>
 
     <nav class="top-navbar">
-    <div class="nav-container">
-        <a href="index.html" class="nav-logo-link">
-            <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
-            <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
-        </a>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo-link">
+                <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
+                <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
+            </a>
 
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About the team</a>
-            <a href="departments.html">Departments</a>
-            <a href="sponsors.html">Sponsors</a>
-            <a href="timeline.html">Timeline</a>
-            <a href="contact.html">Contact us</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About the team</a>
+                <a href="departments.html" class="active">Departments</a>
+                <a href="sponsors.html">Sponsors</a>
+                <a href="timeline.html">Timeline</a>
+                <a href="contact.html">Contact us</a>
+            </div>
         </div>
-    </div>
-</nav>
-    <!-- 8-Channel Parallax Scroll Engine Script -->
+    </nav>
+    
+    <main>
+        <h1>Aerodynamics</h1>
+        <div class="subtitle">// Surface Fluid Optimization</div>
+
+        <div class="intro">
+            [EDITABLE HEADER BLOCK] Click anywhere inside this dashed block to edit the text description directly on the page. Use this space to write an executive overview regarding current wing profiles, drag targets, and wind-tunnel testing cycles.
+        </div>
+
+        <div class="feature-split">
+            <div class="image-box">
+                <img src="2acf7968-6837-4a01-a615-052a2736fea0.png" alt="Aerodynamics CFD Render Diagram">
+            </div>
+            
+            <div class="side-writing-box">
+                <h2>Boundary Layer Analysis</h2>
+                <p>Our surface computational fluid dynamic modules focus on reducing flow separation across the primary profile limits. By modifying downstream geometric transitions, the simulation arrays target an optimal cross-sectional force balance matrix to elevate corner-entry velocities without compromising straight-line drag coefficients.</p>
+            </div>
+        </div>
+
+        <section id="aerodynamics" class="detail-section">
+            <h2 class="section-divider-title">Meet The Team</h2>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-photo-frame">
+                        <div class="image-placeholder-text">Photo Frame</div>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Alex Mercer</div>
+                        <div class="team-role">Division Director</div>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo-frame">
+                        <div class="image-placeholder-text">Photo Frame</div>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Sarah Jenkins</div>
+                        <div class="team-role">CFD Engineer</div>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo-frame">
+                        <div class="image-placeholder-text">Photo Frame</div>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Marcus Vance</div>
+                        <div class="team-role">Surface Modeler</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <script>
         function updateMultiLayerPaddock() {
             const totalScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
             if (totalScrollableHeight <= 0) return;
-            
-            // Map scroll position to a clean 0 to 1 ratio value
             const scrollPercent = window.scrollY / totalScrollableHeight;
-
-            // Apply distinct calculated transforms to each fracture element simultaneously
+            
             document.getElementById('shard1').style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
             document.getElementById('shard2').style.transform = `translateX(${scrollPercent * 25}px)`;
             document.getElementById('shard3').style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
             document.getElementById('shard4').style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
-            document.getElementById('shard5').style.transform = `translateX(${scrollPercent * -60}px)`;
-            
-            // Center red highlight tracks opacity and horizontal glide
-            const s6 = document.getElementById('shard6');
-            s6.style.transform = `translateX(${scrollPercent * -30}px)`;
-            s6.style.opacity = `${0.7 + (scrollPercent * 0.3)}`;
-            
-            document.getElementById('shard7').style.transform = `translateX(${scrollPercent * 15}px)`;
-            document.getElementById('shard8').style.transform = `translateX(${scrollPercent * -75}px) skewX(${scrollPercent * -2}deg)`;
         }
-
-        // Window interaction event connections
         window.addEventListener('scroll', updateMultiLayerPaddock);
         window.addEventListener('resize', updateMultiLayerPaddock);
         document.addEventListener("DOMContentLoaded", updateMultiLayerPaddock);
     </script>
-<!-- START: Content Hero Image Block -->
-<section class="welcome-hero-section">
-    <div class="welcome-hero-container">
-        <!-- Logo Column -->
-        <div class="hero-logo-frame">
-            <!-- Ensure you save your logo as 'utas-motorsport-logo.png' in your project folder -->
-            <img src="utas-motorsport-logo.png" alt="University of Tasmania Motorsport Logo" class="hero-brand-logo">
-        </div>
-        
-        <!-- Text Column -->
-        <div class="hero-text-content">
-            <div class="telemetry-tag">// SYSTEM INITIALIZED // RUNNING STATUS: ACTIVE</div>
-            <h2 class="welcome-heading">UTAS Motorsport</h2>
-            <p class="welcome-body">
-                We are the University of Tasmania's premier Formula Student engineering team. By fusing advanced digital telemetry, high-yield powertrain optimization, and custom aerodynamic manufacturing, we push the physical limits of kinetic racing. Explore our systems, meet our team, and track our build timeline as we prepare for the Australasian stage.
-            </p>
-        </div>
-    </div>
-</section>
-
-<style>
-    .welcome-hero-section {
-        max-width: 1250px; /* Expanded slightly to accommodate the larger layout footprint */
-        margin: 110px auto 60px auto; /* Increased top margin from 60px to 110px to clear the nav bar */
-        padding: 0 40px;
-        position: relative;
-        z-index: 10;
-    }
-    .welcome-hero-container {
-        background: rgba(12, 14, 18, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-right: 4px solid #Da2e29; 
-        padding: 50px; /* Increased internal padding for a roomier, premium grid feel */
-        border-radius: 4px; /* Unrounded the sharp corners from 20px down to a aggressive 4px */
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 50px;
-    }
-    
-    @media (min-width: 992px) {
-        .welcome-hero-container {
-            flex-direction: row;
-            align-items: center;
-            text-align: left;
-        }
-    }
-    
-    /* Scaled-up Logo Frame Layout */
-    .hero-logo-frame {
-        flex-shrink: 0;
-        width: 240px; /* Increased from 180px */
-        height: 240px; /* Increased from 180px */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .hero-brand-logo {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.06));
-    }
-
-    /* Text Content Upscaling */
-    .hero-text-content {
-        flex: 1;
-    }
-    .telemetry-tag {
-        font-family: Arial, sans-serif;
-        font-size: 0.85rem; /* Marginally boosted */
-        color: #Da2e29;
-        font-weight: bold;
-        letter-spacing: 2px;
-        margin-bottom: 12px;
-    }
-    .welcome-heading {
-        font-size: 3rem; /* Scaled up from 2.5rem */
-        text-transform: uppercase;
-        font-style: italic;
-        margin: 0 0 18px 0;
-        color: #ffffff;
-        letter-spacing: -0.5px;
-        line-height: 1.1;
-    }
-    .welcome-body {
-        font-family: Arial, sans-serif;
-        font-size: 1.15rem; /* Scaled up from 1.05rem for enhanced readability */
-        line-height: 1.75;
-        color: #b0b5c0;
-        margin: 0;
-    }
-
-    /* Responsive scaling for mobile screens */
-    @media (max-width: 991px) {
-        .welcome-hero-container {
-            text-align: center;
-            padding: 35px;
-        }
-        .hero-logo-frame {
-            width: 180px;
-            height: 180px;
-        }
-        .welcome-heading {
-            font-size: 2.3rem;
-        }
-    }
-</style>
-<!-- END: Welcome Hero Block -->
-<!-- Start: hardcore mapping -->
-<section class="location-tracker-section">
-    <div class="tracker-container">
-        
-        <div class="tracker-header">
-            <span class="telemetry-node">// REALTIME_GEO_TRACKING</span>
-            <h2 id="status-title">We are currently: Loading Status...</h2>
-        </div>
-
-        <div class="tracker-layout">
-            <div class="map-frame">
-                <div class="map-render-container">
-                    <img src="au-03.png" alt="Map of Australia" class="au-highfi-map">
-                    
-                    <div id="node-hobart" class="geo-overlay-node">
-                        <div class="radar-ping"></div>
-                        <div class="core-dot"></div>
-                    </div>
-
-                    <div id="node-adelaide" class="geo-overlay-node">
-                        <div class="radar-ping"></div>
-                        <div class="core-dot"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="telemetry-data-column">
-                <div class="telemetry-card active-card">
-                    <div class="card-accent"></div>
-                    <div class="card-title">// CURRENT OPERATIONAL BASE</div>
-                    <div class="card-value" id="base-location-text">Detecting Position...</div>
-                </div>
-
-                <div class="telemetry-card expandable-details" id="metrics-card">
-                    <div class="card-title">// DEPLOYMENT SPECIFICATIONS</div>
-                    <div class="details-content" id="metrics-content">
-                        </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<style>
-    .location-tracker-section {
-        max-width: 1200px;
-        margin: 60px auto;
-        padding: 0 20px;
-        position: relative;
-        z-index: 10;
-    }
-    .tracker-container {
-        background: rgba(12, 14, 18, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 40px;
-        border-radius: 4px;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-    }
-    .telemetry-node {
-        font-family: Arial, sans-serif;
-        font-size: 0.8rem;
-        color: #Da2e29;
-        font-weight: bold;
-        letter-spacing: 2px;
-    }
-    #status-title {
-        font-size: 2.4rem;
-        text-transform: uppercase;
-        font-style: italic;
-        margin: 5px 0 30px 0;
-        color: #ffffff;
-        letter-spacing: -0.5px;
-    }
-    .tracker-layout {
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-    }
-    @media (min-width: 768px) {
-        .tracker-layout {
-            flex-direction: row;
-            align-items: center;
-        }
-    }
-    
-    /* Responsive Map Container with Precise Coordinate System */
-    .map-frame {
-        flex: 1;
-        background: rgba(7, 8, 10, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.03);
-        padding: 20px;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .map-render-container {
-        position: relative;
-        width: 100%;
-        max-width: 500px; /* Keep the map sharp and balanced */
-        display: inline-block;
-    }
-    .au-highfi-map {
-        width: 100%;
-        height: auto;
-        display: block;
-        opacity: 0.25; /* Blends perfectly into your dark paddock aesthetic */
-        filter: brightness(1.1) contrast(1.1);
-    }
-    
-    /* Telemetry Overlay Nodes */
-    .geo-overlay-node {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        transform: translate(-50%, -50%); /* Centering anchor */
-        display: none; /* Controlled by state manager */
-        pointer-events: none;
-    }
-    .geo-overlay-node.active-node {
-        display: block;
-    }
-    
-    /* Map Location Coordinates (Calibrated for au-03.png aspect ratio) */
-    #node-hobart {
-       left: 80.5%;
-       top: 95.5%;
-    }
-    #node-adelaide {
-       left: 63.3%;
-    top: 71.5%;
-    }
-
-    /* Target Node Styling */
-    .core-dot {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 8px;
-        height: 8px;
-        margin-top: -4px;
-        margin-left: -4px;
-        background-color: #Da2e29;
-        border-radius: 50%;
-        box-shadow: 0 0 10px #Da2e29;
-        z-index: 2;
-    }
-    .radar-ping {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 20px;
-        height: 20px;
-        border: 2px solid #Da2e29;
-        border-radius: 50%;
-        background-color: rgba(218, 46, 41, 0.15);
-        opacity: 0;
-        animation: radarPulse 1.8s infinite cubic-bezier(0.215, 0.610, 0.355, 1);
-        z-index: 1;
-    }
-
-    /* Right Side Panel Design */
-    .telemetry-data-column {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-    .telemetry-card {
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        padding: 25px;
-        border-radius: 4px;
-        position: relative;
-    }
-    .active-card {
-        border-left: 3px solid #Da2e29;
-    }
-    .card-title {
-        font-family: Arial, sans-serif;
-        font-size: 0.75rem;
-        color: #b0b5c0;
-        letter-spacing: 1.5px;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-    .card-value {
-        font-size: 1.8rem;
-        text-transform: uppercase;
-        font-style: italic;
-        color: #ffffff;
-    }
-    
-    .expandable-details {
-        border-top: 1px solid rgba(218, 46, 41, 0.1);
-    }
-    .details-content {
-        font-family: Arial, sans-serif;
-        font-size: 0.95rem;
-        line-height: 1.6;
-        color: #b0b5c0;
-        margin-top: 10px;
-    }
-    .metric-line {
-        margin-bottom: 6px;
-    }
-    .metric-highlight {
-        color: #ffffff;
-        font-weight: bold;
-    }
-
-    @keyframes radarPulse {
-        0% { transform: scale(0.2); opacity: 0; }
-        50% { opacity: 0.8; }
-        100% { transform: scale(2.4); opacity: 0; }
-    }
-</style>
-    <section class="countdown-section">
-    <div class="countdown-container">
-        <div class="countdown-header">
-            <span class="live-indicator"></span>
-            <h2>2026 FSAE Competition Countdown</h2>
-            <p class="target-location">// Formula Student Australasian Finals</p>
-        </div>
-        
-        <div class="timer-grid">
-            <div class="timer-segment">
-                <div class="timer-number" id="days">00</div>
-                <div class="timer-label">Days</div>
-            </div>
-            <div class="timer-divider">:</div>
-            <div class="timer-segment">
-                <div class="timer-number" id="hours">00</div>
-                <div class="timer-label">Hours</div>
-            </div>
-            <div class="timer-divider">:</div>
-            <div class="timer-segment">
-                <div class="timer-number" id="minutes">00</div>
-                <div class="timer-label">Mins</div>
-            </div>
-            <div class="timer-divider">:</div>
-            <div class="timer-segment">
-                <div class="timer-number" id="seconds">00</div>
-                <div class="timer-label">Secs</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- START: Monochromatic Interactive Image Block -->
-<div class="interactive-media-wrapper">
-    <div class="media-frame">
-        <img src="bc8d0619-fff7-484e-baaf-9d86a1906114.jpg" alt="UTAS Motorsport vehicle analytics" class="chroma-shift-img" loading="lazy">
-        
-        <div class="media-telemetry-overlay">
-            <span class="status-node"></span>
-            <span class="overlay-label">FIGURE 01 // Driver_testing</span>
-        </div>
-    </div>
-</div>
-
-<style>
-    .interactive-media-wrapper {
-        max-width: 1200px;
-        margin: 40px auto;
-        padding: 0 20px;
-        position: relative;
-        z-index: 10;
-    }
-    
-    .media-frame {
-        position: relative;
-        background: #07080a;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 4px;
-        overflow: hidden;
-        cursor: pointer;
-        /* Hardware acceleration styling */
-        transform: translateZ(0);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-    
-    .chroma-shift-img {
-        width: 100%;
-        height: auto;
-        max-height: 550px;
-        object-fit: cover;
-        display: block;
-        
-        /* The Core Logic: Default to 100% grayscale and slightly dark/subdued */
-        filter: grayscale(100%) brightness(0.85) contrast(1.1);
-        
-        /* Smooth telemetry transition timing */
-        transition: filter 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        will-change: filter;
-    }
-    
-    /* Hover state: Restores full color and normalization instantly/smoothly */
-    .media-frame:hover .chroma-shift-img {
-        filter: grayscale(0%) brightness(1) contrast(1);
-    }
-    
-    /* Stylized UI overlay overlaying the asset */
-    .media-telemetry-overlay {
-        position: absolute;
-        bottom: 15px;
-        left: 15px;
-        background: rgba(0, 0, 0, 0.75);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        padding: 6px 12px;
-        border-radius: 2px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        pointer-events: none;
-        transition: border-color 0.3s ease;
-    }
-    
-    .media-frame:hover .media-telemetry-overlay {
-        border-color: #Da2e29;
-    }
-    
-    .status-node {
-        width: 6px;
-        height: 6px;
-        background-color: #ffffff;
-        border-radius: 50%;
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .media-frame:hover .status-node {
-        background-color: #Da2e29;
-        box-shadow: 0 0 6px #Da2e29;
-    }
-    
-    .overlay-label {
-        font-family: Arial, sans-serif;
-        font-size: 0.7rem;
-        font-weight: bold;
-        color: #b0b5c0;
-        letter-spacing: 1px;
-        transition: color 0.3s ease;
-    }
-    
-    .media-frame:hover .overlay-label {
-        color: #ffffff;
-    }
-</style>
-<!-- END: Monochromatic Interactive Image Block -->
-    
-<style>
-    .content-image-wrapper {
-        max-width: 1200px;
-        margin: 40px auto;
-        padding: 0 20px;
-        position: relative;
-        z-index: 10;
-    }
-    .image-accent-bracket {
-        position: absolute;
-        top: -8px;
-        left: 12px;
-        width: 40px;
-        height: 40px;
-        border-top: 3px solid #Da2e29;
-        border-left: 3px solid #Da2e29;
-        pointer-events: none;
-    }
-    .site-image-container {
-        margin: 0;
-        padding: 0;
-        background: rgba(12, 14, 18, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 4px;
-        overflow: hidden;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-    }
-    .responsive-site-img {
-        width: 100%;
-        height: auto;
-        max-height: 550px;
-        object-fit: cover;
-        display: block;
-        opacity: 0.95;
-        transition: opacity 0.3s ease;
-    }
-    .site-image-container:hover .responsive-site-img {
-        opacity: 1;
-    }
-    .image-telemetry-caption {
-        font-family: Arial, sans-serif;
-        font-size: 0.85rem;
-        color: #b0b5c0;
-        background: rgba(7, 8, 10, 0.85);
-        padding: 15px 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        letter-spacing: 0.5px;
-    }
-    .caption-marker {
-        color: #Da2e29;
-        font-weight: bold;
-        font-family: 'Oswald', sans-serif;
-        margin-right: 4px;
-    }
-</style>
-<!-- END: Content Hero Image Block -->
-<style>
-    .countdown-section {
-        padding: 60px 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 10;
-    }
-    .countdown-container {
-        background: rgba(12, 14, 18, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-left: 4px solid #Da2e29;
-        padding: 40px;
-        border-radius: 4px;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
-    @media (min-width: 768px) {
-        .countdown-container {
-            flex-direction: row;
-            justify-content: space-between;
-        }
-    }
-    .countdown-header {
-        position: relative;
-    }
-    .countdown-header h2 {
-        font-size: 2.2rem;
-        text-transform: uppercase;
-        font-style: italic;
-        margin: 0 0 5px 0;
-        color: #ffffff;
-        letter-spacing: -0.5px;
-    }
-    .countdown-header .target-location {
-        font-family: Arial, sans-serif;
-        font-size: 0.9rem;
-        color: #b0b5c0;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin: 0;
-    }
-    .live-indicator {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        background-color: #Da2e29;
-        border-radius: 50%;
-        margin-right: 8px;
-        vertical-align: middle;
-        box-shadow: 0 0 8px #Da2e29;
-        animation: telemetryPulse 2s infinite;
-    }
-    .timer-grid {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .timer-segment {
-        text-align: center;
-        min-width: 70px;
-    }
-    .timer-number {
-        font-size: 3rem;
-        font-weight: 700;
-        font-style: italic;
-        color: #ffffff;
-        line-height: 1;
-    }
-    .timer-label {
-        font-family: Arial, sans-serif;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        color: #Da2e29;
-        letter-spacing: 1px;
-        font-weight: bold;
-        margin-top: 5px;
-    }
-    .timer-divider {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: rgba(255, 255, 255, 0.2);
-        line-height: 1;
-        padding-bottom: 20px;
-        animation: pulseDivider 1s infinite;
-    }
-    @keyframes telemetryPulse {
-        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(218, 46, 41, 0.7); }
-        70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(218, 46, 41, 0); }
-        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(218, 46, 41, 0); }
-    }
-    @keyframes pulseDivider {
-        0%, 100% { opacity: 0.3; }
-        50% { opacity: 0.9; }
-    }
-</style>
-<script>
-    function initCompetitionCountdown() {
-        // Set target countdown timestamp here
-        const targetDate = new Date("December 07, 2026 15:00:00").getTime();
-        
-        const dDisplay = document.getElementById("days");
-        const hDisplay = document.getElementById("hours");
-        const mDisplay = document.getElementById("minutes");
-        const sDisplay = document.getElementById("seconds");
-
-        function updateTimer() {
-            const now = new Date().getTime();
-            const difference = targetDate - now;
-
-            if (difference <= 0) {
-                clearInterval(timerInterval);
-                if(dDisplay) dDisplay.parentElement.parentElement.innerHTML = "<div class='timer-number' style='font-size: 2rem;'>RACE WEEK ACTIVE</div>";
-                return;
-            }
-
-            // Math breakdowns for standard intervals
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-            // Double digit buffering logic
-            if (dDisplay) dDisplay.innerText = days < 10 ? "0" + days : days;
-            if (hDisplay) hDisplay.innerText = hours < 10 ? "0" + hours : hours;
-            if (mDisplay) mDisplay.innerText = minutes < 10 ? "0" + minutes : minutes;
-            if (sDisplay) sDisplay.innerText = seconds < 10 ? "0" + seconds : seconds;
-        }
-
-        // Run immediately on cycle launch and bind to interval loop
-        updateTimer();
-        const timerInterval = setInterval(updateTimer, 1000);
-    }
-    
-    document.addEventListener("DOMContentLoaded", initCompetitionCountdown);
-</script>
-    <script>
-    function initializeDynamicTracker() {
-        // STATE CONTROLLER: Change to true when team shifts away to Adelaide competition
-        const isAtCompetition = false; 
-        const titleElement = document.getElementById("status-title");
-        const baseLocationText = document.getElementById("base-location-text");
-        const metricsContent = document.getElementById("metrics-content");
-        
-        const hobartNode = document.getElementById("node-hobart");
-        const adelaideNode = document.getElementById("node-adelaide");
-
-        if (isAtCompetition) {
-            // Configuration Matrix: Away Sequence
-            titleElement.innerHTML = "We are currently: <span style='color: #Da2e29;'>Away</span>";
-            baseLocationText.innerText = "The Bend Motorsport Park";
-            
-            adelaideNode.classList.add("active-node");
-            hobartNode.classList.remove("active-node");
-
-            metricsContent.innerHTML = `
-                <div class="metric-line">📍 <span class="metric-highlight">Location:</span> Adelaide, South Australia</div>
-                <div class="metric-line">🏎️ <span class="metric-highlight">Deployment:</span> Formula Student Australiasian Competition</div>
-                <div class="metric-line">📊 <span class="metric-highlight">Telemetry Status:</span> Live Team Results</div>
-            `;
-        } else {
-            // Configuration Matrix: Home Base Sequence
-            titleElement.innerHTML = "We are currently: <span style='color: #ffffff;'>Home</span>";
-            baseLocationText.innerText = "UTAS Engineering Precinct";
-            
-            hobartNode.classList.add("active-node");
-            adelaideNode.classList.remove("active-node");
-
-            metricsContent.innerHTML = `
-                <div class="metric-line">📍 <span class="metric-highlight">Location:</span> Hobart, Tasmania</div>
-                <div class="metric-line">🛠️ <span class="metric-highlight">Current Stage:</span> Chassis Structural Assembly</div>
-                <div class="metric-line">📆 <span class="metric-highlight">Next Event:</span> Baskerville Historics</div>
-            `;
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", initializeDynamicTracker);
-</script>
 </body>
 </html>
