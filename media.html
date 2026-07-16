@@ -419,4 +419,300 @@
         window.addEventListener('resize', runCombinedScrollEngine);
         document.addEventListener("DOMContentLoaded", runCombinedScrollEngine);
 
-        /* --- ADVANCED COMPLEX 2D RAC
+        /* --- ADVANCED COMPLEX 2D RACING SIMULATOR --- */
+        const canvas = document.getElementById('raceCanvas');
+        const ctx = canvas.getContext('2d');
+        const lapDisplay = document.getElementById('lap-display');
+        const timeDisplay = document.getElementById('time-display');
+        const phaseDisplay = document.getElementById('phase-display');
+
+        let currentLap = 1;
+        let startTimestamp = null;
+        let gameFinished = false;
+        let finalRaceTime = "";
+
+        // Detailed Top-down F1 Car Profile State
+        const car = {
+            x: 230,
+            y: 430,
+            width: 38,
+            height: 20,
+            speed: 0,
+            maxSpeed: 5.5,
+            backwardsMaxSpeed: -2.0,
+            acceleration: 0.12,
+            deceleration: 0.06,
+            brakingPower: 0.25,
+            angle: 0,
+            steeringSpeed: 0.042
+        };
+
+        // Strict Checkpoints Architecture for Lap Counter Flow Validation
+        const checkpoints = [
+            { x: 500, y: 390, hit: false, label: "S Curve Chicanes" },
+            { x: 780, y: 250, hit: false, label: "Hairpin Turn" },
+            { x: 450, y: 110, hit: false, label: "Back Straight" },
+            { x: 180, y: 230, hit: false, label: "Final Sector" },
+            { x: 230, y: 430, hit: false, isFinishLine: true }
+        ];
+
+        // Complex Path Boundaries Vectors Matrix (Outer & Inner Perimeter Walls)
+        const outerWall = [
+            {x: 70, y: 490}, {x: 890, y: 490}, {x: 890, y: 50}, 
+            {x: 70, y: 50}, {x: 70, y: 490}
+        ];
+
+        const innerWall = [
+            // Bottom Infield Blocks
+            {x: 380, y: 330}, {x: 630, y: 330}, {x: 630, y: 420}, {x: 760, y: 420},
+            // Right hairpins
+            {x: 760, y: 170}, {x: 520, y: 170}, {x: 520, y: 240}, {x: 380, y: 240},
+            // Top infield parameters
+            {x: 380, y: 170}, {x: 210, y: 170}, {x: 210, y: 330}, {x: 380, y: 330}
+        ];
+
+        const lapEnvironments = {
+            1: { trackColor: '#25272c', groundColor: '#0c0e12', curb1: '#ffffff', curb2: '#da2e29' },
+            2: { trackColor: '#1d1e22', groundColor: '#1a0b0b', curb1: '#f1c40f', curb2: '#2c3e50' },
+            3: { trackColor: '#141517', groundColor: '#09141c', curb1: '#00ffff', curb2: '#111622' }
+        };
+
+        const keys = { w: false, a: false, s: false, d: false };
+
+        window.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            if (['w', 'a', 's', 'd'].includes(key)) {
+                keys[key] = true;
+                if (!startTimestamp && !gameFinished) startTimestamp = Date.now();
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            const key = e.key.toLowerCase();
+            if (['w', 'a', 's', 'd'].includes(key)) keys[key] = false;
+        });
+
+        function checkProximity(x1, y1, x2, y2, range) {
+            return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2) < range;
+        }
+
+        // Raycasting/Point checks for polygon collision containment bounds
+        function isOutsideTrack(x, y) {
+            // Strict Hard Barrier Checkbox Matrix Coordinates Boundary Systems
+            // Outer limits wall checks
+            if (x < 95 || x > 865 || y < 75 || y > 465) return true;
+
+            // Complex Central Infield Obstacle Barrier Blocks
+            if (x > 185 && x < 800 && y > 145 && y < 395) {
+                // Allows passages matching custom layout cutouts
+                if (x > 380 && x < 760 && y > 330 && y < 420) return false; // Chicane pass channel
+                if (x > 210 && x < 520 && y > 75 && y < 200) return false; // Top connector path
+                return true; 
+            }
+            return false;
+        }
+
+        function drawCircuitLayout(env) {
+            // Ground layer background canvas mesh fills
+            ctx.fillStyle = env.groundColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Hard Outer Asphalt Track Loop Ring
+            ctx.fillStyle = env.trackColor;
+            ctx.fillRect(70, 50, 820, 440);
+
+            // Draw Complex Central Infield Dynamic Barrier Island Shapes
+            ctx.fillStyle = '#060709'; 
+            ctx.strokeStyle = '#da2e29';
+            ctx.lineWidth = 3;
+
+            // Infield shape paths geometry
+            ctx.beginPath();
+            ctx.moveTo(185, 145);
+            ctx.lineTo(800, 145);
+            ctx.lineTo(800, 395);
+            ctx.lineTo(380, 395);
+            ctx.lineTo(380, 300);
+            ctx.lineTo(600, 300);
+            ctx.lineTo(600, 210);
+            ctx.lineTo(185, 210);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Additional Chicane Island Barrier Blocks
+            ctx.fillRect(450, 360, 230, 75);
+            ctx.strokeRect(450, 360, 230, 75);
+
+            // Draw Kerbs indicators borders mapping
+            ctx.strokeStyle = env.curb1;
+            ctx.lineWidth = 4;
+            ctx.strokeRect(90, 70, 780, 400);
+
+            // Render White Finish line indicator gate
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(280, 440);
+            ctx.lineTo(280, 495);
+            ctx.stroke();
+
+            // Render dynamic checkpoints visual triggers
+            ctx.fillStyle = 'rgba(218, 46, 41, 0.25)';
+            checkpoints.forEach(cp => {
+                if (!cp.isFinishLine && !cp.hit) {
+                    ctx.beginPath();
+                    ctx.arc(cp.x, cp.y, 25, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+        }
+
+        function updateSimulation() {
+            if (gameFinished) return;
+
+            // Throttle / Brake Matrix
+            if (keys.w) {
+                car.speed = Math.min(car.speed + car.acceleration, car.maxSpeed);
+            } else if (keys.s) {
+                car.speed = Math.max(car.speed - car.brakingPower, car.backwardsMaxSpeed);
+            } else {
+                if (car.speed > 0) car.speed = Math.max(car.speed - car.deceleration, 0);
+                if (car.speed < 0) car.speed = Math.min(car.speed + car.deceleration, 0);
+            }
+
+            // Steering calculations
+            if (car.speed !== 0) {
+                const modifier = car.speed > 0 ? 1 : -1;
+                if (keys.a) car.angle -= car.steeringSpeed * modifier;
+                if (keys.d) car.angle += car.steeringSpeed * modifier;
+            }
+
+            // Compute hypothetical next vector coordinate step values
+            const nextX = car.x + Math.cos(car.angle) * car.speed;
+            const nextY = car.y + Math.sin(car.angle) * car.speed;
+
+            // HARD BARRIER PENALTY ENFORCEMENT
+            if (isOutsideTrack(nextX, nextY)) {
+                car.speed = -car.speed * 0.4; // Instant rebound knock penalty
+            } else {
+                car.x = nextX;
+                car.y = nextY;
+            }
+
+            // Checkpoint traversal validation logic loops
+            checkpoints.forEach((cp) => {
+                if (checkProximity(car.x, car.y, cp.x, cp.y, 65)) {
+                    if (!cp.isFinishLine && !cp.hit) {
+                        cp.hit = true;
+                        phaseDisplay.innerText = cp.label;
+                    } else if (cp.isFinishLine && checkpoints[0].hit && checkpoints[1].hit && checkpoints[2].hit && checkpoints[3].hit) {
+                        if (currentLap < 3) {
+                            currentLap++;
+                            lapDisplay.innerText = `${currentLap} / 3`;
+                            checkpoints.forEach(c => c.hit = false);
+                            phaseDisplay.innerText = "Lap Progressing";
+                        } else {
+                            gameFinished = true;
+                            phaseDisplay.innerText = "Race Complete";
+                            phaseDisplay.style.color = "#00ff66";
+                        }
+                    }
+                }
+            });
+        }
+
+        function drawF1Car() {
+            ctx.save();
+            ctx.translate(car.x, car.y);
+            ctx.rotate(car.angle);
+
+            // 1. REAR WING ASSEMBLY
+            ctx.fillStyle = '#111111';
+            ctx.fillRect(-car.width/2 - 3, -car.height/2 - 2, 4, car.height + 4); 
+            ctx.fillStyle = '#Da2e29';
+            ctx.fillRect(-car.width/2 - 3, -car.height/2 - 4, 6, 2);
+            ctx.fillRect(-car.width/2 - 3, car.height/2 + 2, 6, 2);
+
+            // 2. WIDE RACING WHEELS SLICKS (4 corners)
+            ctx.fillStyle = '#1b1b1c';
+            ctx.fillRect(-car.width/3, -car.height/2 - 4, 8, 5);  // Rear Left
+            ctx.fillRect(-car.width/3, car.height/2 - 1, 8, 5);   // Rear Right
+            ctx.fillRect(car.width/4, -car.height/2 - 3, 7, 4);   // Front Left
+            ctx.fillRect(car.width/4, car.height/2 - 1, 7, 4);    // Front Right
+
+            // 3. AERODYNAMIC WIDE SIDEPODS
+            ctx.fillStyle = '#b61f1b';
+            ctx.fillRect(-car.width/4, -car.height/2 + 1, car.width/2, car.height - 2);
+
+            // 4. MAIN CHASSIS COWL & NOSE CONE TAPER
+            ctx.fillStyle = '#Da2e29';
+            ctx.beginPath();
+            ctx.moveTo(-car.width/2, -car.height/3);
+            ctx.lineTo(car.width/2, -car.height/6);
+            ctx.lineTo(car.width/2, car.height/6);
+            ctx.lineTo(-car.width/2, car.height/3);
+            ctx.closePath();
+            ctx.fill();
+
+            // 5. BLACK DRIVER HELMET & PITOT COCKPIT GLOSS
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(-2, -car.height/5, 5, car.height/2.5);
+            ctx.fillStyle = '#000000';
+            ctx.beginPath();
+            ctx.arc(1, 0, 3.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 6. FRONT WING AGGRESSIVE ENDPLATES
+            ctx.fillStyle = '#111111';
+            ctx.fillRect(car.width/2, -car.height/2 - 3, 3, car.height + 6);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(car.width/2 - 1, -car.height/2 - 4, 4, 2);
+            ctx.fillRect(car.width/2 - 1, car.height/2 + 2, 4, 2);
+
+            ctx.restore();
+        }
+
+        function updateRaceTimer() {
+            if (!startTimestamp) return;
+            let delta = Date.now() - startTimestamp;
+            if (gameFinished) {
+                if (!finalRaceTime) finalRaceTime = formatTimeString(delta);
+                timeDisplay.innerText = finalRaceTime;
+                return;
+            }
+            timeDisplay.innerText = formatTimeString(delta);
+        }
+
+        function formatTimeString(ms) {
+            let minutes = Math.floor(ms / 60000);
+            let seconds = Math.floor((ms % 60000) / 1000);
+            let hundredths = Math.floor((ms % 1000) / 10);
+            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${hundredths.toString().padStart(2, '0')}`;
+        }
+
+        function loop() {
+            const currentEnv = lapEnvironments[currentLap];
+            updateSimulation();
+            updateRaceTimer();
+            drawCircuitLayout(currentEnv);
+            drawF1Car();
+
+            if (gameFinished) {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.88)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'italic 700 3.5rem Oswald, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('CHEQUERED FLAG', canvas.width / 2, canvas.height / 2 - 10);
+                ctx.fillStyle = '#Da2e29';
+                ctx.font = 'italic 700 2rem Oswald, sans-serif';
+                ctx.fillText(`GRAND PRIX TIME: ${finalRaceTime}`, canvas.width / 2, canvas.height / 2 + 50);
+            }
+            requestAnimationFrame(loop);
+        }
+
+        loop();
+    </script>
+</body>
+</html>
