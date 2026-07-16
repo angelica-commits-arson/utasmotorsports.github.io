@@ -22,95 +22,149 @@
         .shard-3 { right: 2vw; width: 42vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.1) 0%, rgba(0, 0, 0, 0) 80%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 30% 100%); z-index: -6; }
         .shard-4 { right: 0; width: 35vw; background: #07080a; border-left: 1px solid rgba(218, 46, 41, 0.1); clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%); z-index: -5; }
         
-        /* --- STICKY NAV RENEWAL --- */
-        .top-navbar {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            z-index: 1000;
-            height: 80px; 
-            background: rgba(0, 0, 0, 0.75); 
-            backdrop-filter: blur(15px); 
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
-        }
+/* --- FIXED & ALIGNED STICKY NAV SYSTEM --- */
+.top-navbar {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 1000;
+    height: 80px; 
+    background: rgba(0, 0, 0, 0.85); 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+}
 
-        /* Flexbox Matrix Container */
-        .nav-container {
-            width: 100%;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between; 
-            align-items: center;
-            box-sizing: border-box;
-        }
+.nav-container {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    box-sizing: border-box;
+}
 
-        /* Brand Identity Layout */
-        .nav-logo-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            height: 100%;
-        }
+.nav-logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    height: 100%;
+}
 
-        .nav-logo-img {
-            height: 48px; 
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
-            transition: transform 0.2s ease;
-        }
+.nav-logo-img {
+    height: 48px; 
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
+    transition: transform 0.2s ease;
+}
 
-        .nav-logo-link:hover .nav-logo-img {
-            transform: scale(1.05); 
-        }
+.nav-logo-link:hover .nav-logo-img { 
+    transform: scale(1.02); 
+}
 
-        .nav-logo-text {
-            font-size: 1.3rem;
-            font-weight: 700;
-            font-style: italic;
-            text-transform: uppercase;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-        }
+.nav-logo-text { 
+    font-size: 1.3rem; 
+    font-weight: 700; 
+    font-style: italic; 
+    text-transform: uppercase; 
+    color: #ffffff; 
+    letter-spacing: 0.5px; 
+}
 
-        .accent-red {
-            color: #Da2e29;
-        }
+.accent-red { 
+    color: #Da2e29; 
+}
 
-        /* Nav links alignment adjustments */
-        .nav-links { 
-            display: flex; 
-            gap: 15px; 
-        }
+/* --- THE FIX: Precise inline anchoring for lines --- */
+.nav-links { 
+    display: flex; 
+    gap: 8px; 
+    align-items: center;
+}
 
-        .nav-links a {
-            text-decoration: none; 
-            font-size: 15px; 
-            font-weight: 700; 
-            font-style: italic;
-            text-transform: uppercase; 
-            color: #ffffff; 
-            letter-spacing: 1.2px; 
-            padding: 8px 12px;
-            transition: all 0.2s ease; 
-            position: relative;
-            white-space: nowrap;
-        }
+.nav-links a {
+    text-decoration: none; 
+    font-size: 15px; 
+    font-weight: 700; 
+    font-style: italic;
+    text-transform: uppercase; 
+    color: #ffffff; 
+    letter-spacing: 1.2px; 
+    padding: 8px 12px;
+    margin-bottom: -2px; /* Pulls active line precisely toward frame bounds */
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
 
-        .nav-links a.active { color: #Da2e29; }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
-            bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
-        }
-        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
-        .nav-links a:hover { color: #Da2e29; }
+.nav-links a.active { 
+    color: #Da2e29; 
+}
+
+/* Perfect alignment locking across screen states */
+.nav-links a::after {
+    content: ''; 
+    position: absolute; 
+    width: calc(100% - 24px); /* Locks line exactly to text width, discounting padding left/right */
+    height: 3px;
+    bottom: 0; 
+    left: 12px; /* Offsets padding balance perfectly */
+    background-color: #Da2e29; 
+    transform: scaleX(0);
+    transform-origin: bottom right; 
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-links a:hover::after, 
+.nav-links a.active::after { 
+    transform: scaleX(1); 
+    transform-origin: bottom left; 
+}
+
+.nav-links a:hover { 
+    color: #Da2e29; 
+}
+
+/* --- UNIFIED RESPONSIVE BREAKPOINT GRID --- */
+@media (max-width: 991px) {
+    .top-navbar { 
+        height: auto; 
+        padding: 14px 0; 
+    }
+    .nav-container { 
+        flex-direction: column; 
+        gap: 14px; 
+        padding: 0 20px; 
+        align-items: center; 
+    }
+    .nav-logo-text { 
+        display: inline-block; /* Retains text logo consistently for alignment structure */
+        font-size: 1.1rem;
+    }
+    .nav-links { 
+        width: 100%; 
+        justify-content: center; 
+        flex-wrap: wrap; /* Prevents overflow clipping while holding bounds */
+        gap: 4px;
+    }
+    .nav-links a { 
+        font-size: 13px; 
+        padding: 6px 10px; 
+        letter-spacing: 0.8px; 
+    }
+    .nav-links a::after {
+        width: calc(100% - 20px);
+        left: 10px;
+    }
+}
 
         /* --- MAIN ELEMENTS --- */
         main { padding: 140px 50px 80px 50px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; box-sizing: border-box; }
