@@ -110,7 +110,7 @@
         .media-frame { width: 100%; aspect-ratio: 16 / 10; background: #090b0e; }
         .media-frame img { width: 100%; height: 100%; object-fit: cover; }
         .media-footer { padding: 15px 20px; background: rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; gap: 4px; }
-        .media-title { font-size: 1.25rem; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; margin: 0; }
+        .media-title font-size: 1.25rem; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; margin: 0; }
         .media-meta { font-family: Arial, sans-serif; font-size: 0.85rem; color: #8e94a0; margin: 0; }
 
         @media (max-width: 991px) {
@@ -209,54 +209,47 @@
         let gameFinished = false;
         let finalRaceTime = "";
 
-        // Open/Close Tab Actions
-        openSimCard.addEventListener('click', () => {
-            simOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Lock background scroll
-            isRunning = true;
-            resetGame();
-        });
-
-        closeSimBtn.addEventListener('click', () => {
-            simOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            isRunning = false;
-        });
-
-        // Expanded/Widened Physics Car Model
+        // Car model with fixed spawning direction (facing left to race clockwise up the main straight)
         const car = {
-            x: 600, y: 585,
+            x: 550, y: 580,
             width: 32, height: 16,
-            speed: 0, maxSpeed: 6.5, backwardsMaxSpeed: -2,
-            acceleration: 0.14, deceleration: 0.05, brakingPower: 0.3,
-            angle: 0, steeringSpeed: 0.045
+            speed: 0, maxSpeed: 6.8, backwardsMaxSpeed: -2,
+            acceleration: 0.15, deceleration: 0.05, brakingPower: 0.35,
+            angle: Math.PI, steeringSpeed: 0.048
         };
 
         const checkpoints = [
-            { x: 980, y: 530, hit: false, label: "Turn 1 & 2 Chicane" },
-            { x: 980, y: 310, hit: false, label: "Sports Center Sweep" },
-            { x: 670, y: 330, hit: false, label: "Lakeside Backstraight" },
-            { x: 230, y: 150, hit: false, label: "Clark Chicane" },
-            { x: 130, y: 360, hit: false, label: "Whiteford Complex" },
-            { x: 380, y: 560, hit: false, label: "Ascari Sweep" },
-            { x: 600, y: 585, hit: false, isFinishLine: true }
+            { x: 230, y: 580, hit: false, label: "Jones Chicane (T1/T2)" },
+            { x: 140, y: 320, hit: false, label: "Whiteford Complex" },
+            { x: 250, y: 140, hit: false, label: "Clark Curves" },
+            { x: 550, y: 380, hit: false, label: "Lakeside Sweep" },
+            { x: 880, y: 380, hit: false, label: "Waite High-Speed Bend" },
+            { x: 1050, y: 530, hit: false, label: "Ascari & Stewart Corners" },
+            { x: 550, y: 580, hit: false, isFinishLine: true }
         ];
 
-        // Meticulously calculated paths to completely emulate the image layout (widened and green removed)
+        // ENTIRELY RE-ENGINEERED SMOOTH ALBERT PARK TRACK ARRAYS
+        // Expanded track widths & softened sharp corners to perfectly mirror the source image
         const outerTrackPath = [
-            {x: 350, y: 630}, {x: 820, y: 630}, {x: 850, y: 580}, {x: 1040, y: 580}, 
-            {x: 1080, y: 530}, {x: 1080, y: 460}, {x: 960, y: 360}, {x: 820, y: 250}, 
-            {x: 650, y: 280}, {x: 520, y: 360}, {x: 360, y: 220}, {x: 240, y: 100}, 
-            {x: 80, y: 110}, {x: 50, y: 260}, {x: 170, y: 460}, {x: 90, y: 530}, 
-            {x: 130, y: 580}, {x: 350, y: 580}
+            {x: 1120, y: 640}, {x: 180, y: 640},  // Long bottom straight extending down to Turn 1
+            {x: 90, y: 580},   {x: 60, y: 460},   // Smooth out the bottom-left T1/T2 hook
+            {x: 150, y: 320},  {x: 60, y: 220},   // Climbing left side perimeter
+            {x: 60, y: 80},    {x: 200, y: 60},   // Top-left complex corner peak
+            {x: 340, y: 130},  {x: 480, y: 280},  // Smooth progression entering the lakeside dip
+            {x: 620, y: 350},  {x: 740, y: 320},  // Bottom floor of the gentle lake curve
+            {x: 880, y: 280},  {x: 1060, y: 360}, // Sweeping back up towards the eastern sector
+            {x: 1150, y: 460}, {x: 1140, y: 580}  // Final Turn 15/16 sweep back onto pit straight
         ];
 
         const innerTrackPath = [
-            {x: 400, y: 540}, {x: 780, y: 540}, {x: 800, y: 490}, {x: 970, y: 490}, 
-            {x: 990, y: 460}, {x: 900, y: 400}, {x: 770, y: 320}, {x: 630, y: 345}, 
-            {x: 470, y: 430}, {x: 310, y: 300}, {x: 190, y: 180}, {x: 120, y: 180}, 
-            {x: 120, y: 240}, {x: 240, y: 400}, {x: 180, y: 470}, {x: 210, y: 520}, 
-            {x: 400, y: 520}
+            {x: 1040, y: 520}, {x: 240, y: 520},  // Bottom internal cockpit boundary line
+            {x: 160, y: 480},  {x: 160, y: 420},  // Left infield track inner edge
+            {x: 220, y: 320},  {x: 160, y: 220},  // Infield clearance points
+            {x: 160, y: 160},  {x: 220, y: 140},  // Opening up the top turns cleanly
+            {x: 300, y: 210},  {x: 420, y: 340},  // Clearing out that nasty sharp wedge artifact completely
+            {x: 600, y: 440},  {x: 760, y: 420},  // Generating a completely spacious inner lakeside track flow
+            {x: 880, y: 380},  {x: 980, y: 440},  // Right hand run down
+            {x: 1040, y: 480}
         ];
 
         const keys = { w: false, a: false, s: false, d: false };
@@ -269,13 +262,25 @@
             }
         });
         window.addEventListener('keyup', (e) => {
-            const key = e.key.toLowerCase();
-            if (['w', 'a', 's', 'd'].includes(key)) keys[key] = false;
+            if (['w', 'a', 's', 'd'].includes(key = e.key.toLowerCase())) keys[key] = false;
+        });
+
+        openSimCard.addEventListener('click', () => {
+            simOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            isRunning = true;
+            resetGame();
+        });
+
+        closeSimBtn.addEventListener('click', () => {
+            simOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            isRunning = false;
         });
 
         function resetGame() {
             currentLap = 1; startTimestamp = null; gameFinished = false; finalRaceTime = "";
-            car.x = 600; car.y = 585; car.speed = 0; car.angle = 0;
+            car.x = 550; car.y = 580; car.speed = 0; car.angle = Math.PI;
             checkpoints.forEach(cp => cp.hit = false);
             lapDisplay.innerText = "1 / 3"; timeDisplay.innerText = "00:00.00";
             sectorDisplay.innerText = "Main Straight"; sectorDisplay.style.color = "#ffffff";
@@ -318,20 +323,19 @@
             const nextY = car.y + Math.sin(car.angle) * car.speed;
 
             if (checkHardBarriers(nextX, nextY)) {
-                car.speed = -car.speed * 0.4; // Solid barrier deflection bounce
+                car.speed = -car.speed * 0.4; 
             } else {
                 car.x = nextX;
                 car.y = nextY;
             }
 
-            // Checkpoints tracking logic
             checkpoints.forEach((cp) => {
                 const dist = Math.sqrt((car.x - cp.x)**2 + (car.y - cp.y)**2);
-                if (dist < 70) {
+                if (dist < 80) {
                     if (!cp.isFinishLine && !cp.hit) {
                         cp.hit = true;
                         sectorDisplay.innerText = cp.label;
-                    } else if (cp.isFinishLine && checkpoints[0].hit && checkpoints[4].hit) {
+                    } else if (cp.isFinishLine && checkpoints[0].hit && checkpoints[3].hit && checkpoints[5].hit) {
                         if (currentLap < 3) {
                             currentLap++;
                             lapDisplay.innerText = `${currentLap} / 3`;
@@ -348,11 +352,10 @@
         }
 
         function drawTrack() {
-            // Dark high-contrast paddock field background (No Green)
             ctx.fillStyle = '#090b0e';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Outer loop asphalt fill
+            // Wide asphalt loop track geometry rendering
             ctx.fillStyle = '#1b1d22';
             ctx.beginPath();
             ctx.moveTo(outerTrackPath[0].x, outerTrackPath[0].y);
@@ -360,7 +363,7 @@
             ctx.closePath();
             ctx.fill();
 
-            // Inner core block out
+            // Inner boundary cutout
             ctx.fillStyle = '#06080c';
             ctx.beginPath();
             ctx.moveTo(innerTrackPath[0].x, innerTrackPath[0].y);
@@ -368,7 +371,7 @@
             ctx.closePath();
             ctx.fill();
 
-            // Red & White Apex Kerb Lines (Solid Barrier Profiles)
+            // Render Solid White & Red Safety Barriers
             ctx.lineWidth = 4;
             ctx.strokeStyle = '#Da2e29';
             ctx.beginPath();
@@ -384,12 +387,12 @@
             ctx.closePath();
             ctx.stroke();
 
-            // Start/Finish banner line
+            // Draw clean start/finish checkpoint threshold banner line
             ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 6;
             ctx.beginPath();
-            ctx.moveTo(600, 540);
-            ctx.lineTo(600, 630);
+            ctx.moveTo(550, 520);
+            ctx.lineTo(550, 640);
             ctx.stroke();
         }
 
@@ -398,7 +401,6 @@
             ctx.translate(car.x, car.y);
             ctx.rotate(car.angle);
 
-            // Car chassis setup
             ctx.fillStyle = '#111111';
             ctx.fillRect(-car.width/2, -car.height/2, car.width, car.height);
             ctx.fillStyle = '#Da2e29';
