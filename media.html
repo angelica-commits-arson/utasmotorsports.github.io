@@ -12,271 +12,120 @@
         body {
             font-family: 'Oswald', Arial, sans-serif;
             margin: 0; padding: 0; background-color: #000000; color: #ffffff;
-            letter-spacing: 0.5px; min-height: 180vh; position: relative; overflow-x: hidden;
+            letter-spacing: 0.5px; min-height: 120vh; position: relative; overflow-x: hidden;
         }
 
-        /* --- BACKGROUND LAYER FRAMEWORK --- */
+        /* --- BACKGROUND SHARD LAYERS --- */
         .paddock-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(135deg, #040507 0%, #000000 100%); z-index: -10; }
         .glow-wash { position: fixed; bottom: -30%; right: -10%; width: 80vw; height: 80vh; background: radial-gradient(circle, rgba(218, 46, 41, 0.15) 0%, rgba(0, 0, 0, 0) 70%); z-index: -9; pointer-events: none; }
-        .geo-shard { position: fixed; top: 0; height: 100vh; pointer-events: none; will-change: transform, opacity; transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.2, 1), opacity 0.15s linear; }
+        .geo-shard { position: fixed; top: 0; height: 100vh; pointer-events: none; }
         .shard-1 { right: 0; width: 65vw; background: rgba(218, 46, 41, 0.03); clip-path: polygon(45% 0%, 100% 0%, 90% 100%, 20% 100%); z-index: -8; }
         .shard-2 { right: 8vw; width: 50vw; background: rgba(10, 11, 14, 0.8); border-left: 1px solid rgba(255, 255, 255, 0.02); clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 10% 100%); z-index: -7; }
-        .shard-3 { right: 2vw; width: 42vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.1) 0%, rgba(0, 0, 0, 0) 80%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 30% 100%); z-index: -6; }
-        .shard-4 { right: 0; width: 35vw; background: #07080a; border-left: 1px solid rgba(218, 46, 41, 0.1); clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%); z-index: -5; }
-        .shard-5 { right: 12vw; width: 20vw; background: linear-gradient(90deg, rgba(255, 255, 255, 0.01) 0%, rgba(218, 46, 41, 0.05) 100%); clip-path: polygon(0% 0%, 100% 0%, 60% 100%, 20% 100%); z-index: -4; }
-        .shard-6 { right: 0; width: 25vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.22) 0%, rgba(15, 3, 3, 0.6) 60%, rgba(0, 0, 0, 0.95) 100%); clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 5% 100%); backdrop-filter: brightness(0.95) contrast(1.05); z-index: -3; }
-        .shard-7 { right: -3vw; width: 18vw; background: rgba(5, 6, 8, 0.9); border-left: 1px solid rgba(255, 255, 255, 0.04); clip-path: polygon(45% 0%, 100% 0%, 80% 100%, 0% 100%); z-index: -2; }
-        .shard-8 { right: -8vw; width: 15vw; background: linear-gradient(90deg, rgba(218, 46, 41, 0.12) 0%, rgba(0, 0, 0, 0) 100%); clip-path: polygon(60% 0%, 100% 0%, 50% 100%, 0% 100%); z-index: -1; }
 
-        /* --- STICKY NAV RENEWAL --- */
+        /* --- STICKY NAV --- */
         .top-navbar {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            z-index: 1000;
-            height: 80px; 
-            background: rgba(0, 0, 0, 0.75); 
-            backdrop-filter: blur(15px); 
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; height: 80px; 
+            background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex; align-items: center;
         }
-
-        .nav-container {
-            width: 100%;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between; 
-            align-items: center;
-        }
-
-        .nav-logo-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            height: 100%;
-        }
-
-        .nav-logo-img {
-            height: 48px; 
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
-            transition: transform 0.2s ease;
-        }
-
-        .nav-logo-link:hover .nav-logo-img { transform: scale(1.05); }
-        .nav-logo-text { font-size: 1.3rem; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; letter-spacing: 0.5px; }
+        .nav-container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo-img { height: 48px; width: auto; object-fit: contain; }
+        .nav-logo-text { font-size: 1.3rem; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; }
         .accent-red { color: #Da2e29; }
-        
         .nav-links { display: flex; gap: 12px; }
-        .nav-links a {
-            text-decoration: none; 
-            font-size: 14px; 
-            font-weight: 700; 
-            font-style: italic;
-            text-transform: uppercase; 
-            color: #ffffff; 
-            letter-spacing: 1px; 
-            padding: 8px 10px;
-            transition: all 0.2s ease; 
-            position: relative;
-        }
-
+        .nav-links a { text-decoration: none; font-size: 14px; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; padding: 8px 10px; }
         .nav-links a.active { color: #Da2e29; }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
-            bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
-        }
-        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
-        .nav-links a:hover { color: #Da2e29; }
 
-        /* --- LAYOUT CONTAINER SYSTEMS --- */
+        /* --- LAYOUT SYSTEMS --- */
         main { padding: 140px 40px 60px 40px; max-width: 1250px; margin: 0 auto; position: relative; z-index: 10; box-sizing: border-box; }
-        h1 { font-size: 4rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 40px; letter-spacing: -1px; color: #ffffff; border-left: 6px solid #Da2e29; padding-left: 20px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); }
-        
+        h1 { font-size: 4rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 40px; color: #ffffff; border-left: 6px solid #Da2e29; padding-left: 20px; }
         .section-header { font-size: 2rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 25px; color: #ffffff; border-bottom: 2px solid #Da2e29; padding-bottom: 5px; }
 
-        /* --- INTERACTIVE RACING MODULE --- */
-        .game-wrapper {
-            background: rgba(12, 14, 18, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 4px;
-            backdrop-filter: blur(8px);
-            margin-bottom: 60px;
-            box-sizing: border-box;
-        }
-        
-        .game-telemetry {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(218, 46, 41, 0.2);
-            padding: 15px 25px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            font-style: italic;
-            text-transform: uppercase;
-        }
-        
-        .telemetry-item span { color: #Da2e29; }
-
-        .btn-reset {
-            background: #Da2e29;
-            color: #ffffff;
-            border: none;
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            font-style: italic;
-            text-transform: uppercase;
-            padding: 6px 18px;
-            border-radius: 3px;
+        /* --- IMMERSIVE INTERACTIVE TAB LAYER --- */
+        .game-trigger-card {
+            background: linear-gradient(135deg, rgba(20, 24, 33, 0.8) 0%, rgba(10, 12, 16, 0.9) 100%);
+            border: 2px dashed rgba(218, 46, 41, 0.4);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
             cursor: pointer;
-            letter-spacing: 0.5px;
-            transition: background 0.2s ease, transform 0.1s ease;
+            margin-bottom: 60px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        .btn-reset:hover { background: #b61f1b; }
-        .btn-reset:active { transform: scale(0.96); }
-        
-        .canvas-container {
-            width: 100%;
-            position: relative;
-            background: #111;
-            border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            aspect-ratio: 16 / 9;
-            max-height: 540px;
-        }
-        
-        canvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        .game-instructions {
-            margin-top: 15px;
-            font-family: Arial, sans-serif;
-            color: #a0a0a0;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            display: flex;
-            gap: 20px;
-        }
-        .instruction-pill { background: rgba(255, 255, 255, 0.05); padding: 2px 8px; border-radius: 3px; color: #ffffff; font-weight: bold; font-family: 'Oswald', sans-serif; }
-
-        /* --- 9-GRID MEDIA ARCHITECTURE --- */
-        .media-matrix-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            box-sizing: border-box;
-        }
-
-        .media-card {
-            background: rgba(12, 14, 18, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 4px;
-            overflow: hidden;
-            backdrop-filter: blur(8px);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-        }
-
-        .media-card:hover {
-            transform: translateY(-5px);
+        .game-trigger-card:hover {
             border-color: #Da2e29;
+            background: linear-gradient(135deg, rgba(30, 35, 48, 0.85) 0%, rgba(15, 18, 24, 0.95) 100%);
+            transform: translateY(-2px);
+        }
+        .game-trigger-card h3 { font-size: 2.5rem; color: #ffffff; font-style: italic; margin: 0 0 10px 0; text-transform: uppercase; }
+        .game-trigger-card p { font-family: Arial, sans-serif; color: #a0a0a0; margin: 0 0 20px 0; font-size: 1.1rem; }
+        .btn-launch {
+            background: #Da2e29; color: #fff; border: none; font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem; font-weight: 700; font-style: italic; text-transform: uppercase;
+            padding: 10px 30px; border-radius: 4px; transition: background 0.2s;
         }
 
-        .media-frame {
-            width: 100%;
-            aspect-ratio: 16 / 10;
-            background: #090b0e;
-            overflow: hidden;
-            position: relative;
+        /* --- THE FULL-SCREEN IMMERSIVE TAB --- */
+        .game-fullscreen-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #06080c; z-index: 9999;
+            display: none; flex-direction: column;
+            box-sizing: border-box; padding: 20px;
         }
+        .game-fullscreen-overlay.active { display: flex; }
 
-        .media-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(15%);
-            transition: transform 0.3s ease, filter 0.3s ease;
+        .overlay-header {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0, 0, 0, 0.8); border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px 30px; border-radius: 4px; margin-bottom: 15px;
         }
-
-        .media-card:hover .media-frame img {
-            transform: scale(1.04);
-            filter: grayscale(0%);
+        .telemetry-group { display: flex; gap: 40px; font-size: 1.8rem; font-weight: 700; font-style: italic; text-transform: uppercase; }
+        .telemetry-group span { color: #Da2e29; }
+        
+        .btn-close-sim {
+            background: #333; color: #fff; border: 1px solid #555; font-family: 'Oswald', sans-serif;
+            font-weight: 700; font-style: italic; text-transform: uppercase; padding: 8px 20px;
+            cursor: pointer; border-radius: 3px; font-size: 1.1rem; transition: all 0.2s;
         }
+        .btn-close-sim:hover { background: #Da2e29; border-color: #Da2e29; }
 
-        .media-footer {
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+        .canvas-container {
+            flex: 1; width: 100%; max-width: 1200px; margin: 0 auto;
+            background: #0f1115; border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px; overflow: hidden; position: relative;
         }
+        canvas { width: 100%; height: 100%; display: block; }
 
-        .media-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            font-style: italic;
-            text-transform: uppercase;
-            color: #ffffff;
-            margin: 0;
+        .overlay-footer {
+            text-align: center; color: #747a85; font-family: Arial, sans-serif;
+            font-size: 0.95rem; padding-top: 10px;
         }
+        .key-pill { background: rgba(255,255,255,0.1); padding: 1px 6px; border-radius: 3px; color: #fff; font-family: 'Oswald', sans-serif; font-weight: bold; }
 
-        .media-meta {
-            font-family: Arial, sans-serif;
-            font-size: 0.85rem;
-            color: #8e94a0;
-            margin: 0;
-            letter-spacing: 0;
-        }
+        /* --- 9-GRID MEDIA ARTIFACTS --- */
+        .media-matrix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .media-card { background: rgba(12, 14, 18, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
+        .media-frame { width: 100%; aspect-ratio: 16 / 10; background: #090b0e; }
+        .media-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .media-footer { padding: 15px 20px; background: rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; gap: 4px; }
+        .media-title { font-size: 1.25rem; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; margin: 0; }
+        .media-meta { font-family: Arial, sans-serif; font-size: 0.85rem; color: #8e94a0; margin: 0; }
 
-        /* --- RESPONSIVE MEDIA ADAPTATIONS --- */
         @media (max-width: 991px) {
-            .top-navbar { height: auto; padding: 10px 0; }
-            .nav-container { flex-direction: column; gap: 10px; padding: 0 20px; }
-            .nav-logo-text { display: none; }
-            .nav-links { gap: 6px; flex-wrap: wrap; justify-content: center; }
-            .nav-links a { font-size: 12px; padding: 6px 8px; letter-spacing: 0.5px; }
-
+            .media-matrix-grid { grid-template-columns: repeat(2, 1fr); }
             main { padding: 160px 20px 40px 20px; }
-            h1 { font-size: 2.8rem; margin-bottom: 25px; }
-            
-            .media-matrix-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-            .game-telemetry { font-size: 1.2rem; padding: 10px 15px; flex-wrap: wrap; gap: 10px; justify-content: center; }
         }
-
         @media (max-width: 600px) {
             .media-matrix-grid { grid-template-columns: 1fr; }
-            .game-instructions { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="paddock-bg"></div><div class="glow-wash"></div>
-    <div class="geo-shard shard-1" id="shard1"></div><div class="geo-shard shard-2" id="shard2"></div>
-    <div class="geo-shard shard-3" id="shard3"></div><div class="geo-shard shard-4" id="shard4"></div>
-    <div class="geo-shard shard-5" id="shard5"></div><div class="geo-shard shard-6" id="shard6"></div>
-    <div class="geo-shard shard-7" id="shard7"></div><div class="geo-shard shard-8" id="shard8"></div>
+    <div class="paddock-bg"></div>
+    <div class="geo-shard shard-1"></div><div class="geo-shard shard-2"></div>
 
     <nav class="top-navbar">
         <div class="nav-container">
@@ -284,7 +133,6 @@
                 <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
                 <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
             </a>
-
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="about.html">About the team</a>
@@ -297,265 +145,140 @@
         </div>
     </nav>
 
-    <main>
+    <main id="page-main-content">
         <h1>Media Vault</h1>
 
-        <!-- INTERACTIVE RACING SYSTEM -->
-        <section class="game-wrapper">
-            <div class="section-header">// Monza Circuit Simulator</div>
-            <div class="game-telemetry">
-                <div class="telemetry-item">Lap: <span id="lap-display">1 / 3</span></div>
-                <div class="telemetry-item">Time: <span id="time-display">00:00.00</span></div>
-                <div class="telemetry-item">Phase: <span id="phase-display">Main Straight</span></div>
-                <button class="btn-reset" id="resetBtn">Reset Run</button>
-            </div>
-            
-            <div class="canvas-container">
-                <canvas id="raceCanvas" width="960" height="540"></canvas>
-            </div>
-            
-            <div class="game-instructions">
-                <div>Controls: <span class="instruction-pill">W</span> Forward | <span class="instruction-pill">S</span> Brake/Reverse | <span class="instruction-pill">A</span> Turn Left | <span class="instruction-pill">D</span> Turn Right</div>
-                <div>Objective: Master the legendary Temple of Speed! Navigate chicanes and the massive Parabolica sweep. 3 Laps.</div>
-            </div>
-        </section>
+        <!-- CLICKABLE TAB SQUARE GRID ELEMENT -->
+        <div class="game-trigger-card" id="openSimCard">
+            <h3>// Launch Melbourne GP Simulator</h3>
+            <p>Experience an immersive full-screen hotlap module mapped directly from track configurations.</p>
+            <button class="btn-launch">Open Immersive Mode</button>
+        </div>
 
-        <!-- 9-GRID MEDIA ARCHITECTURE WITH FOOTERS -->
         <section>
             <div class="section-header">// Captured Moments</div>
             <div class="media-matrix-grid">
-                
-                <!-- Card 1 -->
-                <div class="media-card">
-                    <div class="media-frame">
-                        <img src="images/placeholder-media.png" alt="Track Testing Day">
-                    </div>
-                    <div class="media-footer">
-                        <h4 class="media-title">Aerodynamic Testing</h4>
-                        <p class="media-meta">Baskerville Raceway • Feb 2025</p>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="media-card">
-                    <div class="media-frame">
-                        <img src="images/placeholder-media.png" alt="Chassis Assembly">
-                    </div>
-                    <div class="media-footer">
-                        <h4 class="media-title">Monocoque Assembly</h4>
-                        <p class="media-meta">Engineering Lab HQ • Mar 2025</p>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="media-card">
-                    <div class="media-frame">
-                        <img src="images/placeholder-media.png" alt="Battery Integration">
-                    </div>
-                    <div class="media-footer">
-                        <h4 class="media-title">Accumulator Rigging</h4>
-                        <p class="media-meta">Electrical Workshop • May 2025</p>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="media-card">
-                    <div class="media-frame">
-                        <img src="images/placeholder-media.png" alt="Team Presentation">
-                    </div>
-                    <div class="media-footer">
-                        <h4 class="media-title">2025 Vehicle Launch</h4>
-                        <p class="media-meta">UTAS Main Atrium • June 2025</p>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="media-card">
-                    <div class="media-frame">
-                        <img src="images/placeholder-media.png" alt="Shakedown Runs">
-                    </div>
-                    <div class="media-footer">
-                        <h4 class="media-title">EV Dynamic Shakedown</h4>
-                        <p class="media-meta">STKC Kart Track • Aug 2025</p>
-                    </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="media-card">
-                    <div class="media-frame">
-                        <img src="images/placeholder-media.png" alt="Data Telemetry Analysis">
-                    </div>
-                    <div class="media-footer">
-                        <h4 class="media-title">Live Telemetry Analytics</h4>
-                        <p class="media-meta">Pit Wall Station • Oct 2025</p>
-                    </div>
-                </div>
-
-                <!-- Card 7 -->
-                <div class="media-card">
-                    <div class="media-frame">
-                        <img src="images/placeholder-media.png" alt="Formula SAE Dynamic Events">
-                    </div>
-                    <div class="media-footer">
-                        <h4 class="media-title">Endurance Circuit Battle</h4>
-                        <p class="media-meta">FSAE Competition • Dec 2025</p>
-                    </div>
-                </div>
-
-                <!-- Card 8 -->
-                <div class="media-card">
-                    <div class="media-frame">
-                        <img src="images/placeholder-media.png" alt="Podium Celebration">
-                    </div>
-                    <div class="media-footer">
-                        <h4 class="media-title">Cost & Efficiency Victory</h4>
-                        <p class="media-meta">Awards Ceremony • Dec 2025</p>
-                    </div>
-                </div>
-
-                <!-- Card 9 -->
-                <div class="media-card">
-                    <div class="media-frame">
-                        <img src="images/placeholder-media.png" alt="Community Engagement">
-                    </div>
-                    <div class="media-footer">
-                        <h4 class="media-title">STEM Pathway Exhibition</h4>
-                        <p class="media-meta">Tasmanian Expo Center • Jan 2026</p>
-                    </div>
-                </div>
-
+                <!-- 9 Grid Placeholders -->
+                <div class="media-card"><div class="media-frame"><img src="images/placeholder-media.png" alt=""></div><div class="media-footer"><h4 class="media-title">Aerodynamic Testing</h4><p class="media-meta">Baskerville Raceway</p></div></div>
+                <div class="media-card"><div class="media-frame"><img src="images/placeholder-media.png" alt=""></div><div class="media-footer"><h4 class="media-title">Monocoque Assembly</h4><p class="media-meta">Engineering Lab HQ</p></div></div>
+                <div class="media-card"><div class="media-frame"><img src="images/placeholder-media.png" alt=""></div><div class="media-footer"><h4 class="media-title">Accumulator Rigging</h4><p class="media-meta">Electrical Workshop</p></div></div>
+                <div class="media-card"><div class="media-frame"><img src="images/placeholder-media.png" alt=""></div><div class="media-footer"><h4 class="media-title">2025 Vehicle Launch</h4><p class="media-meta">UTAS Main Atrium</p></div></div>
+                <div class="media-card"><div class="media-frame"><img src="images/placeholder-media.png" alt=""></div><div class="media-footer"><h4 class="media-title">EV Dynamic Shakedown</h4><p class="media-meta">STKC Kart Track</p></div></div>
+                <div class="media-card"><div class="media-frame"><img src="images/placeholder-media.png" alt=""></div><div class="media-footer"><h4 class="media-title">Live Telemetry Analytics</h4><p class="media-meta">Pit Wall Station</p></div></div>
+                <div class="media-card"><div class="media-frame"><img src="images/placeholder-media.png" alt=""></div><div class="media-footer"><h4 class="media-title">Endurance Circuit Battle</h4><p class="media-meta">FSAE Competition</p></div></div>
+                <div class="media-card"><div class="media-frame"><img src="images/placeholder-media.png" alt=""></div><div class="media-footer"><h4 class="media-title">Cost & Efficiency Victory</h4><p class="media-meta">Awards Ceremony</p></div></div>
+                <div class="media-card"><div class="media-frame"><img src="images/placeholder-media.png" alt=""></div><div class="media-footer"><h4 class="media-title">STEM Pathway Exhibition</h4><p class="media-meta">Tasmanian Expo Center</p></div></div>
             </div>
         </section>
     </main>
 
+    <!-- FULL SCREEN INTERACTIVE MODAL OVERLAY (OPENABLE CLOSEABLE SYSTEM) -->
+    <div class="game-fullscreen-overlay" id="simOverlay">
+        <div class="overlay-header">
+            <div class="telemetry-group">
+                <div>Lap: <span id="lap-display">1 / 3</span></div>
+                <div>Time: <span id="time-display">00:00.00</span></div>
+                <div>Sector: <span id="sector-display">Main Straight</span></div>
+            </div>
+            <button class="btn-close-sim" id="closeSimBtn">Exit Simulator</button>
+        </div>
+        
+        <div class="canvas-container">
+            <canvas id="raceCanvas" width="1200" height="675"></canvas>
+        </div>
+        
+        <div class="overlay-footer">
+            Controls: <span class="key-pill">W</span> Accelerate | <span class="key-pill">S</span> Reverse/Brake | <span class="key-pill">A</span> Left | <span class="key-pill">D</span> Right — Master the widened boundaries of Albert Park.
+        </div>
+    </div>
+
     <script>
-        /* --- BACKGROUND SCROLL LOGIC --- */
-        function runCombinedScrollEngine() {
-            const totalScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (totalScrollableHeight <= 0) return;
-            const scrollPercent = window.scrollY / totalScrollableHeight;
-
-            document.getElementById('shard1').style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
-            document.getElementById('shard2').style.transform = `translateX(${scrollPercent * 25}px)`;
-            document.getElementById('shard3').style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
-            document.getElementById('shard4').style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
-            document.getElementById('shard5').style.transform = `translateX(${scrollPercent * -60}px)`;
-            const s6 = document.getElementById('shard6');
-            if (s6) {
-                s6.style.transform = `translateX(${scrollPercent * -30}px)`; s6.style.opacity = `${0.7 + (scrollPercent * 0.3)}`;
-            }
-            document.getElementById('shard7').style.transform = `translateX(${scrollPercent * 15}px)`;
-            document.getElementById('shard8').style.transform = `translateX(${scrollPercent * -75}px) skewX(${scrollPercent * -2}deg)`;
-        }
-        window.addEventListener('scroll', runCombinedScrollEngine);
-        window.addEventListener('resize', runCombinedScrollEngine);
-        document.addEventListener("DOMContentLoaded", runCombinedScrollEngine);
-
-        /* --- TRUELY ACCURATE MONZA 2D SIMULATOR ENGINE --- */
+        const openSimCard = document.getElementById('openSimCard');
+        const closeSimBtn = document.getElementById('closeSimBtn');
+        const simOverlay = document.getElementById('simOverlay');
         const canvas = document.getElementById('raceCanvas');
         const ctx = canvas.getContext('2d');
+
         const lapDisplay = document.getElementById('lap-display');
         const timeDisplay = document.getElementById('time-display');
-        const phaseDisplay = document.getElementById('phase-display');
-        const resetBtn = document.getElementById('resetBtn');
+        const sectorDisplay = document.getElementById('sector-display');
 
+        let isRunning = false;
         let currentLap = 1;
         let startTimestamp = null;
         let gameFinished = false;
         let finalRaceTime = "";
 
-        // Car spawn adjusted to start on main straight facing right (clockwise circuit racing)
+        // Open/Close Tab Actions
+        openSimCard.addEventListener('click', () => {
+            simOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock background scroll
+            isRunning = true;
+            resetGame();
+        });
+
+        closeSimBtn.addEventListener('click', () => {
+            simOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            isRunning = false;
+        });
+
+        // Expanded/Widened Physics Car Model
         const car = {
-            x: 240,
-            y: 470,
-            width: 36,
-            height: 18,
-            speed: 0,
-            maxSpeed: 7.2, // Faster straight top speeds
-            backwardsMaxSpeed: -2.0,
-            acceleration: 0.15,
-            deceleration: 0.06,
-            brakingPower: 0.35,
-            angle: 0, // Facing right down straight
-            steeringSpeed: 0.046
+            x: 600, y: 585,
+            width: 32, height: 16,
+            speed: 0, maxSpeed: 6.5, backwardsMaxSpeed: -2,
+            acceleration: 0.14, deceleration: 0.05, brakingPower: 0.3,
+            angle: 0, steeringSpeed: 0.045
         };
 
-        // Real Monza progression checkpoints 
         const checkpoints = [
-            { x: 500, y: 470, hit: false, label: "Rettifilo Chicane" },
-            { x: 740, y: 390, hit: false, label: "Curva Grande" },
-            { x: 760, y: 210, hit: false, label: "Variante della Roggia" },
-            { x: 670, y: 80,  hit: false, label: "Lesmo Corners" },
-            { x: 310, y: 150, hit: false, label: "Variante Ascari" },
-            { x: 100, y: 300, hit: false, label: "Curva Parabolica" },
-            { x: 240, y: 470, hit: false, isFinishLine: true }
+            { x: 980, y: 530, hit: false, label: "Turn 1 & 2 Chicane" },
+            { x: 980, y: 310, hit: false, label: "Sports Center Sweep" },
+            { x: 670, y: 330, hit: false, label: "Lakeside Backstraight" },
+            { x: 230, y: 150, hit: false, label: "Clark Chicane" },
+            { x: 130, y: 360, hit: false, label: "Whiteford Complex" },
+            { x: 380, y: 560, hit: false, label: "Ascari Sweep" },
+            { x: 600, y: 585, hit: false, isFinishLine: true }
         ];
 
-        const lapEnvironments = {
-            1: { trackColor: '#2b2c30', groundColor: '#090a0d', curb1: '#ffffff', curb2: '#da2e29' },
-            2: { trackColor: '#202125', groundColor: '#160909', curb1: '#f1c40f', curb2: '#111111' },
-            3: { trackColor: '#151619', groundColor: '#050f18', curb1: '#00ffff', curb2: '#1f2a38' }
-        };
-
-        // Mathematically accurate outer and inner polygons mapping Monza's specific loops
+        // Meticulously calculated paths to completely emulate the image layout (widened and green removed)
         const outerTrackPath = [
-            {x: 50, y: 440},   {x: 50, y: 500},   {x: 550, y: 500},  // Main straight to Turn 1 area
-            {x: 560, y: 460},  {x: 590, y: 460},  {x: 600, y: 490},  // T1 Chicane detour curves out
-            {x: 680, y: 490},  {x: 820, y: 410},  {x: 820, y: 250},  // Curva Grande sweep
-            {x: 810, y: 230},  {x: 770, y: 230},  {x: 760, y: 190},  // Roggia chicane detour
-            {x: 780, y: 110},  {x: 710, y: 50},   {x: 600, y: 50},   // Lesmos outer boundary
-            {x: 530, y: 100},  {x: 350, y: 100},  {x: 340, y: 60},   // Straight down to Ascari entry
-            {x: 240, y: 60},   {x: 230, y: 120},  {x: 260, y: 180},  // Ascari chicane complex hooks
-            {x: 150, y: 180},  {x: 50, y: 320}                       // Parabolica outer entry sweep
+            {x: 350, y: 630}, {x: 820, y: 630}, {x: 850, y: 580}, {x: 1040, y: 580}, 
+            {x: 1080, y: 530}, {x: 1080, y: 460}, {x: 960, y: 360}, {x: 820, y: 250}, 
+            {x: 650, y: 280}, {x: 520, y: 360}, {x: 360, y: 220}, {x: 240, y: 100}, 
+            {x: 80, y: 110}, {x: 50, y: 260}, {x: 170, y: 460}, {x: 90, y: 530}, 
+            {x: 130, y: 580}, {x: 350, y: 580}
         ];
 
         const innerTrackPath = [
-            {x: 130, y: 440},  {x: 530, y: 440},  {x: 550, y: 410},  // Infield main straight boundary
-            {x: 610, y: 410},  {x: 630, y: 430},  {x: 740, y: 360},  // Infield T1 recovery
-            {x: 740, y: 270},  {x: 720, y: 270},  {x: 700, y: 160},  // Infield through Roggia
-            {x: 680, y: 120},  {x: 610, y: 110},  {x: 470, y: 160},  // Infield exiting Lesmos
-            {x: 310, y: 160},  {x: 290, y: 230},  {x: 190, y: 240},  // Infield under Ascari
-            {x: 130, y: 320}                                         // Parabolica inner apex throat
+            {x: 400, y: 540}, {x: 780, y: 540}, {x: 800, y: 490}, {x: 970, y: 490}, 
+            {x: 990, y: 460}, {x: 900, y: 400}, {x: 770, y: 320}, {x: 630, y: 345}, 
+            {x: 470, y: 430}, {x: 310, y: 300}, {x: 190, y: 180}, {x: 120, y: 180}, 
+            {x: 120, y: 240}, {x: 240, y: 400}, {x: 180, y: 470}, {x: 210, y: 520}, 
+            {x: 400, y: 520}
         ];
 
         const keys = { w: false, a: false, s: false, d: false };
-
         window.addEventListener('keydown', (e) => {
+            if (!isRunning) return;
             const key = e.key.toLowerCase();
             if (['w', 'a', 's', 'd'].includes(key)) {
                 keys[key] = true;
                 if (!startTimestamp && !gameFinished) startTimestamp = Date.now();
             }
         });
-
         window.addEventListener('keyup', (e) => {
             const key = e.key.toLowerCase();
             if (['w', 'a', 's', 'd'].includes(key)) keys[key] = false;
         });
 
         function resetGame() {
-            currentLap = 1;
-            startTimestamp = null;
-            gameFinished = false;
-            finalRaceTime = "";
-            
-            car.x = 240;
-            car.y = 470;
-            car.speed = 0;
-            car.angle = 0;
-            
+            currentLap = 1; startTimestamp = null; gameFinished = false; finalRaceTime = "";
+            car.x = 600; car.y = 585; car.speed = 0; car.angle = 0;
             checkpoints.forEach(cp => cp.hit = false);
-            
-            lapDisplay.innerText = "1 / 3";
-            timeDisplay.innerText = "00:00.00";
-            phaseDisplay.innerText = "Main Straight";
-            phaseDisplay.style.color = "#ffffff";
-        }
-
-        resetBtn.addEventListener('click', resetGame);
-
-        function checkProximity(x1, y1, x2, y2, range) {
-            return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2) < range;
+            lapDisplay.innerText = "1 / 3"; timeDisplay.innerText = "00:00.00";
+            sectorDisplay.innerText = "Main Straight"; sectorDisplay.style.color = "#ffffff";
         }
 
         function pointInPolygon(x, y, polygon) {
@@ -569,200 +292,161 @@
             return inside;
         }
 
-        function isOutsideTrack(x, y) {
+        function checkHardBarriers(x, y) {
             const insideOuter = pointInPolygon(x, y, outerTrackPath);
             const insideInner = pointInPolygon(x, y, innerTrackPath);
             return !insideOuter || insideInner;
         }
 
-        function drawMonzaTrack(env) {
-            ctx.fillStyle = env.groundColor;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        function updatePhysics() {
+            if (gameFinished || !isRunning) return;
 
-            // Draw Outer Layer Circuit asphalt fill
-            ctx.fillStyle = env.trackColor;
-            ctx.beginPath();
-            ctx.moveTo(outerTrackPath[0].x, outerTrackPath[0].y);
-            for(let i = 1; i < outerTrackPath.length; i++) {
-                ctx.lineTo(outerTrackPath[i].x, outerTrackPath[i].y);
-            }
-            ctx.closePath();
-            ctx.fill();
-
-            // Cut out the core internal infield grass/void zone shape
-            ctx.fillStyle = '#060709';
-            ctx.strokeStyle = env.curb2;
-            ctx.lineWidth = 4;
-            ctx.beginPath();
-            ctx.moveTo(innerTrackPath[0].x, innerTrackPath[0].y);
-            for(let i = 1; i < innerTrackPath.length; i++) {
-                ctx.lineTo(innerTrackPath[i].x, innerTrackPath[i].y);
-            }
-            ctx.closePath();
-            ctx.fill();
-            ctx.stroke();
-
-            // Draw primary exterior alignment line track borders
-            ctx.strokeStyle = env.curb1;
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.moveTo(outerTrackPath[0].x, outerTrackPath[0].y);
-            for(let i = 1; i < outerTrackPath.length; i++) {
-                ctx.lineTo(outerTrackPath[i].x, outerTrackPath[i].y);
-            }
-            ctx.closePath();
-            ctx.stroke();
-
-            // Start/Finish Line Grid Beam
-            ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 6;
-            ctx.beginPath();
-            ctx.moveTo(240, 440);
-            ctx.lineTo(240, 500);
-            ctx.stroke();
-        }
-
-        function updateSimulation() {
-            if (gameFinished) return;
-
-            if (keys.w) {
-                car.speed = Math.min(car.speed + car.acceleration, car.maxSpeed);
-            } else if (keys.s) {
-                car.speed = Math.max(car.speed - car.brakingPower, car.backwardsMaxSpeed);
-            } else {
+            if (keys.w) car.speed = Math.min(car.speed + car.acceleration, car.maxSpeed);
+            else if (keys.s) car.speed = Math.max(car.speed - car.brakingPower, car.backwardsMaxSpeed);
+            else {
                 if (car.speed > 0) car.speed = Math.max(car.speed - car.deceleration, 0);
                 if (car.speed < 0) car.speed = Math.min(car.speed + car.deceleration, 0);
             }
 
             if (car.speed !== 0) {
-                const modifier = car.speed > 0 ? 1 : -1;
-                if (keys.a) car.angle -= car.steeringSpeed * modifier;
-                if (keys.d) car.angle += car.steeringSpeed * modifier;
+                const rotDir = car.speed > 0 ? 1 : -1;
+                if (keys.a) car.angle -= car.steeringSpeed * rotDir;
+                if (keys.d) car.angle += car.steeringSpeed * rotDir;
             }
 
             const nextX = car.x + Math.cos(car.angle) * car.speed;
             const nextY = car.y + Math.sin(car.angle) * car.speed;
 
-            if (isOutsideTrack(nextX, nextY)) {
-                car.speed = -car.speed * 0.35; // Wall crash rebound loss deceleration
+            if (checkHardBarriers(nextX, nextY)) {
+                car.speed = -car.speed * 0.4; // Solid barrier deflection bounce
             } else {
                 car.x = nextX;
                 car.y = nextY;
             }
 
-            // Route Sector validation checkpoints engine logic
+            // Checkpoints tracking logic
             checkpoints.forEach((cp) => {
-                if (checkProximity(car.x, car.y, cp.x, cp.y, 60)) {
+                const dist = Math.sqrt((car.x - cp.x)**2 + (car.y - cp.y)**2);
+                if (dist < 70) {
                     if (!cp.isFinishLine && !cp.hit) {
                         cp.hit = true;
-                        phaseDisplay.innerText = cp.label;
-                    } else if (cp.isFinishLine && checkpoints[0].hit && checkpoints[1].hit && checkpoints[2].hit && checkpoints[3].hit && checkpoints[4].hit && checkpoints[5].hit) {
+                        sectorDisplay.innerText = cp.label;
+                    } else if (cp.isFinishLine && checkpoints[0].hit && checkpoints[4].hit) {
                         if (currentLap < 3) {
                             currentLap++;
                             lapDisplay.innerText = `${currentLap} / 3`;
                             checkpoints.forEach(c => c.hit = false);
-                            phaseDisplay.innerText = "Main Straight";
+                            sectorDisplay.innerText = "Main Straight";
                         } else {
                             gameFinished = true;
-                            phaseDisplay.innerText = "Race Complete";
-                            phaseDisplay.style.color = "#00ff66";
+                            sectorDisplay.innerText = "Race Complete";
+                            sectorDisplay.style.color = "#00ff66";
                         }
                     }
                 }
             });
         }
 
-        function drawF1Car() {
+        function drawTrack() {
+            // Dark high-contrast paddock field background (No Green)
+            ctx.fillStyle = '#090b0e';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Outer loop asphalt fill
+            ctx.fillStyle = '#1b1d22';
+            ctx.beginPath();
+            ctx.moveTo(outerTrackPath[0].x, outerTrackPath[0].y);
+            outerTrackPath.forEach(pt => ctx.lineTo(pt.x, pt.y));
+            ctx.closePath();
+            ctx.fill();
+
+            // Inner core block out
+            ctx.fillStyle = '#06080c';
+            ctx.beginPath();
+            ctx.moveTo(innerTrackPath[0].x, innerTrackPath[0].y);
+            innerTrackPath.forEach(pt => ctx.lineTo(pt.x, pt.y));
+            ctx.closePath();
+            ctx.fill();
+
+            // Red & White Apex Kerb Lines (Solid Barrier Profiles)
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = '#Da2e29';
+            ctx.beginPath();
+            ctx.moveTo(outerTrackPath[0].x, outerTrackPath[0].y);
+            outerTrackPath.forEach(pt => ctx.lineTo(pt.x, pt.y));
+            ctx.closePath();
+            ctx.stroke();
+
+            ctx.strokeStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.moveTo(innerTrackPath[0].x, innerTrackPath[0].y);
+            innerTrackPath.forEach(pt => ctx.lineTo(pt.x, pt.y));
+            ctx.closePath();
+            ctx.stroke();
+
+            // Start/Finish banner line
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.moveTo(600, 540);
+            ctx.lineTo(600, 630);
+            ctx.stroke();
+        }
+
+        function drawCar() {
             ctx.save();
             ctx.translate(car.x, car.y);
             ctx.rotate(car.angle);
 
-            // Rear Wing Profile
+            // Car chassis setup
             ctx.fillStyle = '#111111';
-            ctx.fillRect(-car.width/2 - 3, -car.height/2 - 2, 4, car.height + 4); 
+            ctx.fillRect(-car.width/2, -car.height/2, car.width, car.height);
             ctx.fillStyle = '#Da2e29';
-            ctx.fillRect(-car.width/2 - 3, -car.height/2 - 4, 6, 2);
-            ctx.fillRect(-car.width/2 - 3, car.height/2 + 2, 6, 2);
-
-            // Open Wheel Slick Tires 
-            ctx.fillStyle = '#1b1b1c';
-            ctx.fillRect(-car.width/3, -car.height/2 - 4, 8, 5);
-            ctx.fillRect(-car.width/3, car.height/2 - 1, 8, 5);
-            ctx.fillRect(car.width/4, -car.height/2 - 3, 7, 4);
-            ctx.fillRect(car.width/4, car.height/2 - 1, 7, 4);
-
-            // Sidepods setup
-            ctx.fillStyle = '#b61f1b';
-            ctx.fillRect(-car.width/4, -car.height/2 + 1, car.width/2, car.height - 2);
-
-            // Nose cone body styling
-            ctx.fillStyle = '#Da2e29';
-            ctx.beginPath();
-            ctx.moveTo(-car.width/2, -car.height/3);
-            ctx.lineTo(car.width/2, -car.height/6);
-            ctx.lineTo(car.width/2, car.height/6);
-            ctx.lineTo(-car.width/2, car.height/3);
-            ctx.closePath();
-            ctx.fill();
-
-            // Cockpit driver details
+            ctx.fillRect(-car.width/4, -car.height/3, car.width/1.5, car.height/1.5);
             ctx.fillStyle = '#ffffff';
-            ctx.fillRect(-2, -car.height/5, 5, car.height/2.5);
-            ctx.fillStyle = '#000000';
-            ctx.beginPath();
-            ctx.arc(1, 0, 3.5, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Front wing endplates structure
-            ctx.fillStyle = '#111111';
-            ctx.fillRect(car.width/2, -car.height/2 - 3, 3, car.height + 6);
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(car.width/2 - 1, -car.height/2 - 4, 4, 2);
-            ctx.fillRect(car.width/2 - 1, car.height/2 + 2, 4, 2);
+            ctx.fillRect(car.width/4, -car.height/6, 4, car.height/3);
 
             ctx.restore();
         }
 
-        function updateRaceTimer() {
+        function processTimer() {
             if (!startTimestamp) return;
             let delta = Date.now() - startTimestamp;
             if (gameFinished) {
-                if (!finalRaceTime) finalRaceTime = formatTimeString(delta);
+                if (!finalRaceTime) finalRaceTime = formatTime(delta);
                 timeDisplay.innerText = finalRaceTime;
                 return;
             }
-            timeDisplay.innerText = formatTimeString(delta);
+            timeDisplay.innerText = formatTime(delta);
         }
 
-        function formatTimeString(ms) {
-            let minutes = Math.floor(ms / 60000);
-            let seconds = Math.floor((ms % 60000) / 1000);
-            let hundredths = Math.floor((ms % 1000) / 10);
-            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${hundredths.toString().padStart(2, '0')}`;
+        function formatTime(ms) {
+            let min = Math.floor(ms / 60000);
+            let sec = Math.floor((ms % 60000) / 1000);
+            let hund = Math.floor((ms % 1000) / 10);
+            return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}.${hund.toString().padStart(2, '0')}`;
         }
 
-        function loop() {
-            const currentEnv = lapEnvironments[currentLap];
-            updateSimulation();
-            updateRaceTimer();
-            drawMonzaTrack(currentEnv);
-            drawF1Car();
+        function gameLoop() {
+            updatePhysics();
+            processTimer();
+            drawTrack();
+            drawCar();
 
             if (gameFinished) {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.88)';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = '#ffffff';
-                ctx.font = 'italic 700 3.5rem Oswald, sans-serif';
+                ctx.font = 'italic 700 3rem Oswald, sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('CHEQUERED FLAG', canvas.width / 2, canvas.height / 2 - 10);
+                ctx.fillText('FINISH LINE CROSSED', canvas.width / 2, canvas.height / 2 - 10);
                 ctx.fillStyle = '#Da2e29';
-                ctx.font = 'italic 700 2rem Oswald, sans-serif';
-                ctx.fillText(`MONZA LAP TOTAL: ${finalRaceTime}`, canvas.width / 2, canvas.height / 2 + 50);
+                ctx.fillText(`TOTAL RUN TIME: ${finalRaceTime}`, canvas.width / 2, canvas.height / 2 + 45);
             }
-            requestAnimationFrame(loop);
+            requestAnimationFrame(gameLoop);
         }
 
-        loop();
+        gameLoop();
     </script>
 </body>
 </html>
