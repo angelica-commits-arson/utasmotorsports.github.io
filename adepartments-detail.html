@@ -12,8 +12,10 @@
         body {
             font-family: 'Oswald', Arial, sans-serif;
             margin: 0; padding: 0; background-color: #000000; color: #ffffff;
-            letter-spacing: 0.5px; min-height: 140vh; position: relative; overflow-x: hidden;
+            letter-spacing: 0.5px; min-height: 150vh; position: relative; overflow-x: hidden;
         }
+
+        /* --- GEOMETRIC BACKGROUND FRAMEWORK --- */
         .paddock-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(135deg, #040507 0%, #000000 100%); z-index: -10; }
         .glow-wash { position: fixed; bottom: -30%; right: -10%; width: 80vw; height: 80vh; background: radial-gradient(circle, rgba(218, 46, 41, 0.15) 0%, rgba(0, 0, 0, 0) 70%); z-index: -9; pointer-events: none; }
         .geo-shard { position: fixed; top: 0; height: 100vh; pointer-events: none; will-change: transform, opacity; transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.2, 1), opacity 0.15s linear; }
@@ -37,6 +39,7 @@
             display: flex;
             align-items: center;
         }
+
         .nav-container {
             width: 100%;
             max-width: 1300px;
@@ -47,6 +50,7 @@
             align-items: center;
             box-sizing: border-box;
         }
+
         .nav-logo-link {
             display: flex;
             align-items: center;
@@ -54,6 +58,7 @@
             text-decoration: none;
             height: 100%;
         }
+
         .nav-logo-img {
             height: 48px; 
             width: auto;
@@ -61,10 +66,29 @@
             filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
             transition: transform 0.2s ease;
         }
-        .nav-logo-link:hover .nav-logo-img { transform: scale(1.05); }
-        .nav-logo-text { font-size: 1.3rem; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; letter-spacing: 0.5px; }
-        .accent-red { color: #Da2e29; }
-        .nav-links { display: flex; gap: 15px; }
+
+        .nav-logo-link:hover .nav-logo-img {
+            transform: scale(1.05); 
+        }
+
+        .nav-logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-style: italic;
+            text-transform: uppercase;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .accent-red {
+            color: #Da2e29;
+        }
+
+        .nav-links { 
+            display: flex; 
+            gap: 15px; 
+        }
+
         .nav-links a {
             text-decoration: none; 
             font-size: 15px; 
@@ -78,6 +102,7 @@
             position: relative;
             white-space: nowrap;
         }
+
         .nav-links a.active { color: #Da2e29; }
         .nav-links a::after {
             content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
@@ -86,36 +111,157 @@
         .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
         .nav-links a:hover { color: #Da2e29; }
 
-        /* --- CONTENT WRAPPER --- */
-        main { padding: 140px 40px 60px 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; box-sizing: border-box; }
+        /* --- CONTENT CONTAINERS --- */
+        main { padding: 140px 50px 80px 50px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; box-sizing: border-box; }
+        
         h1 { font-size: 4rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 10px; letter-spacing: -1px; color: #ffffff; border-left: 6px solid #Da2e29; padding-left: 20px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); }
         .subtitle { font-size: 1.1rem; color: #b0b5c0; text-transform: uppercase; letter-spacing: 2px; padding-left: 26px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); margin-bottom: 40px; }
         
+        /* Editable Header Block */
         .intro {
-            background: rgba(12, 14, 18, 0.4); 
+            background: rgba(12, 14, 18, 0.4);
             border: 1px rgba(255, 255, 255, 0.15);
-            padding: 25px; border-radius: 4px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            font-family: Arial, sans-serif; font-size: 1.1rem; line-height: 1.7; color: #d1d5db; margin-bottom: 50px;
-            outline: none; transition: border-color 0.2s ease, background 0.2s ease;
+            padding: 25px;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            font-family: Arial, sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #d1d5db;
+            margin-bottom: 50px;
+            outline: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
         }
-        .intro:focus { border-color: #Da2e29; background: rgba(12, 14, 18, 0.6); }
+        .intro:focus {
+            border-color: #Da2e29;
+            background: rgba(12, 14, 18, 0.6);
+        }
 
-        .feature-split { display: flex; gap: 40px; margin-bottom: 80px; align-items: stretch; }
-        .image-box { flex: 1; min-height: 350px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .image-placeholder-text { font-size: 1.2rem; color: rgba(255, 255, 255, 0.2); text-transform: uppercase; font-weight: 700; font-style: italic; text-align: center; padding: 0 20px; }
+        /* Side-by-Side Presentation Layout */
+        .feature-split {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 80px;
+            align-items: stretch;
+        }
+        
+        .image-box {
+            flex: 1;
+            min-height: 350px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+        }
+        .image-placeholder-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            font-weight: 700;
+            font-style: italic;
+        }
 
-        .side-writing-box { flex: 1; background: rgba(12, 14, 18, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px; border-radius: 4px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: center; }
-        .side-writing-box h2 { font-size: 2rem; text-transform: uppercase; font-style: italic; margin-top: 0; margin-bottom: 20px; color: #ffffff; border-bottom: 1px solid rgba(218, 46, 41, 0.3); padding-bottom: 10px; }
-        .side-writing-box p { font-family: Arial, sans-serif; font-size: 1rem; line-height: 1.6; color: #a0a0a0; margin: 0; }
+        .side-writing-box {
+            flex: 1;
+            background: rgba(12, 14, 18, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 35px;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .side-writing-box h2 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            font-style: italic;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(218, 46, 41, 0.3);
+            padding-bottom: 10px;
+        }
+        .side-writing-box p {
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #a0a0a0;
+            margin: 0;
+        }
 
-        .section-divider-title { font-size: 2.2rem; text-transform: uppercase; font-style: italic; margin-bottom: 30px; color: #ffffff; }
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
-        .team-card { background: rgba(12, 14, 18, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px; overflow: hidden; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: border-color 0.2s ease; }
-        .team-card:hover { border-color: #Da2e29; }
-        .team-photo-frame { width: 100%; height: 260px; background: rgba(255, 255, 255, 0.02); border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .team-info { padding: 15px 20px; }
-        .team-name { font-size: 1.3rem; text-transform: uppercase; font-weight: 700; font-style: italic; color: #ffffff; margin-bottom: 2px; }
-        .team-role { font-family: Arial, sans-serif; font-size: 0.85rem; color: #Da2e29; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+        /* Meet the Team Section */
+        .section-divider-title {
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #ffffff;
+            letter-spacing: 0px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+        .team-card {
+            background: rgba(12, 14, 18, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: border-color 0.2s ease;
+        }
+        .team-card:hover {
+            border-color: #Da2e29;
+        }
+        .team-photo-frame {
+            width: 100%;
+            height: 260px;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .team-photo-frame img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .team-info {
+            padding: 15px 20px;
+        }
+        .team-name {
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-style: italic;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+        .team-role {
+            font-family: Arial, sans-serif;
+            font-size: 0.85rem;
+            color: #Da2e29;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
 
         /* --- UNIFIED ADAPTIVE RESPONSIVENESS MATRIX --- */
         @media (max-width: 991px) {
@@ -131,7 +277,7 @@
             .nav-links::-webkit-scrollbar { display: none; }
             .nav-links a { font-size: 13px; padding: 6px 8px; letter-spacing: 0.5px; }
 
-            main { padding: 160px 20px 40px 20px; }
+            main { padding: 160px 20px 60px 20px; }
             h1 { font-size: 2.8rem; }
             .subtitle { padding-left: 20px; font-size: 1rem; margin-bottom: 30px; }
             .feature-split { flex-direction: column; gap: 20px; }
@@ -144,6 +290,7 @@
     </style>
 </head>
 <body>
+
     <div class="paddock-bg"></div><div class="glow-wash"></div>
     <div class="geo-shard shard-1" id="shard1"></div><div class="geo-shard shard-2" id="shard2"></div>
     <div class="geo-shard shard-3" id="shard3"></div><div class="geo-shard shard-4" id="shard4"></div>
@@ -154,6 +301,7 @@
                 <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
                 <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
             </a>
+
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="about.html">About the team</a>
@@ -164,53 +312,84 @@
             </div>
         </div>
     </nav>
+    
+    <main>
+        <section id="aerodynamics">
+            <h1>Aerodynamics</h1>
+            <div class="subtitle">// Surface Fluid Optimization</div>
 
-    <main id="aerodynamics">
-        <h1>Aerodynamics</h1>
-        <div class="subtitle">// Fluid Surface Structures &amp; Drag Calculations</div>
-
-        <div class="intro">
-            Our Aerodynamics department designs the external profile of the formula car, utilizing computational fluid dynamics (CFD) and scale wind tunnel analysis to optimize high-speed downforce and overall boundary-layer air management. Click inside this box to edit this block.
-        </div>
-
-        <div class="feature-split">
-            <div class="image-box">
-                <div class="image-placeholder-text">Wing Profiles &amp; Airflow Simulation Render</div>
+            <div class="intro" contenteditable="true">
+                [EDITABLE HEADER BLOCK] Click anywhere inside this dashed block to edit the text description directly on the page. Use this space to write an executive overview regarding current wing profiles, drag targets, and wind-tunnel testing cycles.
             </div>
-            <div class="side-writing-box">
-                <h2>Boundary Air Control</h2>
-                <p>We work tightly with composites construction methods to translate pressure mapping models into physical wings, diffusers, and side-pod curves that keep the tires loaded in tight turns.</p>
-            </div>
-        </div>
 
-        <section>
-            <h2 class="section-divider-title">Meet The Team</h2>
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-photo-frame"><div class="image-placeholder-text">Photo Frame</div></div>
-                    <div class="team-info"><div class="team-name">Thomas Sterling</div><div class="team-role">Aerodynamics Lead</div></div>
+            <div class="feature-split">
+                <div class="image-box">
+                    <img src="aero-image.jpg" alt="Aerodynamic car">
+                </div>
+                
+                <div class="side-writing-box">
+                    <h2>Boundary Layer Analysis</h2>
+                    <p>Our surface computational fluid dynamic modules focus on reducing flow separation across the primary profile limits. By modifying downstream geometric transitions, the simulation arrays target an optimal cross-sectional force balance matrix to elevate corner-entry velocities without compromising straight-line drag coefficients.</p>
                 </div>
             </div>
+
+            <section>
+                <h2 class="section-divider-title">Meet The Team</h2>
+                
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-photo-frame">
+                            <div class="image-placeholder-text">Photo Frame</div>
+                        </div>
+                        <div class="team-info">
+                            <div class="team-name">Alex Mercer</div>
+                            <div class="team-role">Division Director</div>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-photo-frame">
+                            <div class="image-placeholder-text">Photo Frame</div>
+                        </div>
+                        <div class="team-info">
+                            <div class="team-name">Sarah Jenkins</div>
+                            <div class="team-role">CFD Engineer</div>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-photo-frame">
+                            <div class="image-placeholder-text">Photo Frame</div>
+                        </div>
+                        <div class="team-info">
+                            <div class="team-name">Marcus Vance</div>
+                            <div class="team-role">Surface Modeler</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </section>
     </main>
 
     <script>
-        function updatePaddock() {
-            const total = document.documentElement.scrollHeight - window.innerHeight;
-            if (total <= 0 || window.innerWidth <= 767) return;
-            const pct = window.scrollY / total;
+        function updateMultiLayerPaddock() {
+            const totalScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (totalScrollableHeight <= 0 || window.innerWidth <= 767) return;
+            const scrollPercent = window.scrollY / totalScrollableHeight;
+            
             const s1 = document.getElementById('shard1');
             const s2 = document.getElementById('shard2');
             const s3 = document.getElementById('shard3');
             const s4 = document.getElementById('shard4');
-            if (s1) s1.style.transform = `translateX(${pct * -45}px) skewX(${pct * 1}deg)`;
-            if (s2) s2.style.transform = `translateX(${pct * 25}px)`;
-            if (s3) s3.style.transform = `translateX(${pct * -15}px) translateY(${pct * 20}px)`;
-            if (s4) s4.style.transform = `translateX(${pct * 35}px) scaleX(${1 + pct * 0.03})`;
+
+            if (s1) s1.style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
+            if (s2) s2.style.transform = `translateX(${scrollPercent * 25}px)`;
+            if (s3) s3.style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
+            if (s4) s4.style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
         }
-        window.addEventListener('scroll', updatePaddock);
-        window.addEventListener('resize', updatePaddock);
-        document.addEventListener("DOMContentLoaded", updatePaddock);
+        window.addEventListener('scroll', updateMultiLayerPaddock);
+        window.addEventListener('resize', updateMultiLayerPaddock);
+        document.addEventListener("DOMContentLoaded", updateMultiLayerPaddock);
     </script>
 </body>
 </html>
