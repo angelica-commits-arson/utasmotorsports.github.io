@@ -61,16 +61,15 @@
             padding: 0 40px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: baseline; /* Matches textual baseline of home page layout precisely */
             box-sizing: border-box;
         }
 
         .nav-logo-link {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            height: 100%;
         }
 
         .nav-logo-img {
@@ -92,6 +91,11 @@
             text-transform: uppercase;
             color: #ffffff;
             letter-spacing: 0.5px;
+            line-height: 1;
+        }
+
+        .accent-red {
+            color: #Da2e29;
         }
 
         .nav-links { 
@@ -115,6 +119,7 @@
             position: relative;
             white-space: nowrap;
             display: block;
+            line-height: 1;
         }
 
         .nav-links a.active { color: #Da2e29; }
@@ -155,7 +160,7 @@
         /* --- GLOBAL MEDIA RESPONSIVENESS MATRIX --- */
         @media (max-width: 991px) {
             .nav-container { padding: 0 20px; }
-            .nav-logo-text { display: none; } /* Hides text title on small tablets/mobile to ensure links have full width room */
+            .nav-logo-text { display: none; }
             .nav-links a { font-size: 13px; padding: 6px 8px; }
             .nav-links { gap: 4px; }
             .geo-shard { opacity: 0.5; }
@@ -163,7 +168,7 @@
 
         @media screen and (max-width: 767px) {
             .top-navbar { height: auto; padding: 12px 0; }
-            .nav-container { flex-direction: column; gap: 12px; }
+            .nav-container { flex-direction: column; gap: 12px; align-items: center; }
             .nav-links { 
                 width: 100%; justify-content: center; 
                 overflow-x: auto; white-space: nowrap;
@@ -177,7 +182,7 @@
             .subtitle { font-size: 0.9rem; padding-left: 20px; }
             
             .social-matrix-row { flex-direction: column; gap: 15px; }
-            .geo-shard { display: none !important; } /* Eliminate screen overflow crashes on small display viewports */
+            .geo-shard { display: none !important; }
         }
     </style>
 </head>
@@ -192,7 +197,7 @@
         <div class="nav-container">
             <a href="index.html" class="nav-logo-link">
                 <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
-                <span class="nav-logo-text">UTAS MOTORSPORT</span>
+                <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
             </a>
 
             <div class="nav-links">
