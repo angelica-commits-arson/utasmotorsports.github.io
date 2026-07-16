@@ -302,11 +302,11 @@
 
         <!-- INTERACTIVE RACING SYSTEM -->
         <section class="game-wrapper">
-            <div class="section-header">// Grand Prix Simulator</div>
+            <div class="section-header">// Monza Circuit Simulator</div>
             <div class="game-telemetry">
                 <div class="telemetry-item">Lap: <span id="lap-display">1 / 3</span></div>
                 <div class="telemetry-item">Time: <span id="time-display">00:00.00</span></div>
-                <div class="telemetry-item">Phase: <span id="phase-display">Main Straight</span></div>
+                <div class="telemetry-item">Phase: <span id="phase-display">Prima Variante</span></div>
                 <button class="btn-reset" id="resetBtn">Reset Run</button>
             </div>
             
@@ -316,7 +316,7 @@
             
             <div class="game-instructions">
                 <div>Controls: <span class="instruction-pill">W</span> Forward | <span class="instruction-pill">S</span> Brake/Reverse | <span class="instruction-pill">A</span> Turn Left | <span class="instruction-pill">D</span> Turn Right</div>
-                <div>Objective: Avoid the dark inner/outer solid barriers! Complete 3 laps as fast as possible. Track shifts dynamic theme each lap.</div>
+                <div>Objective: Master the legendary Temple of Speed! Navigate chicanes and the massive Parabolica sweep. 3 Laps.</div>
             </div>
         </section>
 
@@ -451,7 +451,7 @@
         window.addEventListener('resize', runCombinedScrollEngine);
         document.addEventListener("DOMContentLoaded", runCombinedScrollEngine);
 
-        /* --- ADVANCED COMPLEX 2D RACING SIMULATOR --- */
+        /* --- MONZA 2D RACING SIMULATOR ENGINE --- */
         const canvas = document.getElementById('raceCanvas');
         const ctx = canvas.getContext('2d');
         const lapDisplay = document.getElementById('lap-display');
@@ -464,36 +464,52 @@
         let gameFinished = false;
         let finalRaceTime = "";
 
-        // Detailed Top-down F1 Car Profile State
+        // Car spawn adjusted to start at the bottom straight facing left (towards Turn 1 chicane)
         const car = {
-            x: 230,
-            y: 430,
-            width: 38,
-            height: 20,
+            x: 500,
+            y: 475,
+            width: 36,
+            height: 18,
             speed: 0,
-            maxSpeed: 5.5,
+            maxSpeed: 6.8, // Slightly higher speed potential for Monza straights
             backwardsMaxSpeed: -2.0,
-            acceleration: 0.12,
+            acceleration: 0.14,
             deceleration: 0.06,
-            brakingPower: 0.25,
-            angle: 0,
-            steeringSpeed: 0.042
+            brakingPower: 0.32,
+            angle: Math.PI, // Facing left
+            steeringSpeed: 0.045
         };
 
-        // Strict Checkpoints Architecture for Lap Counter Flow Validation
+        // Checkpoints tracing the lap layout steps of Monza
         const checkpoints = [
-            { x: 500, y: 390, hit: false, label: "S Curve Chicanes" },
-            { x: 780, y: 250, hit: false, label: "Hairpin Turn" },
-            { x: 450, y: 110, hit: false, label: "Back Straight" },
-            { x: 180, y: 230, hit: false, label: "Final Sector" },
-            { x: 230, y: 430, hit: false, isFinishLine: true }
+            { x: 140, y: 475, hit: false, label: "Variante del Rettifilo" },
+            { x: 120, y: 160, hit: false, label: "Curva Grande & Roggia" },
+            { x: 440, y: 70,  hit: false, label: "Lesmo 1 & 2" },
+            { x: 740, y: 120, hit: false, label: "Variante Ascari" },
+            { x: 860, y: 350, hit: false, label: "Curva Parabolica" },
+            { x: 500, y: 475, hit: false, isFinishLine: true }
         ];
 
+        // Dynamic lap environment visual profile changes
         const lapEnvironments = {
-            1: { trackColor: '#25272c', groundColor: '#0c0e12', curb1: '#ffffff', curb2: '#da2e29' },
-            2: { trackColor: '#1d1e22', groundColor: '#1a0b0b', curb1: '#f1c40f', curb2: '#2c3e50' },
-            3: { trackColor: '#141517', groundColor: '#09141c', curb1: '#00ffff', curb2: '#111622' }
+            1: { trackColor: '#2c2e35', groundColor: '#090b0e', curb1: '#ffffff', curb2: '#da2e29' },
+            2: { trackColor: '#212328', groundColor: '#160909', curb1: '#f39c12', curb2: '#111111' },
+            3: { trackColor: '#16171c', groundColor: '#05101a', curb1: '#00f9ff', curb2: '#1c2833' }
         };
+
+        // Path definitions: Precise custom matching outer & inner boundaries for Monza
+        const outerTrackPath = [
+            {x: 80, y: 525}, {x: 880, y: 525}, 
+            {x: 930, y: 450}, {x: 930, y: 250}, {x: 800, y: 60},
+            {x: 440, y: 30},  {x: 270, y: 110}, {x: 70, y: 110}, 
+            {x: 70, y: 430},  {x: 80, y: 525}
+        ];
+
+        const innerTrackPath = [
+            {x: 180, y: 425}, {x: 180, y: 200}, {x: 350, y: 200},
+            {x: 440, y: 120}, {x: 700, y: 150}, {x: 810, y: 300},
+            {x: 810, y: 425}, {x: 180, y: 425}
+        ];
 
         const keys = { w: false, a: false, s: false, d: false };
 
@@ -510,26 +526,22 @@
             if (['w', 'a', 's', 'd'].includes(key)) keys[key] = false;
         });
 
-        // RESET GAME FUNCTIONALITY
         function resetGame() {
             currentLap = 1;
             startTimestamp = null;
             gameFinished = false;
             finalRaceTime = "";
             
-            // Reset Car parameters back to grid
-            car.x = 230;
-            car.y = 430;
+            car.x = 500;
+            car.y = 475;
             car.speed = 0;
-            car.angle = 0;
+            car.angle = Math.PI;
             
-            // Clear all hit checkpoints
             checkpoints.forEach(cp => cp.hit = false);
             
-            // UI Updates
             lapDisplay.innerText = "1 / 3";
             timeDisplay.innerText = "00:00.00";
-            phaseDisplay.innerText = "Main Straight";
+            phaseDisplay.innerText = "Prima Variante";
             phaseDisplay.style.color = "#ffffff";
         }
 
@@ -539,70 +551,76 @@
             return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2) < range;
         }
 
-        function isOutsideTrack(x, y) {
-            // Outer limits wall checks
-            if (x < 95 || x > 865 || y < 75 || y > 465) return true;
-
-            // Central Infield Obstacle Barrier Blocks
-            if (x > 185 && x < 800 && y > 145 && y < 395) {
-                if (x > 380 && x < 760 && y > 330 && y < 420) return false; // Chicane pass channel
-                if (x > 210 && x < 520 && y > 75 && y < 200) return false; // Top connector path
-                return true; 
+        // Raycasting algorithm to check if point is inside a polygon boundary
+        function pointInPolygon(x, y, polygon) {
+            let inside = false;
+            for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+                const xi = polygon[i].x, yi = polygon[i].y;
+                const xj = polygon[j].x, yj = polygon[j].y;
+                const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
             }
-            return false;
+            return inside;
         }
 
-        function drawCircuitLayout(env) {
-            // Ground layer Fills
+        function isOutsideTrack(x, y) {
+            // Must be INSIDE the outer perimeter loop, and OUTSIDE the inner field infield boundary loop
+            const insideOuter = pointInPolygon(x, y, outerTrackPath);
+            const insideInner = pointInPolygon(x, y, innerTrackPath);
+            return !insideOuter || insideInner;
+        }
+
+        function drawMonzaTrack(env) {
+            // Ground layer canvas wash
             ctx.fillStyle = env.groundColor;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Outer Asphalt Track Ring
+            // Draw Main Asphalt Monza Circuit via complex structural paths
             ctx.fillStyle = env.trackColor;
-            ctx.fillRect(70, 50, 820, 440);
-
-            // Complex Central Infield Barrier Island Shapes
-            ctx.fillStyle = '#060709'; 
-            ctx.strokeStyle = '#da2e29';
-            ctx.lineWidth = 3;
-
             ctx.beginPath();
-            ctx.moveTo(185, 145);
-            ctx.lineTo(800, 145);
-            ctx.lineTo(800, 395);
-            ctx.lineTo(380, 395);
-            ctx.lineTo(380, 300);
-            ctx.lineTo(600, 300);
-            ctx.lineTo(600, 210);
-            ctx.lineTo(185, 210);
+            ctx.moveTo(outerTrackPath[0].x, outerTrackPath[0].y);
+            for(let i = 1; i < outerTrackPath.length; i++) {
+                ctx.lineTo(outerTrackPath[i].x, outerTrackPath[i].y);
+            }
+            ctx.closePath();
+            ctx.fill();
+
+            // Cut out the core inner infield green belt void island
+            ctx.fillStyle = '#060709';
+            ctx.strokeStyle = env.curb2;
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(innerTrackPath[0].x, innerTrackPath[0].y);
+            for(let i = 1; i < innerTrackPath.length; i++) {
+                ctx.lineTo(innerTrackPath[i].x, innerTrackPath[i].y);
+            }
             ctx.closePath();
             ctx.fill();
             ctx.stroke();
 
-            // Additional Chicane Island Barrier Blocks
-            ctx.fillRect(450, 360, 230, 75);
-            ctx.strokeRect(450, 360, 230, 75);
-
-            // Kerbs indicators borders mapping
+            // Draw outer tracking structural safety line boundaries kerbs
             ctx.strokeStyle = env.curb1;
-            ctx.lineWidth = 4;
-            ctx.strokeRect(90, 70, 780, 400);
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(outerTrackPath[0].x, outerTrackPath[0].y);
+            for(let i = 1; i < outerTrackPath.length; i++) {
+                ctx.lineTo(outerTrackPath[i].x, outerTrackPath[i].y);
+            }
+            ctx.closePath();
+            ctx.stroke();
 
-            // White Finish line indicator gate
+            // Draw White checkered finish timing line beam gate
             ctx.strokeStyle = '#ffffff';
             ctx.lineWidth = 6;
             ctx.beginPath();
-            ctx.moveTo(280, 440);
-            ctx.lineTo(280, 495);
+            ctx.moveTo(500, 425);
+            ctx.lineTo(500, 525);
             ctx.stroke();
-
-            // Note: Red visual dots indicator code completely removed for a clean UI view 
         }
 
         function updateSimulation() {
             if (gameFinished) return;
 
-            // Throttle / Brake Matrix
             if (keys.w) {
                 car.speed = Math.min(car.speed + car.acceleration, car.maxSpeed);
             } else if (keys.s) {
@@ -612,37 +630,35 @@
                 if (car.speed < 0) car.speed = Math.min(car.speed + car.deceleration, 0);
             }
 
-            // Steering calculations
             if (car.speed !== 0) {
                 const modifier = car.speed > 0 ? 1 : -1;
                 if (keys.a) car.angle -= car.steeringSpeed * modifier;
                 if (keys.d) car.angle += car.steeringSpeed * modifier;
             }
 
-            // Compute hypothetical next vector coordinate step values
             const nextX = car.x + Math.cos(car.angle) * car.speed;
             const nextY = car.y + Math.sin(car.angle) * car.speed;
 
-            // HARD BARRIER PENALTY ENFORCEMENT
+            // Strict Hard barrier enforcement tracking parameters
             if (isOutsideTrack(nextX, nextY)) {
-                car.speed = -car.speed * 0.4; // Instant rebound knock penalty
+                car.speed = -car.speed * 0.3; // Rebound elasticity penalty drop down force
             } else {
                 car.x = nextX;
                 car.y = nextY;
             }
 
-            // Checkpoint traversal validation logic loops
+            // Progression checkpoints loop mapping tracker
             checkpoints.forEach((cp) => {
                 if (checkProximity(car.x, car.y, cp.x, cp.y, 65)) {
                     if (!cp.isFinishLine && !cp.hit) {
                         cp.hit = true;
                         phaseDisplay.innerText = cp.label;
-                    } else if (cp.isFinishLine && checkpoints[0].hit && checkpoints[1].hit && checkpoints[2].hit && checkpoints[3].hit) {
+                    } else if (cp.isFinishLine && checkpoints[0].hit && checkpoints[1].hit && checkpoints[2].hit && checkpoints[3].hit && checkpoints[4].hit) {
                         if (currentLap < 3) {
                             currentLap++;
                             lapDisplay.innerText = `${currentLap} / 3`;
                             checkpoints.forEach(c => c.hit = false);
-                            phaseDisplay.innerText = "Lap Progressing";
+                            phaseDisplay.innerText = "Rettifilo Straight";
                         } else {
                             gameFinished = true;
                             phaseDisplay.innerText = "Race Complete";
@@ -658,25 +674,25 @@
             ctx.translate(car.x, car.y);
             ctx.rotate(car.angle);
 
-            // 1. REAR WING ASSEMBLY
+            // Rear Wing Assembly components
             ctx.fillStyle = '#111111';
             ctx.fillRect(-car.width/2 - 3, -car.height/2 - 2, 4, car.height + 4); 
             ctx.fillStyle = '#Da2e29';
             ctx.fillRect(-car.width/2 - 3, -car.height/2 - 4, 6, 2);
             ctx.fillRect(-car.width/2 - 3, car.height/2 + 2, 6, 2);
 
-            // 2. WIDE RACING WHEELS SLICKS (4 corners)
+            // Wide Slick Racing Tyres 
             ctx.fillStyle = '#1b1b1c';
-            ctx.fillRect(-car.width/3, -car.height/2 - 4, 8, 5);  // Rear Left
-            ctx.fillRect(-car.width/3, car.height/2 - 1, 8, 5);   // Rear Right
-            ctx.fillRect(car.width/4, -car.height/2 - 3, 7, 4);   // Front Left
-            ctx.fillRect(car.width/4, car.height/2 - 1, 7, 4);    // Front Right
+            ctx.fillRect(-car.width/3, -car.height/2 - 4, 8, 5);
+            ctx.fillRect(-car.width/3, car.height/2 - 1, 8, 5);
+            ctx.fillRect(car.width/4, -car.height/2 - 3, 7, 4);
+            ctx.fillRect(car.width/4, car.height/2 - 1, 7, 4);
 
-            // 3. AERODYNAMIC WIDE SIDEPODS
+            // Aerodynamic Sidepods
             ctx.fillStyle = '#b61f1b';
             ctx.fillRect(-car.width/4, -car.height/2 + 1, car.width/2, car.height - 2);
 
-            // 4. MAIN CHASSIS COWL & NOSE CONE TAPER
+            // Chassis Main Cowl Taper Profile
             ctx.fillStyle = '#Da2e29';
             ctx.beginPath();
             ctx.moveTo(-car.width/2, -car.height/3);
@@ -686,7 +702,7 @@
             ctx.closePath();
             ctx.fill();
 
-            // 5. BLACK DRIVER HELMET & PITOT COCKPIT GLOSS
+            // Driver Helmet cockpit highlights
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(-2, -car.height/5, 5, car.height/2.5);
             ctx.fillStyle = '#000000';
@@ -694,7 +710,7 @@
             ctx.arc(1, 0, 3.5, 0, Math.PI * 2);
             ctx.fill();
 
-            // 6. FRONT WING AGGRESSIVE ENDPLATES
+            // Front Wing Assembly Elements
             ctx.fillStyle = '#111111';
             ctx.fillRect(car.width/2, -car.height/2 - 3, 3, car.height + 6);
             ctx.fillStyle = '#ffffff';
@@ -726,7 +742,7 @@
             const currentEnv = lapEnvironments[currentLap];
             updateSimulation();
             updateRaceTimer();
-            drawCircuitLayout(currentEnv);
+            drawMonzaTrack(currentEnv);
             drawF1Car();
 
             if (gameFinished) {
@@ -738,7 +754,7 @@
                 ctx.fillText('CHEQUERED FLAG', canvas.width / 2, canvas.height / 2 - 10);
                 ctx.fillStyle = '#Da2e29';
                 ctx.font = 'italic 700 2rem Oswald, sans-serif';
-                ctx.fillText(`GRAND PRIX TIME: ${finalRaceTime}`, canvas.width / 2, canvas.height / 2 + 50);
+                ctx.fillText(`TOTAL TIME: ${finalRaceTime}`, canvas.width / 2, canvas.height / 2 + 50);
             }
             requestAnimationFrame(loop);
         }
