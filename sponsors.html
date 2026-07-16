@@ -11,8 +11,14 @@
     <style>
         body {
             font-family: 'Oswald', Arial, sans-serif;
-            margin: 0; padding: 0; background-color: #000000; color: #ffffff;
-            letter-spacing: 0.5px; min-height: 180vh; position: relative; overflow-x: hidden;
+            margin: 0; 
+            padding: 0; 
+            background-color: #000000; 
+            color: #ffffff;
+            letter-spacing: 0.5px; 
+            min-height: 180vh; 
+            position: relative; 
+            overflow-x: hidden;
         }
 
         /* --- BACKGROUND LAYER FRAMEWORK --- */
@@ -28,112 +34,99 @@
         .shard-7 { right: -3vw; width: 18vw; background: rgba(5, 6, 8, 0.9); border-left: 1px solid rgba(255, 255, 255, 0.04); clip-path: polygon(45% 0%, 100% 0%, 80% 100%, 0% 100%); z-index: -2; }
         .shard-8 { right: -8vw; width: 15vw; background: linear-gradient(90deg, rgba(218, 46, 41, 0.12) 0%, rgba(0, 0, 0, 0) 100%); clip-path: polygon(60% 0%, 100% 0%, 50% 100%, 0% 100%); z-index: -1; }
 
-      /* --- STICKY NAV RENEWAL --- */
-.top-navbar {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    z-index: 1000;
-    height: 80px; /* Marginally widened to sit comfortably above your enlarged welcome block */
-    background: rgba(0, 0, 0, 0.75); 
-    backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-}
+        /* --- STICKY NAV SYSTEM (PERFECT PARITY MATCH WITH INDEX/ABOUT) --- */
+        .top-navbar {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 1000;
+            height: 80px; 
+            background: rgba(0, 0, 0, 0.75); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+        }
 
-/* Flexbox Matrix Container */
-.nav-container {
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    justify-content: space-between; /* Pushes logo left and links right */
-    align-items: center;
-}
+        .nav-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
 
-/* Brand Identity Layout */
-.nav-logo-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    height: 100%;
-}
+        .nav-logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            height: 100%;
+        }
 
-.nav-logo-img {
-    height: 48px; /* Scales your logo to fit perfectly within the 80px bar height */
-    width: auto;
-    object-fit: contain;
-    filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
-    transition: transform 0.2s ease;
-}
+        .nav-logo-img {
+            height: 48px; 
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
+            transition: transform 0.2s ease;
+        }
 
-.nav-logo-link:hover .nav-logo-img {
-    transform: scale(1.05); /* Micro-interaction when users hover over logo */
-}
+        .nav-logo-link:hover .nav-logo-img { transform: scale(1.05); }
+        .nav-logo-text { font-size: 1.3rem; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; letter-spacing: 0.5px; }
+        .accent-red { color: #Da2e29; }
+        .nav-links { display: flex; gap: 15px; }
 
-.nav-logo-text {
-    font-size: 1.3rem;
-    font-weight: 700;
-    font-style: italic;
-    text-transform: uppercase;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-}
+        .nav-links a {
+            text-decoration: none; 
+            font-size: 15px; 
+            font-weight: 700; 
+            font-style: italic;
+            text-transform: uppercase; 
+            color: #ffffff; 
+            letter-spacing: 1.2px; 
+            padding: 8px 12px;
+            transition: all 0.2s ease; 
+            position: relative;
+        }
 
-.accent-red {
-    color: #Da2e29;
-}
+        .nav-links a.active { color: #Da2e29; }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
+            bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
+        .nav-links a:hover { color: #Da2e29; }
 
-/* Nav links alignment alignment adjustments */
-.nav-links { 
-    display: flex; 
-    gap: 15px; 
-}
+        /* Global Structural Headings */
+        h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-style: italic;
+            margin: 120px auto 40px auto;
+            max-width: 1250px;
+            padding: 0 40px;
+            letter-spacing: -1px;
+            color: #ffffff;
+            border-left: 6px solid #Da2e29;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+            box-sizing: border-box;
+        }
 
-.nav-links a {
-    text-decoration: none; 
-    font-size: 15px; 
-    font-weight: 700; 
-    font-style: italic;
-    text-transform: uppercase; 
-    color: #ffffff; 
-    letter-spacing: 1.2px; 
-    padding: 8px 12px;
-    transition: all 0.2s ease; 
-    position: relative;
-}
-
-.nav-links a.active { color: #Da2e29; }
-.nav-links a::after {
-    content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
-    bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
-}
-.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
-.nav-links a:hover { color: #Da2e29; }
-
-/* Responsive Mobile Compression Layer */
-@media (max-width: 991px) {
-    .nav-container {
-        padding: 0 20px;
-    }
-    .nav-logo-text {
-        display: none; /* Hides text title on small tablets/mobile to ensure links have full width room */
-    }
-    .nav-links a {
-        font-size: 13px;
-        padding: 6px 8px;
-        gap: 8px;
-    }
-}
-
-        /* --- CONTENT WRAPPER --- */
-        main { padding: 140px 50px 50px 50px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
-        h1 { font-size: 4rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 40px; letter-spacing: -1px; color: #ffffff; border-left: 6px solid #Da2e29; padding-left: 20px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); }
+        /* --- CONTENT WRAPPER ARCHITECTURE --- */
+        main { 
+            max-width: 1250px; 
+            margin: 0 auto; 
+            padding: 0 40px 60px 40px;
+            position: relative; 
+            z-index: 10; 
+            box-sizing: border-box;
+        }
         
         .tier-section { margin-bottom: 50px; background: rgba(12, 14, 18, 0.3); border: 1px solid rgba(255, 255, 255, 0.04); padding: 30px; border-radius: 4px; backdrop-filter: blur(8px); }
         .tier-header { font-size: 2rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
@@ -145,41 +138,55 @@
         .supporter .tier-header { color: #ffffff; border-bottom: 2px solid #Da2e29; }
 
         .logo-grid { display: grid; gap: 25px; align-items: center; justify-content: center; }
-        .platinum .logo-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
-        .gold .logo-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+        .platinum .logo-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .gold .logo-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
         .silver .logo-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
         .bronze .logo-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
         .supporter .logo-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
 
-        .sponsor-card { background-color: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); padding: 20px; text-align: center; border-radius: 4px; transition: transform 0.2s ease, border-color 0.2s ease; }
+        .sponsor-card { background-color: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); padding: 20px; text-align: center; border-radius: 4px; transition: transform 0.2s ease, border-color 0.2s ease; box-sizing: border-box; }
         .sponsor-card:hover { transform: scale(1.03); border-color: #Da2e29; }
         .sponsor-card img { max-width: 100%; height: auto; max-height: 120px; object-fit: contain; filter: grayscale(20%); transition: filter 0.2s ease; }
         .sponsor-card:hover img { filter: grayscale(0%); }
         .sponsor-name { font-size: 1.1rem; margin-top: 15px; text-transform: uppercase; font-weight: 700; color: #a0a0a0; }
-   /* --- SUPPLIER MATRIX SPECIFIC LAYOUT --- */
-.supplier-matrix .tier-header {
-    color: #8e94a0; /* Neutral telemetry gray instead of tier colors */
-    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
-}
 
-.supplier-grid {
-    display: grid;
-    gap: 16px; /* Tighter spacing for high volume */
-    align-items: center;
-    justify-content: center;
-    /* Denser matrix sizing: shrinks spaces to fit significantly more items per row */
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
-}
+        /* --- SUPPLIER MATRIX SPECIFIC LAYOUT --- */
+        .supplier-matrix .tier-header {
+            color: #8e94a0;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+        }
 
-/* Slightly compact padding adjustments for the larger asset list */
-.supplier-grid .sponsor-card {
-    padding: 12px;
-}
+        .supplier-grid {
+            display: grid;
+            gap: 16px; 
+            align-items: center;
+            justify-content: center;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+        }
 
-.supplier-grid .sponsor-name {
-    font-size: 0.9rem;
-    margin-top: 10px;
-}
+        .supplier-grid .sponsor-card { padding: 12px; }
+        .supplier-grid .sponsor-name { font-size: 0.9rem; margin-top: 10px; }
+
+        /* --- UNIFIED ADAPTIVE MEDIA RESPONSIVENESS (COMPRESSION MATRIX) --- */
+        @media (max-width: 991px) {
+            .top-navbar { height: auto; padding: 10px 0; }
+            .nav-container { flex-direction: column; gap: 10px; padding: 0 20px; }
+            .nav-logo-text { display: none; }
+            .nav-links { gap: 6px; flex-wrap: wrap; justify-content: center; }
+            .nav-links a { font-size: 12px; padding: 6px 8px; letter-spacing: 0.5px; }
+
+            h1 { font-size: 2.8rem; margin-top: 160px; padding: 0 20px; margin-bottom: 25px; }
+            main { padding: 0 20px 40px 20px; }
+            .tier-section { padding: 20px; margin-bottom: 30px; }
+            .tier-header { font-size: 1.5rem; }
+
+            .platinum .logo-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+            .gold .logo-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+            .silver .logo-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+            .bronze .logo-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+            .supporter .logo-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+            .supplier-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+        }
     </style>
 </head>
 <body>
@@ -191,26 +198,26 @@
     <div class="geo-shard shard-7" id="shard7"></div><div class="geo-shard shard-8" id="shard8"></div>
 
     <nav class="top-navbar">
-    <div class="nav-container">
-        <a href="index.html" class="nav-logo-link">
-            <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
-            <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
-        </a>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo-link">
+                <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
+                <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
+            </a>
 
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About the team</a>
-            <a href="departments.html">Departments</a>
-            <a href="sponsors.html">Sponsors</a>
-            <a href="timeline.html">Timeline</a>
-            <a href="contact.html">Contact us</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About the team</a>
+                <a href="departments.html">Departments</a>
+                <a href="sponsors.html">Sponsors</a>
+                <a href="timeline.html">Timeline</a>
+                <a href="contact.html">Contact us</a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
+    <h1>Our Partners</h1>
 
     <main>
-        <h1>Our Partners</h1>
-
         <section class="tier-section platinum">
             <div class="tier-header">// Platinum Partner</div>
             <div class="logo-grid">
@@ -224,27 +231,24 @@
         <section class="tier-section gold">
             <div class="tier-header">// Gold Partners</div>
             <div class="logo-grid">
-            
                 <div class="sponsor-card">
-            <img src="leap.png" alt="LEAP">
-            <div class="sponsor-name">CAD, CAE, and PLM technologies</div>
-        </div>
-                       <div class="sponsor-card">
-            <img src="Ansys.png" alt="ANSYS">
-            <div class="sponsor-name">Engineering Simulation Software</div>
-        </div>
-                
-        <div class="sponsor-card">
-            <img src="Altium.png" alt="Supplier Logo">
-            <div class="sponsor-name">Innovative Design Software</div>
-        </div>
+                    <img src="leap.png" alt="LEAP">
+                    <div class="sponsor-name">CAD, CAE, and PLM technologies</div>
+                </div>
+                <div class="sponsor-card">
+                    <img src="Ansys.png" alt="ANSYS">
+                    <div class="sponsor-name">Engineering Simulation Software</div>
+                </div>
+                <div class="sponsor-card">
+                    <img src="Altium.png" alt="Altium">
+                    <div class="sponsor-name">Innovative Design Software</div>
+                </div>
             </div>
         </section>
 
-       <section class="tier-section silver">
+        <section class="tier-section silver">
             <div class="tier-header">// Silver Partners</div>
             <div class="logo-grid">
-               
                 <div class="sponsor-card">
                     <img src="bulk-nutrients.png" alt="Bulk Nutrients">
                     <div class="sponsor-name">Australian Supplements</div>
@@ -282,71 +286,3 @@
                     <div class="sponsor-name">Southern Tasmania Kart Club in Orielton, Tasmania</div>
                 </div>
             </div>
-        </section>
-<!-- --- UNCLASSED TEAM SUPPLIERS SECTION --- -->
-<section class="tier-section supplier-matrix">
-    <div class="tier-header">// Official Team Suppliers</div>
-    <div class="supplier-grid">
-        
-        <!-- Repeat this block for as many suppliers as you need -->
-        <div class="sponsor-card">
-            <img src="CSIRO.png" alt="CSIRO">
-            <div class="sponsor-name">Australia's National Science Agency</div>
-        </div>
-
-        <div class="sponsor-card">
-            <img src="Calm_aluminium.png" alt="Calm Aluminium">
-            <div class="sponsor-name">Structural Aluminium Supplier</div>
-        </div>
-
-        <div class="sponsor-card">
-            <img src="Spectrum-paints.png" alt="Spectrum Paints">
-            <div class="sponsor-name">Premium Car Paints</div>
-        </div>
-
-        <div class="sponsor-card">
-            <img src="images/placeholder-logo.png" alt="Supplier Logo">
-            <div class="sponsor-name">Supplier Eta</div>
-        </div>
-
-        <div class="sponsor-card">
-            <img src="images/placeholder-logo.png" alt="Supplier Logo">
-            <div class="sponsor-name">Supplier Theta</div>
-        </div>
-
-    </div>
-</section>
-        <section class="tier-section supporter" style="margin-top: 60px; border-color: rgba(218, 46, 41, 0.2);">
-            <div class="tier-header">// Interested in becoming a sponsor?</div>
-            <div style="font-family: Arial, sans-serif; color: #d1d5db; font-size: 1.2rem; padding-left: 15px; margin-top: 15px;">UTAS Motorsport is committed to maximising sponsor exposure through strong community engagement, media presence and participation in major public events with our vehicle and team attracting attention from students, industry professionals and the wider Tasmanian community.<p>Supporting UTAS Motorsport demonstrates a commitment to education, innovation and the future of Tasmania, with sponsorship helping to develop students and promote STEM and business pathways to young Tasmanians.
-
-Our electric vehicle program also aligns sponsors with sustainability and the future of automotive technology.</p>
-                <p>For more information, connect with our team directly:
-                <div style="font-family: 'Oswald', Arial, sans-serif; font-size: 1.5rem; font-weight: 700; font-style: italic; color: #Da2e29; margin-top: 15px; letter-spacing: 1px;">
-                    EMAIL: <a href="mailto:andrew.smith2@utas.edu.au" style="color: #ffffff; text-decoration: none; border-bottom: 1px dashed #Da2e29; transition: color 0.2s;" onmouseover="this.style.color='#Da2e29'" onmouseout="this.style.color='#ffffff'">andrew.smith2@utas.edu.au</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <script>
-        function updateMultiLayerPaddock() {
-            const totalScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (totalScrollableHeight <= 0) return;
-            const scrollPercent = window.scrollY / totalScrollableHeight;
-            document.getElementById('shard1').style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
-            document.getElementById('shard2').style.transform = `translateX(${scrollPercent * 25}px)`;
-            document.getElementById('shard3').style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
-            document.getElementById('shard4').style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
-            document.getElementById('shard5').style.transform = `translateX(${scrollPercent * -60}px)`;
-            const s6 = document.getElementById('shard6');
-            s6.style.transform = `translateX(${scrollPercent * -30}px)`; s6.style.opacity = `${0.7 + (scrollPercent * 0.3)}`;
-            document.getElementById('shard7').style.transform = `translateX(${scrollPercent * 15}px)`;
-            document.getElementById('shard8').style.transform = `translateX(${scrollPercent * -75}px) skewX(${scrollPercent * -2}deg)`;
-        }
-        window.addEventListener('scroll', updateMultiLayerPaddock);
-        window.addEventListener('resize', updateMultiLayerPaddock);
-        document.addEventListener("DOMContentLoaded", updateMultiLayerPaddock);
-    </script>
-</body>
-</html>
