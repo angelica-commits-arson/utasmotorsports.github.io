@@ -682,16 +682,7 @@
             </div>
         </div>
     </div>
-        
-    <div class="content-image-wrapper">
-        <div class="image-accent-bracket"></div>
-        <div class="site-image-container">
-            <img src="bc8d0619-fff7-484e-baaf-9d86a1906114.jpg" alt="Chassis production layout" class="responsive-site-img" loading="lazy">
-            <div class="image-telemetry-caption">
-                <span class="caption-marker">// MATRIX DIAGRAM:</span> Workspace framework optimization matrix modules.
-            </div>
-        </div>
-    </div>
+
 
     <script>
         function updateMultiLayerPaddock() {
@@ -771,27 +762,26 @@
             const adelaideOverlay = document.getElementById("node-adelaide");
 
             if(isTestingInAdelaide) {
-                if(titleNode) titleNode.innerHTML = "We are currently: <span class='accent-red'>Testing Down Under</span>";
-                if(baseTextNode) baseTextNode.innerText = "Adelaide Motorsport Park";
+                if(titleNode) titleNode.innerHTML = "We are currently: <span class='accent-red'>At Competition</span>";
+                if(baseTextNode) baseTextNode.innerText = "The Bend Motorsport Complex, South Australia";
                 if(adelaideOverlay) adelaideOverlay.classList.add("active-node");
                 
                 if(metricsNode) {
                     metricsNode.innerHTML = `
-                        <div class="metric-line">// STATUS: <span class="metric-highlight">ON-SITE RIG RUNS</span></div>
-                        <div class="metric-line">// AIR TEMP: <span class="metric-highlight">22.4°C</span></div>
-                        <div class="metric-line">// TELEMETRY BAND: <span class="metric-highlight">5.8 GHz Active</span></div>
-                    `;
+                        <div class="metric-line">📍 <span class="metric-highlight">Location:</span> Adelaide, South Australia</div>
+                <div class="metric-line">🏎️ <span class="metric-highlight">Deployment:</span> Formula Student Australiasian Competition</div>
+                <div class="metric-line">📊 <span class="metric-highlight">Telemetry Status:</span> Live Team Results</div>
                 }
             } else {
                 if(titleNode) titleNode.innerHTML = "We are currently: <span class='accent-red'>In the Workshop</span>";
-                if(baseTextNode) baseTextNode.innerText = "Hobart HQ - University of Tasmania";
+                if(baseTextNode) baseTextNode.innerText = "MOTORSPORT HQ - University of Tasmania";
                 if(hobartOverlay) hobartOverlay.classList.add("active-node");
                 
                 if(metricsNode) {
                     metricsNode.innerHTML = `
-                        <div class="metric-line">// STATUS: <span class="metric-highlight">MANUFACTURING CYCLE</span></div>
-                        <div class="metric-line">// CORE TASK: <span class="metric-highlight">Aerodynamic Layups & Monocoque Prep</span></div>
-                        <div class="metric-line">// SIMULATION ARRAY: <span class="metric-highlight">CFD Processing Queue Active</span></div>
+                        <div class="metric-line">// 📍 <span class="metric-highlight">Location:</span> Hobart, Tasmania</div>
+                        <div class="metric-line">// 🛠️ <span class="metric-highlight">Current Stage:</span> Chassis Structural Assembly</div>
+                        <div class="metric-line">// 📆: <span class="metric-highlight">Next Event:</span> Baskerville Historics</div>
                     `;
                 }
             }
