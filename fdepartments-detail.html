@@ -9,8 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Shared CSS framework */
-        body { font-family: 'Oswald', Arial, sans-serif; margin: 0; padding: 0; background-color: #000000; color: #ffffff; letter-spacing: 0.5px; min-height: 140vh; position: relative; overflow-x: hidden; }
+        body {
+            font-family: 'Oswald', Arial, sans-serif;
+            margin: 0; padding: 0; background-color: #000000; color: #ffffff;
+            letter-spacing: 0.5px; min-height: 150vh; position: relative; overflow-x: hidden;
+        }
         .paddock-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(135deg, #040507 0%, #000000 100%); z-index: -10; }
         .glow-wash { position: fixed; bottom: -30%; right: -10%; width: 80vw; height: 80vh; background: radial-gradient(circle, rgba(218, 46, 41, 0.15) 0%, rgba(0, 0, 0, 0) 70%); z-index: -9; pointer-events: none; }
         .geo-shard { position: fixed; top: 0; height: 100vh; pointer-events: none; will-change: transform, opacity; transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.2, 1), opacity 0.15s linear; }
@@ -19,29 +22,117 @@
         .shard-3 { right: 2vw; width: 42vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.1) 0%, rgba(0, 0, 0, 0) 80%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 30% 100%); z-index: -6; }
         .shard-4 { right: 0; width: 35vw; background: #07080a; border-left: 1px solid rgba(218, 46, 41, 0.1); clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%); z-index: -5; }
         
-        .top-navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; height: 80px; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; align-items: center; }
-        .nav-container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
-        .nav-logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; height: 100%; }
-        .nav-logo-img { height: 48px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1)); transition: transform 0.2s ease; }
-        .nav-logo-link:hover .nav-logo-img { transform: scale(1.05); }
-        .nav-logo-text { font-size: 1.3rem; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; letter-spacing: 0.5px; }
-        .accent-red { color: #Da2e29; }
-        .nav-links { display: flex; gap: 15px; }
-        .nav-links a { text-decoration: none; font-size: 15px; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; letter-spacing: 1.2px; padding: 8px 12px; transition: all 0.2s ease; position: relative; white-space: nowrap; }
+        /* --- STICKY NAV RENEWAL --- */
+        .top-navbar {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 1000;
+            height: 80px; 
+            background: rgba(0, 0, 0, 0.75); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+        }
+
+        /* Flexbox Matrix Container */
+        .nav-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* Brand Identity Layout */
+        .nav-logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            height: 100%;
+        }
+
+        .nav-logo-img {
+            height: 48px; 
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
+            transition: transform 0.2s ease;
+        }
+
+        .nav-logo-link:hover .nav-logo-img {
+            transform: scale(1.05); 
+        }
+
+        .nav-logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-style: italic;
+            text-transform: uppercase;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .accent-red {
+            color: #Da2e29;
+        }
+
+        /* Nav links alignment adjustments */
+        .nav-links { 
+            display: flex; 
+            gap: 15px; 
+        }
+
+        .nav-links a {
+            text-decoration: none; 
+            font-size: 15px; 
+            font-weight: 700; 
+            font-style: italic;
+            text-transform: uppercase; 
+            color: #ffffff; 
+            letter-spacing: 1.2px; 
+            padding: 8px 12px;
+            transition: all 0.2s ease; 
+            position: relative;
+            white-space: nowrap;
+        }
+
         .nav-links a.active { color: #Da2e29; }
-        .nav-links a::after { content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px; bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out; }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
+            bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
+        }
         .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
         .nav-links a:hover { color: #Da2e29; }
 
-        main { padding: 140px 40px 60px 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; box-sizing: border-box; }
+        /* --- MAIN ELEMENTS --- */
+        main { padding: 140px 50px 80px 50px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; box-sizing: border-box; }
         h1 { font-size: 4rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 10px; letter-spacing: -1px; color: #ffffff; border-left: 6px solid #Da2e29; padding-left: 20px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); }
         .subtitle { font-size: 1.1rem; color: #b0b5c0; text-transform: uppercase; letter-spacing: 2px; padding-left: 26px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); margin-bottom: 40px; }
         
-        .intro { background: rgba(12, 14, 18, 0.4); border: 1px  rgba(255, 255, 255, 0.15); padding: 25px; border-radius: 4px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-family: Arial, sans-serif; font-size: 1.1rem; line-height: 1.7; color: #d1d5db; margin-bottom: 50px; outline: none; transition: border-color 0.2s ease, background 0.2s ease; }
-        .intro:focus { border-color: #Da2e29; background: rgba(12, 14, 18, 0.6); }
+        .intro {
+            background: rgba(12, 14, 18, 0.4);
+            border: 1px rgba(255, 255, 255, 0.15);
+            padding: 25px; border-radius: 4px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            font-family: Arial, sans-serif; font-size: 1.1rem; line-height: 1.7; color: #d1d5db; margin-bottom: 50px;
+            outline: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .intro:focus {
+            border-color: #Da2e29;
+            background: rgba(12, 14, 18, 0.6);
+        }
 
         .feature-split { display: flex; gap: 40px; margin-bottom: 80px; align-items: stretch; }
         .image-box { flex: 1; min-height: 350px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .image-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
         .image-placeholder-text { font-size: 1.2rem; color: rgba(255, 255, 255, 0.2); text-transform: uppercase; font-weight: 700; font-style: italic; text-align: center; padding: 0 20px; }
 
         .side-writing-box { flex: 1; background: rgba(12, 14, 18, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px; border-radius: 4px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: center; }
@@ -57,20 +148,30 @@
         .team-name { font-size: 1.3rem; text-transform: uppercase; font-weight: 700; font-style: italic; color: #ffffff; margin-bottom: 2px; }
         .team-role { font-family: Arial, sans-serif; font-size: 0.85rem; color: #Da2e29; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
 
+        /* Responsive Mobile Compression Layer */
         @media (max-width: 991px) {
             .top-navbar { height: auto; padding: 12px 0; }
             .nav-container { flex-direction: column; gap: 12px; padding: 0 20px; align-items: center; }
             .nav-logo-text { display: none; }
-            .nav-links { width: 100%; justify-content: center; overflow-x: auto; white-space: nowrap; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+            .nav-links { 
+                width: 100%; justify-content: center; 
+                overflow-x: auto; white-space: nowrap;
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+            }
             .nav-links::-webkit-scrollbar { display: none; }
             .nav-links a { font-size: 13px; padding: 6px 8px; letter-spacing: 0.5px; }
-            main { padding: 160px 20px 40px 20px; }
+
+            main { padding: 160px 20px 60px 20px; }
             h1 { font-size: 2.8rem; }
             .subtitle { padding-left: 20px; font-size: 1rem; margin-bottom: 30px; }
             .feature-split { flex-direction: column; gap: 20px; }
             .image-box { min-height: 250px; }
         }
-        @media screen and (max-width: 767px) { .geo-shard { display: none !important; } }
+
+        @media screen and (max-width: 767px) {
+            .geo-shard { display: none !important; }
+        }
     </style>
 </head>
 <body>
@@ -84,6 +185,7 @@
                 <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
                 <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
             </a>
+
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="about.html">About the team</a>
@@ -97,19 +199,20 @@
 
     <main id="financial">
         <h1>Financial</h1>
-        <div class="subtitle">// Cost Accounting &amp; Material Procurement</div>
+        <div class="subtitle">// Allocation Strategy &amp; Compliance Node</div>
 
         <div class="intro">
-            The Financial division structures our yearly operation capital, balancing part manufacturing outlays against dynamic budget thresholds to secure strict fiscal feasibility compliance. Click inside this box to edit this block.
+            The Financial sub-team oversees tactical budget control matrices, corporate resource sourcing, and cost-cap verification frameworks. They ensure that team investments safely align with overall operational constraints.
         </div>
 
         <div class="feature-split">
             <div class="image-box">
-                <div class="image-placeholder-text">Procurement Ledger &amp; Budget Optimization Models</div>
+                <div class="image-placeholder-text">Budget / Resource Allocation Media</div>
             </div>
+            
             <div class="side-writing-box">
-                <h2>Operational Resource Flow</h2>
-                <p>We ensure compliance with rigorous competition cost-report margins while optimizing supplier logistics and corporate capital allocation streams.</p>
+                <h2>Asset Distribution Analytics</h2>
+                <p>Our division maps material procurement pipelines and structural asset parameters. By reviewing cross-department expenditures and maximizing partnership distribution equity, the platform delivers secure capital deployment through complex operational seasons.</p>
             </div>
         </div>
 
@@ -118,7 +221,11 @@
             <div class="team-grid">
                 <div class="team-card">
                     <div class="team-photo-frame"><div class="image-placeholder-text">Photo Frame</div></div>
-                    <div class="team-info"><div class="team-name">Fiona Glass</div><div class="team-role">Financial Operations Director</div></div>
+                    <div class="team-info"><div class="team-name">Miranda Cole</div><div class="team-role">Financial Director</div></div>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo-frame"><div class="image-placeholder-text">Photo Frame</div></div>
+                    <div class="team-info"><div class="team-name">Robert Vance</div><div class="team-role">Procurement Officer</div></div>
                 </div>
             </div>
         </section>
@@ -126,19 +233,21 @@
 
     <script>
         function updatePaddock() {
-            const total = document.documentElement.scrollHeight - window.innerHeight;
+            const total = document.documentElement.scrollHeight - window.innerHeight; 
             if (total <= 0 || window.innerWidth <= 767) return;
             const pct = window.scrollY / total;
+            
             const s1 = document.getElementById('shard1');
             const s2 = document.getElementById('shard2');
             const s3 = document.getElementById('shard3');
             const s4 = document.getElementById('shard4');
+
             if (s1) s1.style.transform = `translateX(${pct * -45}px) skewX(${pct * 1}deg)`;
             if (s2) s2.style.transform = `translateX(${pct * 25}px)`;
             if (s3) s3.style.transform = `translateX(${pct * -15}px) translateY(${pct * 20}px)`;
             if (s4) s4.style.transform = `translateX(${pct * 35}px) scaleX(${1 + pct * 0.03})`;
         }
-        window.addEventListener('scroll', updatePaddock);
+        window.addEventListener('scroll', updatePaddock); 
         window.addEventListener('resize', updatePaddock);
         document.addEventListener("DOMContentLoaded", updatePaddock);
     </script>
