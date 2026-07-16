@@ -47,119 +47,141 @@
         .shard-8 { right: -8vw; width: 15vw; background: linear-gradient(90deg, rgba(218, 46, 41, 0.12) 0%, rgba(0, 0, 0, 0) 100%); clip-path: polygon(60% 0%, 100% 0%, 50% 100%, 0% 100%); z-index: -1; }
 
         /* --- STICKY NAV --- */
-.top-navbar {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    z-index: 1000;
-    height: 80px; /* Marginally widened to sit comfortably above your enlarged welcome block */
-    background: rgba(0, 0, 0, 0.75); 
-    backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-}
+        .top-navbar {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 1000;
+            min-height: 80px;
+            background: rgba(0, 0, 0, 0.75); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+        }
 
-/* Flexbox Matrix Container */
-.nav-container {
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    justify-content: space-between; /* Pushes logo left and links right */
-    align-items: center;
-}
+        /* Flexbox Matrix Container */
+        .nav-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
 
-/* Brand Identity Layout */
-.nav-logo-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    height: 100%;
-}
+        /* Brand Identity Layout */
+        .nav-logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            height: 100%;
+        }
 
-.nav-logo-img {
-    height: 48px; /* Scales your logo to fit perfectly within the 80px bar height */
-    width: auto;
-    object-fit: contain;
-    filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
-    transition: transform 0.2s ease;
-}
+        .nav-logo-img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
+            transition: transform 0.2s ease;
+        }
 
-.nav-logo-link:hover .nav-logo-img {
-    transform: scale(1.05); /* Micro-interaction when users hover over logo */
-}
+        .nav-logo-link:hover .nav-logo-img {
+            transform: scale(1.05);
+        }
 
-.nav-logo-text {
-    font-size: 1.3rem;
-    font-weight: 700;
-    font-style: italic;
-    text-transform: uppercase;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-}
+        .nav-logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-style: italic;
+            text-transform: uppercase;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
 
-.accent-red {
-    color: #Da2e29;
-}
+        .accent-red {
+            color: #Da2e29;
+        }
 
-/* Nav links alignment alignment adjustments */
-.nav-links { 
-    display: flex; 
-    gap: 15px; 
-}
+        /* Nav links alignment alignment adjustments */
+        .nav-links { 
+            display: flex; 
+            gap: 15px; 
+            flex-wrap: wrap;
+        }
 
-.nav-links a {
-    text-decoration: none; 
-    font-size: 15px; 
-    font-weight: 700; 
-    font-style: italic;
-    text-transform: uppercase; 
-    color: #ffffff; 
-    letter-spacing: 1.2px; 
-    padding: 8px 12px;
-    transition: all 0.2s ease; 
-    position: relative;
-}
+        .nav-links a {
+            text-decoration: none; 
+            font-size: 15px; 
+            font-weight: 700; 
+            font-style: italic;
+            text-transform: uppercase; 
+            color: #ffffff; 
+            letter-spacing: 1.2px; 
+            padding: 8px 12px;
+            transition: all 0.2s ease; 
+            position: relative;
+            white-space: nowrap;
+        }
 
-.nav-links a.active { color: #Da2e29; }
-.nav-links a::after {
-    content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
-    bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
-}
-.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
-.nav-links a:hover { color: #Da2e29; }
+        .nav-links a.active { color: #Da2e29; }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
+            bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
+        .nav-links a:hover { color: #Da2e29; }
 
-/* Responsive Mobile Compression Layer */
-@media (max-width: 991px) {
-    .nav-container {
-        padding: 0 20px;
-    }
-    .nav-logo-text {
-        display: none; /* Hides text title on small tablets/mobile to ensure links have full width room */
-    }
-    .nav-links a {
-        font-size: 13px;
-        padding: 6px 8px;
-        gap: 8px;
-    }
-}
+        /* Responsive Mobile Compression Layer */
+        @media (max-width: 991px) {
+            .top-navbar {
+                padding: 10px 0;
+            }
+            .nav-container {
+                padding: 0 20px;
+                justify-content: center;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .nav-logo-text {
+                display: none;
+            }
+            .nav-links {
+                justify-content: center;
+                gap: 5px;
+            }
+            .nav-links a {
+                font-size: 13px;
+                padding: 6px 8px;
+            }
+        }
+        
         /* --- CONTENT WRAPPER --- */
         main {
-            padding: 140px 50px 50px 50px;
+            padding: 140px 20px 50px 20px;
             max-width: 900px;
             margin: 0 auto;
             position: relative;
             z-index: 10;
+            box-sizing: border-box;
         }
         h1 {
-            font-size: 4rem; text-transform: uppercase; font-weight: 700; font-style: italic;
-            margin-bottom: 10px; letter-spacing: -1px; color: #ffffff;
-            border-left: 6px solid #Da2e29; padding-left: 20px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+            font-size: clamp(2rem, 8vw, 4rem); 
+            text-transform: uppercase; 
+            font-weight: 700; 
+            font-style: italic;
+            margin-bottom: 10px; 
+            letter-spacing: -1px; 
+            color: #ffffff;
+            border-left: 6px solid #Da2e29; 
+            padding-left: 20px; 
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
         }
         .subtitle {
             font-size: 1.1rem; color: #b0b5c0; text-transform: uppercase; letter-spacing: 2px;
@@ -168,7 +190,7 @@
         .about-content {
             font-family: Arial, sans-serif; font-size: 1.1rem; line-height: 1.8; color: #d1d5db;
             background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 40px; border-radius: 4px; backdrop-filter: blur(5px);
+            padding: clamp(20px, 5vw, 40px); border-radius: 4px; backdrop-filter: blur(5px);
         }
     </style>
 </head>
@@ -203,25 +225,9 @@
         <div class="subtitle">// Driven by student excellence</div>
         <div class="about-content">
             <p>Welcome to our team. We are a collection of high-performance minds collaborating to design, build, manage, and showcase competitive racing infrastructure from the ground up.</p>
-            <p>The UTAS Motorsport Team was founded in 2001 with a clear purpose: to give students the opportunity to
-engage in practical, industry-aligned engineering and project work that extends far beyond the
-classroom. Over the years, the team has evolved into a highly collaborative, multidisciplinary organisation
-where students gain experience in design, manufacturing, business operations, leadership, and motorsport
-engineering.
-<p>Our team operates much like a professional motorsport outfit. Students work across specialised
-sub-teams—including mechanical design, electrical systems, aerodynamics, manufacturing, business, and
-operations—while contributing to the collective goal of producing a competitive Formula SAE vehicle. This
-structure ensures that every member, regardless of degree or background, plays a meaningful role in the
-team’s success.</p>
-<p>What truly defines the team is its culture. We are a close-knit group of passionate individuals who share a
-strong commitment to innovation, teamwork, and continuous improvement. The team environment
-encourages mentorship, problem-solving, and personal growth, creating a supportive space where students
-can challenge themselves, develop new skills, and build confidence in their abilities.
-Beyond engineering, the UTAS Motorsport team fosters leadership, communication, and professional
-readiness. Students learn to manage deadlines, collaborate under pressure, and engage with industry
-professionals. These experiences prepare our members for future careers in engineering, manufacturing,
-motorsport, and related industries, making the team one of the most valuable student development
-programs at the University of Tasmania.</p>
+            <p>The UTAS Motorsport Team was founded in 2001 with a clear purpose: to give students the opportunity to engage in practical, industry-aligned engineering and project work that extends far beyond the classroom. Over the years, the team has evolved into a highly collaborative, multidisciplinary organisation where students gain experience in design, manufacturing, business operations, leadership, and motorsport engineering.</p>
+            <p>Our team operates much like a professional motorsport outfit. Students work across specialised sub-teams—including mechanical design, electrical systems, aerodynamics, manufacturing, business, and operations—while contributing to the collective goal of producing a competitive Formula SAE vehicle. This structure ensures that every member, regardless of degree or background, plays a meaningful role in the team’s success.</p>
+            <p>What truly defines the team is its culture. We are a close-knit group of passionate individuals who share a strong commitment to innovation, teamwork, and continuous improvement. The team environment encourages mentorship, problem-solving, and personal growth, creating a supportive space where students can challenge themselves, develop new skills, and build confidence in their abilities. Beyond engineering, the UTAS Motorsport team fosters leadership, communication, and professional readiness. Students learn to manage deadlines, collaborate under pressure, and engage with industry professionals. These experiences prepare our members for future careers in engineering, manufacturing, motorsport, and related industries, making the team one of the most valuable student development programs at the University of Tasmania.</p>
         </div>
     </main>
 
