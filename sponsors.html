@@ -167,6 +167,39 @@
         .supplier-grid .sponsor-card { padding: 12px; }
         .supplier-grid .sponsor-name { font-size: 0.9rem; margin-top: 10px; }
 
+        /* --- INTAKE/CTA PROSPECT BLOCK STYLING --- */
+        .prospect-section {
+            margin-top: 60px; 
+            border-color: rgba(218, 46, 41, 0.2);
+        }
+        .prospect-content {
+            font-family: Arial, sans-serif; 
+            color: #d1d5db; 
+            font-size: 1.2rem; 
+            padding-left: 15px; 
+            margin-top: 15px;
+            line-height: 1.7;
+        }
+        .prospect-email-block {
+            font-family: 'Oswald', Arial, sans-serif; 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            font-style: italic; 
+            color: #Da2e29; 
+            margin-top: 25px; 
+            letter-spacing: 1px;
+            word-wrap: break-word; /* Prevents long emails from shattering containers on tiny smartphones */
+        }
+        .prospect-email-block a {
+            color: #ffffff; 
+            text-decoration: none; 
+            border-bottom: 1px dashed #Da2e29; 
+            transition: color 0.2s;
+        }
+        .prospect-email-block a:hover {
+            color: #Da2e29;
+        }
+
         /* --- UNIFIED ADAPTIVE MEDIA RESPONSIVENESS (COMPRESSION MATRIX) --- */
         @media (max-width: 991px) {
             .top-navbar { height: auto; padding: 10px 0; }
@@ -186,6 +219,10 @@
             .bronze .logo-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
             .supporter .logo-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
             .supplier-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+            
+            /* Mobile adjustment for Call-To-Action form elements */
+            .prospect-content { font-size: 1.05rem; padding-left: 5px; }
+            .prospect-email-block { font-size: 1.25rem; }
         }
     </style>
 </head>
@@ -208,7 +245,7 @@
                 <a href="index.html">Home</a>
                 <a href="about.html">About the team</a>
                 <a href="departments.html">Departments</a>
-                <a href="sponsors.html">Sponsors</a>
+                <a href="sponsors.html" class="active">Sponsors</a>
                 <a href="timeline.html">Timeline</a>
                 <a href="contact.html">Contact us</a>
             </div>
@@ -286,3 +323,69 @@
                     <div class="sponsor-name">Southern Tasmania Kart Club in Orielton, Tasmania</div>
                 </div>
             </div>
+        </section>
+
+        <section class="tier-section supplier-matrix">
+            <div class="tier-header">// Official Team Suppliers</div>
+            <div class="supplier-grid">
+                <div class="sponsor-card">
+                    <img src="CSIRO.png" alt="CSIRO">
+                    <div class="sponsor-name">Australia's National Science Agency</div>
+                </div>
+                <div class="sponsor-card">
+                    <img src="Calm_aluminium.png" alt="Calm Aluminium">
+                    <div class="sponsor-name">Structural Aluminium Supplier</div>
+                </div>
+                <div class="sponsor-card">
+                    <img src="Spectrum-paints.png" alt="Spectrum Paints">
+                    <div class="sponsor-name">Premium Car Paints</div>
+                </div>
+                <div class="sponsor-card">
+                    <img src="images/placeholder-logo.png" alt="Supplier Logo">
+                    <div class="sponsor-name">Supplier Eta</div>
+                </div>
+                <div class="sponsor-card">
+                    <img src="images/placeholder-logo.png" alt="Supplier Logo">
+                    <div class="sponsor-name">Supplier Theta</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- RE-STYLED RESPONSIVE PARTNERSHIP CTA INTAKE LAYER --- -->
+        <section class="tier-section supporter prospect-section">
+            <div class="tier-header">// Interested in becoming a sponsor?</div>
+            <div class="prospect-content">
+                <p>UTAS Motorsport is committed to maximising sponsor exposure through strong community engagement, media presence and participation in major public events with our vehicle and team attracting attention from students, industry professionals and the wider Tasmanian community.</p>
+                <p>Supporting UTAS Motorsport demonstrates a commitment to education, innovation and the future of Tasmania, with sponsorship helping to develop students and promote STEM and business pathways to young Tasmanians.</p>
+                <p>Our electric vehicle program also aligns sponsors with sustainability and the future of automotive technology.</p>
+                <p>For more information, connect with our team directly:</p>
+                <div class="prospect-email-block">
+                    EMAIL: <a href="mailto:andrew.smith2@utas.edu.au">andrew.smith2@utas.edu.au</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function updateMultiLayerPaddock() {
+            const totalScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (totalScrollableHeight <= 0) return;
+            const scrollPercent = window.scrollY / totalScrollableHeight;
+            document.getElementById('shard1').style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
+            document.getElementById('shard2').style.transform = `translateX(${scrollPercent * 25}px)`;
+            document.getElementById('shard3').style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
+            document.getElementById('shard4').style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
+            document.getElementById('shard5').style.transform = `translateX(${scrollPercent * -60}px)`;
+            const s6 = document.getElementById('shard6');
+            if (s6) {
+                s6.style.transform = `translateX(${scrollPercent * -30}px)`; s6.style.opacity = `${0.7 + (scrollPercent * 0.3)}`;
+            }
+            document.getElementById('shard7').style.transform = `translateX(${scrollPercent * 15}px)`;
+            document.getElementById('shard8').style.transform = `translateX(${scrollPercent * -75}px) skewX(${scrollPercent * -2}deg)`;
+        }
+        window.addEventListener('scroll', updateMultiLayerPaddock);
+        window.addEventListener('resize', updateMultiLayerPaddock);
+        document.addEventListener("DOMContentLoaded", updateMultiLayerPaddock);
+    </script>
+</body>
+</html>
