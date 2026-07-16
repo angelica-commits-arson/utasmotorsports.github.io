@@ -273,7 +273,7 @@
                 <a href="departments.html">Departments</a>
                 <a href="sponsors.html">Sponsors</a>
                 <a href="timeline.html">Timeline</a>
-                <a href="contact.html">Contact us</a>
+                <a href="contact.html" class="active">Contact us</a>
             </div>
         </div>
     </nav>
@@ -300,34 +300,28 @@
         </div>
     </main>
 
-    <!-- Parallax Scroll Script -->
+       <!-- Parallax Scroll Script -->
     <script>
         function updateMultiLayerPaddock() {
             const totalScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (totalScrollableHeight <= 0 || window.innerWidth <= 767) return;
+            if (totalScrollableHeight <= 0) return;
             
             const scrollPercent = window.scrollY / totalScrollableHeight;
 
-            const s1 = document.getElementById('shard1');
-            const s2 = document.getElementById('shard2');
-            const s3 = document.getElementById('shard3');
-            const s4 = document.getElementById('shard4');
-            const s5 = document.getElementById('shard5');
+            document.getElementById('shard1').style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
+            document.getElementById('shard2').style.transform = `translateX(${scrollPercent * 25}px)`;
+            document.getElementById('shard3').style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
+            document.getElementById('shard4').style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
+            document.getElementById('shard5').style.transform = `translateX(${scrollPercent * -60}px)`;
+            
             const s6 = document.getElementById('shard6');
-            const s7 = document.getElementById('shard7');
-            const s8 = document.getElementById('shard8');
-
-            if (s1) s1.style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
-            if (s2) s2.style.transform = `translateX(${scrollPercent * 25}px)`;
-            if (s3) s3.style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
-            if (s4) s4.style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
-            if (s5) s5.style.transform = `translateX(${scrollPercent * -60}px)`;
             if (s6) {
                 s6.style.transform = `translateX(${scrollPercent * -30}px)`;
                 s6.style.opacity = `${0.7 + (scrollPercent * 0.3)}`;
             }
-            if (s7) s7.style.transform = `translateX(${scrollPercent * 15}px)`;
-            if (s8) s8.style.transform = `translateX(${scrollPercent * -75}px) skewX(${scrollPercent * -2}deg)`;
+            
+            document.getElementById('shard7').style.transform = `translateX(${scrollPercent * 15}px)`;
+            document.getElementById('shard8').style.transform = `translateX(${scrollPercent * -75}px) skewX(${scrollPercent * -2}deg)`;
         }
 
         window.addEventListener('scroll', updateMultiLayerPaddock);
