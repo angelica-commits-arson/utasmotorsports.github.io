@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
- <section id="aerodynamics" class="detail-section">
-</section>
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aerodynamics | Motorsport</title>
@@ -26,111 +24,95 @@
         .shard-3 { right: 2vw; width: 42vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.1) 0%, rgba(0, 0, 0, 0) 80%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 30% 100%); z-index: -6; }
         .shard-4 { right: 0; width: 35vw; background: #07080a; border-left: 1px solid rgba(218, 46, 41, 0.1); clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%); z-index: -5; }
         
-       /* --- STICKY NAV RENEWAL --- */
-.top-navbar {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    z-index: 1000;
-    height: 80px; /* Marginally widened to sit comfortably above your enlarged welcome block */
-    background: rgba(0, 0, 0, 0.75); 
-    backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-}
+        /* --- STICKY NAV RENEWAL --- */
+        .top-navbar {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 1000;
+            height: 80px; 
+            background: rgba(0, 0, 0, 0.75); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+        }
 
-/* Flexbox Matrix Container */
-.nav-container {
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    justify-content: space-between; /* Pushes logo left and links right */
-    align-items: center;
-}
+        .nav-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            box-sizing: border-box;
+        }
 
-/* Brand Identity Layout */
-.nav-logo-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    height: 100%;
-}
+        .nav-logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            height: 100%;
+        }
 
-.nav-logo-img {
-    height: 48px; /* Scales your logo to fit perfectly within the 80px bar height */
-    width: auto;
-    object-fit: contain;
-    filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
-    transition: transform 0.2s ease;
-}
+        .nav-logo-img {
+            height: 48px; 
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
+            transition: transform 0.2s ease;
+        }
 
-.nav-logo-link:hover .nav-logo-img {
-    transform: scale(1.05); /* Micro-interaction when users hover over logo */
-}
+        .nav-logo-link:hover .nav-logo-img {
+            transform: scale(1.05); 
+        }
 
-.nav-logo-text {
-    font-size: 1.3rem;
-    font-weight: 700;
-    font-style: italic;
-    text-transform: uppercase;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-}
+        .nav-logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-style: italic;
+            text-transform: uppercase;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
 
-.accent-red {
-    color: #Da2e29;
-}
+        .accent-red {
+            color: #Da2e29;
+        }
 
-/* Nav links alignment alignment adjustments */
-.nav-links { 
-    display: flex; 
-    gap: 15px; 
-}
+        .nav-links { 
+            display: flex; 
+            gap: 15px; 
+        }
 
-.nav-links a {
-    text-decoration: none; 
-    font-size: 15px; 
-    font-weight: 700; 
-    font-style: italic;
-    text-transform: uppercase; 
-    color: #ffffff; 
-    letter-spacing: 1.2px; 
-    padding: 8px 12px;
-    transition: all 0.2s ease; 
-    position: relative;
-}
+        .nav-links a {
+            text-decoration: none; 
+            font-size: 15px; 
+            font-weight: 700; 
+            font-style: italic;
+            text-transform: uppercase; 
+            color: #ffffff; 
+            letter-spacing: 1.2px; 
+            padding: 8px 12px;
+            transition: all 0.2s ease; 
+            position: relative;
+            white-space: nowrap;
+        }
 
-.nav-links a.active { color: #Da2e29; }
-.nav-links a::after {
-    content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
-    bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
-}
-.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
-.nav-links a:hover { color: #Da2e29; }
-
-/* Responsive Mobile Compression Layer */
-@media (max-width: 991px) {
-    .nav-container {
-        padding: 0 20px;
-    }
-    .nav-logo-text {
-        display: none; /* Hides text title on small tablets/mobile to ensure links have full width room */
-    }
-    .nav-links a {
-        font-size: 13px;
-        padding: 6px 8px;
-        gap: 8px;
-    }
-}
+        .nav-links a.active { color: #Da2e29; }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
+            bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
+        .nav-links a:hover { color: #Da2e29; }
 
         /* --- CONTENT CONTAINERS --- */
-        main { padding: 140px 50px 80px 50px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
+        main { padding: 140px 50px 80px 50px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; box-sizing: border-box; }
         
         h1 { font-size: 4rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 10px; letter-spacing: -1px; color: #ffffff; border-left: 6px solid #Da2e29; padding-left: 20px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); }
         .subtitle { font-size: 1.1rem; color: #b0b5c0; text-transform: uppercase; letter-spacing: 2px; padding-left: 26px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); margin-bottom: 40px; }
@@ -138,17 +120,18 @@
         /* Editable Header Block */
         .intro {
             background: rgba(12, 14, 18, 0.4);
-            border: 1px full rgba(255, 255, 255, 0.15);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
             padding: 25px;
             border-radius: 4px;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             font-family: Arial, sans-serif;
             font-size: 1.1rem;
             line-height: 1.7;
             color: #d1d5db;
             margin-bottom: 50px;
             outline: none;
-            transition: border-color 0.2s ease;
+            transition: border-color 0.2s ease, background 0.2s ease;
         }
         .intro:focus {
             border-color: #Da2e29;
@@ -197,6 +180,7 @@
             padding: 35px;
             border-radius: 4px;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -240,6 +224,7 @@
             border-radius: 4px;
             overflow: hidden;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             transition: border-color 0.2s ease;
         }
         .team-card:hover {
@@ -278,9 +263,29 @@
             font-weight: bold;
         }
 
-        @media screen and (max-width: 900px) {
-            .feature-split { flex-direction: column; }
+        /* --- UNIFIED ADAPTIVE RESPONSIVENESS MATRIX --- */
+        @media (max-width: 991px) {
+            .top-navbar { height: auto; padding: 12px 0; }
+            .nav-container { flex-direction: column; gap: 12px; padding: 0 20px; align-items: center; }
+            .nav-logo-text { display: none; }
+            .nav-links { 
+                width: 100%; justify-content: center; 
+                overflow-x: auto; white-space: nowrap;
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .nav-links::-webkit-scrollbar { display: none; }
+            .nav-links a { font-size: 13px; padding: 6px 8px; letter-spacing: 0.5px; }
+
+            main { padding: 160px 20px 60px 20px; }
+            h1 { font-size: 2.8rem; }
+            .subtitle { padding-left: 20px; font-size: 1rem; margin-bottom: 30px; }
+            .feature-split { flex-direction: column; gap: 20px; }
             .image-box { min-height: 250px; }
+        }
+
+        @media screen and (max-width: 767px) {
+            .geo-shard { display: none !important; }
         }
     </style>
 </head>
@@ -291,88 +296,96 @@
     <div class="geo-shard shard-3" id="shard3"></div><div class="geo-shard shard-4" id="shard4"></div>
 
     <nav class="top-navbar">
-    <div class="nav-container">
-        <a href="index.html" class="nav-logo-link">
-            <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
-            <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
-        </a>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo-link">
+                <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
+                <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
+            </a>
 
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About the team</a>
-            <a href="departments.html">Departments</a>
-            <a href="sponsors.html">Sponsors</a>
-            <a href="timeline.html">Timeline</a>
-            <a href="contact.html">Contact us</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About the team</a>
+                <a href="departments.html" class="active">Departments</a>
+                <a href="sponsors.html">Sponsors</a>
+                <a href="timeline.html">Timeline</a>
+                <a href="contact.html">Contact us</a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+    
     <main>
-        <h1>Aerodynamics</h1>
-        <div class="subtitle">// Surface Fluid Optimization</div>
+        <section id="aerodynamics" class="detail-section">
+            <h1>Aerodynamics</h1>
+            <div class="subtitle">// Surface Fluid Optimization</div>
 
-        <div class="intro">
-            [EDITABLE HEADER BLOCK] Click anywhere inside this dashed block to edit the text description directly on the page. Use this space to write an executive overview regarding current wing profiles, drag targets, and wind-tunnel testing cycles.
-        </div>
-
-        <div class="feature-split">
-            <div class="image-box">
-              <img src="aero-image.jpg" alt="Aerodynamic car">
+            <div class="intro" contenteditable="true">
+                [EDITABLE HEADER BLOCK] Click anywhere inside this dashed block to edit the text description directly on the page. Use this space to write an executive overview regarding current wing profiles, drag targets, and wind-tunnel testing cycles.
             </div>
-            
-            <div class="side-writing-box">
-                <h2>Boundary Layer Analysis</h2>
-                <p>Our surface computational fluid dynamic modules focus on reducing flow separation across the primary profile limits. By modifying downstream geometric transitions, the simulation arrays target an optimal cross-sectional force balance matrix to elevate corner-entry velocities without compromising straight-line drag coefficients.</p>
-            </div>
-        </div>
 
-        <section>
-            <h2 class="section-divider-title">Meet The Team</h2>
-            
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-photo-frame">
-                        <div class="image-placeholder-text">Photo Frame</div>
-                    </div>
-                    <div class="team-info">
-                        <div class="team-name">Alex Mercer</div>
-                        <div class="team-role">Division Director</div>
-                    </div>
+            <div class="feature-split">
+                <div class="image-box">
+                    <img src="aero-image.jpg" alt="Aerodynamic car">
                 </div>
-
-                <div class="team-card">
-                    <div class="team-photo-frame">
-                        <div class="image-placeholder-text">Photo Frame</div>
-                    </div>
-                    <div class="team-info">
-                        <div class="team-name">Sarah Jenkins</div>
-                        <div class="team-role">CFD Engineer</div>
-                    </div>
-                </div>
-
-                <div class="team-card">
-                    <div class="team-photo-frame">
-                        <div class="image-placeholder-text">Photo Frame</div>
-                    </div>
-                    <div class="team-info">
-                        <div class="team-name">Marcus Vance</div>
-                        <div class="team-role">Surface Modeler</div>
-                    </div>
+                
+                <div class="side-writing-box">
+                    <h2>Boundary Layer Analysis</h2>
+                    <p>Our surface computational fluid dynamic modules focus on reducing flow separation across the primary profile limits. By modifying downstream geometric transitions, the simulation arrays target an optimal cross-sectional force balance matrix to elevate corner-entry velocities without compromising straight-line drag coefficients.</p>
                 </div>
             </div>
+
+            <section>
+                <h2 class="section-divider-title">Meet The Team</h2>
+                
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-photo-frame">
+                            <div class="image-placeholder-text">Photo Frame</div>
+                        </div>
+                        <div class="team-info">
+                            <div class="team-name">Alex Mercer</div>
+                            <div class="team-role">Division Director</div>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-photo-frame">
+                            <div class="image-placeholder-text">Photo Frame</div>
+                        </div>
+                        <div class="team-info">
+                            <div class="team-name">Sarah Jenkins</div>
+                            <div class="team-role">CFD Engineer</div>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-photo-frame">
+                            <div class="image-placeholder-text">Photo Frame</div>
+                        </div>
+                        <div class="team-info">
+                            <div class="team-name">Marcus Vance</div>
+                            <div class="team-role">Surface Modeler</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </section>
     </main>
 
     <script>
         function updateMultiLayerPaddock() {
             const totalScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (totalScrollableHeight <= 0) return;
+            if (totalScrollableHeight <= 0 || window.innerWidth <= 767) return;
             const scrollPercent = window.scrollY / totalScrollableHeight;
             
-            document.getElementById('shard1').style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
-            document.getElementById('shard2').style.transform = `translateX(${scrollPercent * 25}px)`;
-            document.getElementById('shard3').style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
-            document.getElementById('shard4').style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
+            const s1 = document.getElementById('shard1');
+            const s2 = document.getElementById('shard2');
+            const s3 = document.getElementById('shard3');
+            const s4 = document.getElementById('shard4');
+
+            if (s1) s1.style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
+            if (s2) s2.style.transform = `translateX(${scrollPercent * 25}px)`;
+            if (s3) s3.style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
+            if (s4) s4.style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
         }
         window.addEventListener('scroll', updateMultiLayerPaddock);
         window.addEventListener('resize', updateMultiLayerPaddock);
@@ -380,5 +393,3 @@
     </script>
 </body>
 </html>
-
-
