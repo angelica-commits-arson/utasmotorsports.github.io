@@ -600,46 +600,225 @@
         </div>
     </section>
 
-    <section class="location-tracker-section">
-        <div class="tracker-container">
-            <div class="tracker-header">
-                <span class="telemetry-node">// REALTIME_GEO_TRACKING</span>
-                <h2 id="status-title">We are currently: Loading Status...</h2>
-            </div>
+<!-- Start: hardcore mapping -->
+<section class="location-tracker-section">
+    <div class="tracker-container">
+        
+        <div class="tracker-header">
+            <span class="telemetry-node">// REALTIME_GEO_TRACKING</span>
+            <h2 id="status-title">We are currently: Loading Status...</h2>
+        </div>
 
-            <div class="tracker-layout">
-                <div class="map-frame">
-                    <div class="map-render-container">
-                        <img src="au-03.png" alt="Map of Australia" class="au-highfi-map">
-                        
-                        <div id="node-hobart" class="geo-overlay-node">
-                            <div class="radar-ping"></div>
-                            <div class="core-dot"></div>
-                        </div>
+        <div class="tracker-layout">
+            <div class="map-frame">
+                <div class="map-render-container">
+                    <img src="au-03.png" alt="Map of Australia" class="au-highfi-map">
+                    
+                    <div id="node-hobart" class="geo-overlay-node">
+                        <div class="radar-ping"></div>
+                        <div class="core-dot"></div>
+                    </div>
 
-                        <div id="node-adelaide" class="geo-overlay-node">
-                            <div class="radar-ping"></div>
-                            <div class="core-dot"></div>
-                        </div>
+                    <div id="node-adelaide" class="geo-overlay-node">
+                        <div class="radar-ping"></div>
+                        <div class="core-dot"></div>
                     </div>
                 </div>
+            </div>
 
-                <div class="telemetry-data-column">
-                    <div class="telemetry-card active-card">
-                        <div class="card-accent"></div>
-                        <div class="card-title">// CURRENT OPERATIONAL BASE</div>
-                        <div class="card-value" id="base-location-text">Detecting Position...</div>
-                    </div>
+            <div class="telemetry-data-column">
+                <div class="telemetry-card active-card">
+                    <div class="card-accent"></div>
+                    <div class="card-title">// CURRENT OPERATIONAL BASE</div>
+                    <div class="card-value" id="base-location-text">Detecting Position...</div>
+                </div>
 
-                    <div class="telemetry-card expandable-details" id="metrics-card">
-                        <div class="card-title">// DEPLOYMENT SPECIFICATIONS</div>
-                        <div class="details-content" id="metrics-content">
-                            </div>
-                    </div>
+                <div class="telemetry-card expandable-details" id="metrics-card">
+                    <div class="card-title">// DEPLOYMENT SPECIFICATIONS</div>
+                    <div class="details-content" id="metrics-content">
+                        </div>
                 </div>
             </div>
         </div>
-    </section>
+
+    </div>
+</section>
+
+<style>
+    .location-tracker-section {
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 10;
+    }
+    .tracker-container {
+        background: rgba(12, 14, 18, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 40px;
+        border-radius: 4px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    .telemetry-node {
+        font-family: Arial, sans-serif;
+        font-size: 0.8rem;
+        color: #Da2e29;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+    #status-title {
+        font-size: 2.4rem;
+        text-transform: uppercase;
+        font-style: italic;
+        margin: 5px 0 30px 0;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+    }
+    .tracker-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    @media (min-width: 768px) {
+        .tracker-layout {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+    
+    /* Responsive Map Container with Precise Coordinate System */
+    .map-frame {
+        flex: 1;
+        background: rgba(7, 8, 10, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        padding: 20px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .map-render-container {
+        position: relative;
+        width: 100%;
+        max-width: 500px; /* Keep the map sharp and balanced */
+        display: inline-block;
+    }
+    .au-highfi-map {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: 0.25; /* Blends perfectly into your dark paddock aesthetic */
+        filter: brightness(1.1) contrast(1.1);
+    }
+    
+    /* Telemetry Overlay Nodes */
+    .geo-overlay-node {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        transform: translate(-50%, -50%); /* Centering anchor */
+        display: none; /* Controlled by state manager */
+        pointer-events: none;
+    }
+    .geo-overlay-node.active-node {
+        display: block;
+    }
+    
+    /* Map Location Coordinates (Calibrated for au-03.png aspect ratio) */
+    #node-hobart {
+       left: 80.5%;
+       top: 95.5%;
+    }
+    #node-adelaide {
+       left: 63.3%;
+    top: 71.5%;
+    }
+
+    /* Target Node Styling */
+    .core-dot {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 8px;
+        height: 8px;
+        margin-top: -4px;
+        margin-left: -4px;
+        background-color: #Da2e29;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #Da2e29;
+        z-index: 2;
+    }
+    .radar-ping {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #Da2e29;
+        border-radius: 50%;
+        background-color: rgba(218, 46, 41, 0.15);
+        opacity: 0;
+        animation: radarPulse 1.8s infinite cubic-bezier(0.215, 0.610, 0.355, 1);
+        z-index: 1;
+    }
+
+    /* Right Side Panel Design */
+    .telemetry-data-column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .telemetry-card {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 4px;
+        position: relative;
+    }
+    .active-card {
+        border-left: 3px solid #Da2e29;
+    }
+    .card-title {
+        font-family: Arial, sans-serif;
+        font-size: 0.75rem;
+        color: #b0b5c0;
+        letter-spacing: 1.5px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    .card-value {
+        font-size: 1.8rem;
+        text-transform: uppercase;
+        font-style: italic;
+        color: #ffffff;
+    }
+    
+    .expandable-details {
+        border-top: 1px solid rgba(218, 46, 41, 0.1);
+    }
+    .details-content {
+        font-family: Arial, sans-serif;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #b0b5c0;
+        margin-top: 10px;
+    }
+    .metric-line {
+        margin-bottom: 6px;
+    }
+    .metric-highlight {
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    @keyframes radarPulse {
+        0% { transform: scale(0.2); opacity: 0; }
+        50% { opacity: 0.8; }
+        100% { transform: scale(2.4); opacity: 0; }
+    }
+</style>
 
     <section class="countdown-section">
         <div class="countdown-container">
@@ -749,42 +928,45 @@
         document.addEventListener("DOMContentLoaded", initCompetitionCountdown);
     </script>
 
-    <script>
-        function initializeDynamicTracker() {
-            // Configuration Matrix
-            const isTestingInAdelaide = false; 
+     <script>
+    function initializeDynamicTracker() {
+        // STATE CONTROLLER: Change to true when team shifts away to Adelaide competition
+        const isAtCompetition = false; 
+        const titleElement = document.getElementById("status-title");
+        const baseLocationText = document.getElementById("base-location-text");
+        const metricsContent = document.getElementById("metrics-content");
+        
+        const hobartNode = document.getElementById("node-hobart");
+        const adelaideNode = document.getElementById("node-adelaide");
 
-            const titleNode = document.getElementById("status-title");
-            const baseTextNode = document.getElementById("base-location-text");
-            const metricsNode = document.getElementById("metrics-content");
+        if (isAtCompetition) {
+            // Configuration Matrix: Away Sequence
+            titleElement.innerHTML = "We are currently: <span style='color: #Da2e29;'>Away</span>";
+            baseLocationText.innerText = "The Bend Motorsport Park";
             
-            const hobartOverlay = document.getElementById("node-hobart");
-            const adelaideOverlay = document.getElementById("node-adelaide");
+            adelaideNode.classList.add("active-node");
+            hobartNode.classList.remove("active-node");
 
-            if(isTestingInAdelaide) {
-                if(titleNode) titleNode.innerHTML = "We are currently: <span class='accent-red'>At Competition</span>";
-                if(baseTextNode) baseTextNode.innerText = "The Bend Motorsport Complex, South Australia";
-                if(adelaideOverlay) adelaideOverlay.classList.add("active-node");
-                
-                if(metricsNode) {
-                    metricsNode.innerHTML = `
-                        <div class="metric-line">📍 <span class="metric-highlight">Location:</span> Adelaide, South Australia</div>
+            metricsContent.innerHTML = `
+                <div class="metric-line">📍 <span class="metric-highlight">Location:</span> Adelaide, South Australia</div>
                 <div class="metric-line">🏎️ <span class="metric-highlight">Deployment:</span> Formula Student Australiasian Competition</div>
                 <div class="metric-line">📊 <span class="metric-highlight">Telemetry Status:</span> Live Team Results</div>
-                }
-            } else {
-                if(titleNode) titleNode.innerHTML = "We are currently: <span class='accent-red'>In the Workshop</span>";
-                if(baseTextNode) baseTextNode.innerText = "MOTORSPORT HQ - University of Tasmania";
-                if(hobartOverlay) hobartOverlay.classList.add("active-node");
-                
-                if(metricsNode) {
-                    metricsNode.innerHTML = `
-                        <div class="metric-line">// 📍 <span class="metric-highlight">Location:</span> Hobart, Tasmania</div>
-                        <div class="metric-line">// 🛠️ <span class="metric-highlight">Current Stage:</span> Chassis Structural Assembly</div>
-                        <div class="metric-line">// 📆: <span class="metric-highlight">Next Event:</span> Baskerville Historics</div>
-                    `;
-                }
-            }
+            `;
+        } else {
+            // Configuration Matrix: Home Base Sequence
+            titleElement.innerHTML = "We are currently: <span style='color: #ffffff;'>Home</span>";
+            baseLocationText.innerText = "UTAS Engineering Precinct";
+            
+            hobartNode.classList.add("active-node");
+            adelaideNode.classList.remove("active-node");
+
+            metricsContent.innerHTML = `
+                <div class="metric-line">📍 <span class="metric-highlight">Location:</span> Hobart, Tasmania</div>
+                <div class="metric-line">🛠️ <span class="metric-highlight">Current Stage:</span> Chassis Structural Assembly</div>
+                <div class="metric-line">📆 <span class="metric-highlight">Next Event:</span> Baskerville Historics</div>
+            `;
+        }
+    }
         }
         document.addEventListener("DOMContentLoaded", initializeDynamicTracker);
     </script>
