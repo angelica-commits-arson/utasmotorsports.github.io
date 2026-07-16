@@ -137,7 +137,7 @@
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
             aspect-ratio: 16 / 9;
-            max-height: 500px;
+            max-height: 540px;
         }
         
         canvas {
@@ -281,11 +281,11 @@
         <h1>Media Vault</h1>
 
         <section class="game-wrapper">
-            <div class="section-header">// Telemetry Arena</div>
+            <div class="section-header">// Grand Prix Simulator</div>
             <div class="game-telemetry">
                 <div class="telemetry-item">Lap: <span id="lap-display">1 / 3</span></div>
                 <div class="telemetry-item">Time: <span id="time-display">00:00.00</span></div>
-                <div class="telemetry-item">Phase: <span id="phase-display">Sector 1</span></div>
+                <div class="telemetry-item">Phase: <span id="phase-display">Main Straight</span></div>
             </div>
             
             <div class="canvas-container">
@@ -294,7 +294,7 @@
             
             <div class="game-instructions">
                 <div>Controls: <span class="instruction-pill">W</span> Forward | <span class="instruction-pill">S</span> Brake/Reverse | <span class="instruction-pill">A</span> Turn Left | <span class="instruction-pill">D</span> Turn Right</div>
-                <div>Objective: Complete 3 laps around the training complex as fast as possible. Watch the environment evolve!</div>
+                <div>Objective: Avoid the dark inner/outer solid barriers! Complete 3 laps as fast as possible. Track shifts dynamic theme each lap.</div>
             </div>
         </section>
 
@@ -419,263 +419,4 @@
         window.addEventListener('resize', runCombinedScrollEngine);
         document.addEventListener("DOMContentLoaded", runCombinedScrollEngine);
 
-        /* --- INTERACTIVE 2D MOTORSPORT GAME ENGINE --- */
-        const canvas = document.getElementById('raceCanvas');
-        const ctx = canvas.getContext('2d');
-        const lapDisplay = document.getElementById('lap-display');
-        const timeDisplay = document.getElementById('time-display');
-        const phaseDisplay = document.getElementById('phase-display');
-
-        // Game Variable State
-        let currentLap = 1;
-        let startTimestamp = null;
-        let gameFinished = false;
-        let finalRaceTime = "";
-
-        // Car Physics
-        const car = {
-            x: 480,
-            y: 420,
-            width: 34,
-            height: 18,
-            speed: 0,
-            maxSpeed: 6.5,
-            backwardsMaxSpeed: -2.5,
-            acceleration: 0.15,
-            deceleration: 0.08,
-            brakingPower: 0.3,
-            angle: 0,
-            steeringSpeed: 0.045
-        };
-
-        // Checkpoints matrix inside the oval circuit track
-        const checkpoints = [
-            { x: 800, y: 270, hit: false, label: "Sector 2" },  // Right turn curve
-            { x: 480, y: 120, hit: false, label: "Back Straight" }, // Top straight
-            { x: 160, y: 270, hit: false, label: "Sector 3" },  // Left turn curve
-            { x: 480, y: 450, hit: false, isFinishLine: true }  // Bottom finish gate
-        ];
-
-        // Track Shifting Phase Color Profiles
-        const lapEnvironments = {
-            1: { trackColor: '#282a30', groundColor: '#0a0d14', curbColor1: '#ffffff', curbColor2: '#da2e29', title: 'Day Trials' },
-            2: { trackColor: '#1d1f22', groundColor: '#130505', curbColor1: '#e0a800', curbColor2: '#222222', title: 'Sunset Sprint' },
-            3: { trackColor: '#121315', groundColor: '#050c12', curbColor1: '#00f6ff', curbColor2: '#111827', title: 'Midnight Quals' }
-        };
-
-        // Keys Tracker Dictionary
-        const keys = { w: false, a: false, s: false, d: false };
-
-        window.addEventListener('keydown', (e) => {
-            const key = e.key.toLowerCase();
-            if (['w', 'a', 's', 'd'].includes(key)) {
-                keys[key] = true;
-                if (!startTimestamp && !gameFinished) startTimestamp = Date.now();
-            }
-        });
-
-        window.addEventListener('keyup', (e) => {
-            const key = e.key.toLowerCase();
-            if (['w', 'a', 's', 'd'].includes(key)) keys[key] = false;
-        });
-
-        // Simple distance proximity validation checking
-        function checkProximity(x1, y1, x2, y2, range) {
-            return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2) < range;
-        }
-
-        function drawCircuit(env) {
-            // Ground Mesh
-            ctx.fillStyle = env.groundColor;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Outer Curbing
-            ctx.fillStyle = env.curbColor1;
-            ctx.beginPath();
-            ctx.arc(240, 270, 210, Math.PI * 0.5, Math.PI * 1.5);
-            ctx.lineTo(720, 60);
-            ctx.arc(720, 270, 210, Math.PI * 1.5, Math.PI * 0.5);
-            ctx.closePath();
-            ctx.fill();
-
-            // Core Main Asphalt Loop Path Track
-            ctx.fillStyle = env.trackColor;
-            ctx.beginPath();
-            ctx.arc(240, 270, 200, Math.PI * 0.5, Math.PI * 1.5);
-            ctx.lineTo(720, 70);
-            ctx.arc(720, 270, 200, Math.PI * 1.5, Math.PI * 0.5);
-            ctx.closePath();
-            ctx.fill();
-
-            // Inner Green/Dark Field Infield Ring Curbing
-            ctx.fillStyle = env.curbColor2;
-            ctx.beginPath();
-            ctx.arc(240, 270, 90, Math.PI * 0.5, Math.PI * 1.5);
-            ctx.lineTo(720, 180);
-            ctx.arc(720, 270, 90, Math.PI * 1.5, Math.PI * 0.5);
-            ctx.closePath();
-            ctx.fill();
-
-            // Infield Void Island
-            ctx.fillStyle = env.groundColor;
-            ctx.beginPath();
-            ctx.arc(240, 270, 80, Math.PI * 0.5, Math.PI * 1.5);
-            ctx.lineTo(720, 190);
-            ctx.arc(720, 270, 80, Math.PI * 1.5, Math.PI * 0.5);
-            ctx.closePath();
-            ctx.fill();
-
-            // Render Finish Stripe Gate lines
-            ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 6;
-            ctx.beginPath();
-            ctx.moveTo(480, 370);
-            ctx.lineTo(480, 470);
-            ctx.stroke();
-            
-            // Checkpoint indicator targets for gameplay visibility
-            ctx.fillStyle = 'rgba(218, 46, 41, 0.2)';
-            checkpoints.forEach((cp, i) => {
-                if (!cp.isFinishLine && !cp.hit) {
-                    ctx.beginPath();
-                    ctx.arc(cp.x, cp.y, 18, 0, Math.PI*2);
-                    ctx.fill();
-                }
-            });
-        }
-
-        function updateSimulation() {
-            if (gameFinished) return;
-
-            // Forward/Reverse Thrust Logic Matrix
-            if (keys.w) {
-                car.speed = Math.min(car.speed + car.acceleration, car.maxSpeed);
-            } else if (keys.s) {
-                car.speed = Math.max(car.speed - car.brakingPower, car.backwardsMaxSpeed);
-            } else {
-                if (car.speed > 0) car.speed = Math.max(car.speed - car.deceleration, 0);
-                if (car.speed < 0) car.speed = Math.min(car.speed + car.deceleration, 0);
-            }
-
-            // Handling Steering Angle Constraints Based On Directional Vector Values
-            if (car.speed !== 0) {
-                const modifier = car.speed > 0 ? 1 : -1;
-                if (keys.a) car.angle -= car.steeringSpeed * modifier;
-                if (keys.d) car.angle += car.steeringSpeed * modifier;
-            }
-
-            // Move coordinates forward matching computed vectors
-            car.x += Math.cos(car.angle) * car.speed;
-            car.y += Math.sin(car.angle) * car.speed;
-
-            // Track Border Wall Friction Impact Penalties
-            // Simple bound box safety to maintain containment on canvas maps
-            if (car.x < 30 || car.x > canvas.width - 30 || car.y < 30 || car.y > canvas.height - 30) {
-                car.speed *= 0.5;
-            }
-
-            // Checkpoints Evaluation Cycle Loop
-            checkpoints.forEach((cp) => {
-                if (checkProximity(car.x, car.y, cp.x, cp.y, 70)) {
-                    if (!cp.isFinishLine && !cp.hit) {
-                        cp.hit = true;
-                        phaseDisplay.innerText = cp.label;
-                    } else if (cp.isFinishLine && checkpoints[0].hit && checkpoints[1].hit && checkpoints[2].hit) {
-                        // Complete Lap validation trigger processing
-                        if (currentLap < 3) {
-                            currentLap++;
-                            lapDisplay.innerText = `${currentLap} / 3`;
-                            // Reset mid checkpoints flags
-                            checkpoints[0].hit = false;
-                            checkpoints[1].hit = false;
-                            checkpoints[2].hit = false;
-                            phaseDisplay.innerText = "Sector 1";
-                        } else {
-                            // Stop race upon finishing Lap 3
-                            gameFinished = true;
-                            phaseDisplay.innerText = "Race Complete";
-                            phaseDisplay.style.color = "#00ff66";
-                        }
-                    }
-                }
-            });
-        }
-
-        function drawCar() {
-            ctx.save();
-            ctx.translate(car.x, car.y);
-            ctx.rotate(car.angle);
-
-            // Car Main Body Chassis Pod
-            ctx.fillStyle = '#Da2e29';
-            ctx.fillRect(-car.width / 2, -car.height / 2, car.width, car.height);
-
-            // Open-Wheel Wing Elements accents
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(car.width / 3, -car.height / 2 - 2, 4, car.height + 4); // Front Wing
-            ctx.fillStyle = '#111111';
-            ctx.fillRect(-car.width / 2 - 2, -car.height / 2 + 2, 3, car.height - 4); // Rear Wing
-
-            // Driver Cockpit
-            ctx.fillStyle = '#000000';
-            ctx.beginPath();
-            ctx.arc(2, 0, 5, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.restore();
-        }
-
-        function updateRaceTimer() {
-            if (!startTimestamp) return;
-            
-            let delta = Date.now() - startTimestamp;
-            if (gameFinished) {
-                if (!finalRaceTime) {
-                    finalRaceTime = formatTimeString(delta);
-                }
-                timeDisplay.innerText = finalRaceTime;
-                return;
-            }
-
-            timeDisplay.innerText = formatTimeString(delta);
-        }
-
-        function formatTimeString(ms) {
-            let minutes = Math.floor(ms / 60000);
-            let seconds = Math.floor((ms % 60000) / 1000);
-            let hundredths = Math.floor((ms % 1000) / 10);
-            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${hundredths.toString().padStart(2, '0')}`;
-        }
-
-        function loop() {
-            const currentEnv = lapEnvironments[currentLap];
-            
-            updateSimulation();
-            updateRaceTimer();
-            
-            drawCircuit(currentEnv);
-            drawCar();
-
-            // Overlay HUD Announcement message when race concludes
-            if (gameFinished) {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.fillStyle = '#ffffff';
-                ctx.font = 'italic 700 3.5rem Oswald, sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('CHEQUERED FLAG', canvas.width / 2, canvas.height / 2 - 10);
-                
-                ctx.fillStyle = '#Da2e29';
-                ctx.font = 'italic 700 2rem Oswald, sans-serif';
-                ctx.fillText(`TOTAL TIME: ${finalRaceTime}`, canvas.width / 2, canvas.height / 2 + 50);
-            }
-
-            requestAnimationFrame(loop);
-        }
-
-        // Start Mini-game frame cycle
-        loop();
-    </script>
-</body>
-</html>
+        /* --- ADVANCED COMPLEX 2D RAC
