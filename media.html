@@ -116,6 +116,7 @@
         .game-telemetry {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             background: rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(218, 46, 41, 0.2);
             padding: 15px 25px;
@@ -128,6 +129,25 @@
         }
         
         .telemetry-item span { color: #Da2e29; }
+
+        .btn-reset {
+            background: #Da2e29;
+            color: #ffffff;
+            border: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-style: italic;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 3px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: background 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-reset:hover { background: #b61f1b; }
+        .btn-reset:active { transform: scale(0.96); }
         
         .canvas-container {
             width: 100%;
@@ -241,7 +261,7 @@
             h1 { font-size: 2.8rem; margin-bottom: 25px; }
             
             .media-matrix-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-            .game-telemetry { font-size: 1.2rem; padding: 10px 15px; }
+            .game-telemetry { font-size: 1.2rem; padding: 10px 15px; flex-wrap: wrap; gap: 10px; justify-content: center; }
         }
 
         @media (max-width: 600px) {
@@ -280,12 +300,14 @@
     <main>
         <h1>Media Vault</h1>
 
+        <!-- INTERACTIVE RACING SYSTEM -->
         <section class="game-wrapper">
             <div class="section-header">// Grand Prix Simulator</div>
             <div class="game-telemetry">
                 <div class="telemetry-item">Lap: <span id="lap-display">1 / 3</span></div>
                 <div class="telemetry-item">Time: <span id="time-display">00:00.00</span></div>
                 <div class="telemetry-item">Phase: <span id="phase-display">Main Straight</span></div>
+                <button class="btn-reset" id="resetBtn">Reset Run</button>
             </div>
             
             <div class="canvas-container">
@@ -298,10 +320,12 @@
             </div>
         </section>
 
+        <!-- 9-GRID MEDIA ARCHITECTURE WITH FOOTERS -->
         <section>
             <div class="section-header">// Captured Moments</div>
             <div class="media-matrix-grid">
                 
+                <!-- Card 1 -->
                 <div class="media-card">
                     <div class="media-frame">
                         <img src="images/placeholder-media.png" alt="Track Testing Day">
@@ -312,6 +336,7 @@
                     </div>
                 </div>
 
+                <!-- Card 2 -->
                 <div class="media-card">
                     <div class="media-frame">
                         <img src="images/placeholder-media.png" alt="Chassis Assembly">
@@ -322,6 +347,7 @@
                     </div>
                 </div>
 
+                <!-- Card 3 -->
                 <div class="media-card">
                     <div class="media-frame">
                         <img src="images/placeholder-media.png" alt="Battery Integration">
@@ -332,6 +358,7 @@
                     </div>
                 </div>
 
+                <!-- Card 4 -->
                 <div class="media-card">
                     <div class="media-frame">
                         <img src="images/placeholder-media.png" alt="Team Presentation">
@@ -342,6 +369,7 @@
                     </div>
                 </div>
 
+                <!-- Card 5 -->
                 <div class="media-card">
                     <div class="media-frame">
                         <img src="images/placeholder-media.png" alt="Shakedown Runs">
@@ -352,6 +380,7 @@
                     </div>
                 </div>
 
+                <!-- Card 6 -->
                 <div class="media-card">
                     <div class="media-frame">
                         <img src="images/placeholder-media.png" alt="Data Telemetry Analysis">
@@ -362,6 +391,7 @@
                     </div>
                 </div>
 
+                <!-- Card 7 -->
                 <div class="media-card">
                     <div class="media-frame">
                         <img src="images/placeholder-media.png" alt="Formula SAE Dynamic Events">
@@ -372,6 +402,7 @@
                     </div>
                 </div>
 
+                <!-- Card 8 -->
                 <div class="media-card">
                     <div class="media-frame">
                         <img src="images/placeholder-media.png" alt="Podium Celebration">
@@ -382,6 +413,7 @@
                     </div>
                 </div>
 
+                <!-- Card 9 -->
                 <div class="media-card">
                     <div class="media-frame">
                         <img src="images/placeholder-media.png" alt="Community Engagement">
@@ -425,6 +457,7 @@
         const lapDisplay = document.getElementById('lap-display');
         const timeDisplay = document.getElementById('time-display');
         const phaseDisplay = document.getElementById('phase-display');
+        const resetBtn = document.getElementById('resetBtn');
 
         let currentLap = 1;
         let startTimestamp = null;
@@ -456,21 +489,6 @@
             { x: 230, y: 430, hit: false, isFinishLine: true }
         ];
 
-        // Complex Path Boundaries Vectors Matrix (Outer & Inner Perimeter Walls)
-        const outerWall = [
-            {x: 70, y: 490}, {x: 890, y: 490}, {x: 890, y: 50}, 
-            {x: 70, y: 50}, {x: 70, y: 490}
-        ];
-
-        const innerWall = [
-            // Bottom Infield Blocks
-            {x: 380, y: 330}, {x: 630, y: 330}, {x: 630, y: 420}, {x: 760, y: 420},
-            // Right hairpins
-            {x: 760, y: 170}, {x: 520, y: 170}, {x: 520, y: 240}, {x: 380, y: 240},
-            // Top infield parameters
-            {x: 380, y: 170}, {x: 210, y: 170}, {x: 210, y: 330}, {x: 380, y: 330}
-        ];
-
         const lapEnvironments = {
             1: { trackColor: '#25272c', groundColor: '#0c0e12', curb1: '#ffffff', curb2: '#da2e29' },
             2: { trackColor: '#1d1e22', groundColor: '#1a0b0b', curb1: '#f1c40f', curb2: '#2c3e50' },
@@ -492,19 +510,41 @@
             if (['w', 'a', 's', 'd'].includes(key)) keys[key] = false;
         });
 
+        // RESET GAME FUNCTIONALITY
+        function resetGame() {
+            currentLap = 1;
+            startTimestamp = null;
+            gameFinished = false;
+            finalRaceTime = "";
+            
+            // Reset Car parameters back to grid
+            car.x = 230;
+            car.y = 430;
+            car.speed = 0;
+            car.angle = 0;
+            
+            // Clear all hit checkpoints
+            checkpoints.forEach(cp => cp.hit = false);
+            
+            // UI Updates
+            lapDisplay.innerText = "1 / 3";
+            timeDisplay.innerText = "00:00.00";
+            phaseDisplay.innerText = "Main Straight";
+            phaseDisplay.style.color = "#ffffff";
+        }
+
+        resetBtn.addEventListener('click', resetGame);
+
         function checkProximity(x1, y1, x2, y2, range) {
             return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2) < range;
         }
 
-        // Raycasting/Point checks for polygon collision containment bounds
         function isOutsideTrack(x, y) {
-            // Strict Hard Barrier Checkbox Matrix Coordinates Boundary Systems
             // Outer limits wall checks
             if (x < 95 || x > 865 || y < 75 || y > 465) return true;
 
-            // Complex Central Infield Obstacle Barrier Blocks
+            // Central Infield Obstacle Barrier Blocks
             if (x > 185 && x < 800 && y > 145 && y < 395) {
-                // Allows passages matching custom layout cutouts
                 if (x > 380 && x < 760 && y > 330 && y < 420) return false; // Chicane pass channel
                 if (x > 210 && x < 520 && y > 75 && y < 200) return false; // Top connector path
                 return true; 
@@ -513,20 +553,19 @@
         }
 
         function drawCircuitLayout(env) {
-            // Ground layer background canvas mesh fills
+            // Ground layer Fills
             ctx.fillStyle = env.groundColor;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Draw Hard Outer Asphalt Track Loop Ring
+            // Outer Asphalt Track Ring
             ctx.fillStyle = env.trackColor;
             ctx.fillRect(70, 50, 820, 440);
 
-            // Draw Complex Central Infield Dynamic Barrier Island Shapes
+            // Complex Central Infield Barrier Island Shapes
             ctx.fillStyle = '#060709'; 
             ctx.strokeStyle = '#da2e29';
             ctx.lineWidth = 3;
 
-            // Infield shape paths geometry
             ctx.beginPath();
             ctx.moveTo(185, 145);
             ctx.lineTo(800, 145);
@@ -544,12 +583,12 @@
             ctx.fillRect(450, 360, 230, 75);
             ctx.strokeRect(450, 360, 230, 75);
 
-            // Draw Kerbs indicators borders mapping
+            // Kerbs indicators borders mapping
             ctx.strokeStyle = env.curb1;
             ctx.lineWidth = 4;
             ctx.strokeRect(90, 70, 780, 400);
 
-            // Render White Finish line indicator gate
+            // White Finish line indicator gate
             ctx.strokeStyle = '#ffffff';
             ctx.lineWidth = 6;
             ctx.beginPath();
@@ -557,15 +596,7 @@
             ctx.lineTo(280, 495);
             ctx.stroke();
 
-            // Render dynamic checkpoints visual triggers
-            ctx.fillStyle = 'rgba(218, 46, 41, 0.25)';
-            checkpoints.forEach(cp => {
-                if (!cp.isFinishLine && !cp.hit) {
-                    ctx.beginPath();
-                    ctx.arc(cp.x, cp.y, 25, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            });
+            // Note: Red visual dots indicator code completely removed for a clean UI view 
         }
 
         function updateSimulation() {
