@@ -9,43 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-     /* --- FIND THIS BLOCK IN YOUR DEPARTMENTS.HTML STYLE TAG --- */
-
-.dept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-
-.dept-card { 
-    display: block;
-    text-decoration: none; /* Removes the default blue underline */
-    color: #ffffff;        /* Forces the text color to stay white instead of browser blue */
-    background: rgba(12, 14, 18, 0.4); 
-    border: 1px solid rgba(255, 255, 255, 0.05); 
-    padding: 30px; 
-    border-radius: 4px; 
-    backdrop-filter: blur(10px); 
-    transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; 
-}
-
-.dept-card:hover { 
-    border-color: #Da2e29; /* Smoothly highlights your team's red crimson on hover */
-    transform: translateY(-3px);
-    background: rgba(218, 46, 41, 0.02);
-}
-
-/* Ensure headings inside the link cards don't inherit weird states */
-.dept-title { 
-    font-size: 1.8rem; 
-    font-style: italic; 
-    text-transform: uppercase; 
-    margin: 0 0 15px 0; 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
-    padding-bottom: 10px; 
-    color: #ffffff;        /* Keeps headers crisp white */
-}
-        
         body {
             font-family: 'Oswald', Arial, sans-serif;
             margin: 0; padding: 0; background-color: #000000; color: #ffffff;
-            letter-spacing: 0.5px; min-height: 180vh; position: relative; overflow-x: hidden;
+            letter-spacing: 0.5px; min-height: 140vh; position: relative; overflow-x: hidden;
         }
 
         /* --- BACKGROUND LAYER FRAMEWORK --- */
@@ -62,210 +29,266 @@
         .shard-8 { right: -8vw; width: 15vw; background: linear-gradient(90deg, rgba(218, 46, 41, 0.12) 0%, rgba(0, 0, 0, 0) 100%); clip-path: polygon(60% 0%, 100% 0%, 50% 100%, 0% 100%); z-index: -1; }
 
         /* --- STICKY NAV RENEWAL --- */
-.top-navbar {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    z-index: 1000;
-    height: 80px; /* Marginally widened to sit comfortably above your enlarged welcome block */
-    background: rgba(0, 0, 0, 0.75); 
-    backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-}
+        .top-navbar {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 1000;
+            height: 80px; 
+            background: rgba(0, 0, 0, 0.75); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+        }
 
-/* Flexbox Matrix Container */
-.nav-container {
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    justify-content: space-between; /* Pushes logo left and links right */
-    align-items: center;
-}
+        .nav-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            box-sizing: border-box;
+        }
 
-/* Brand Identity Layout */
-.nav-logo-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    height: 100%;
-}
+        .nav-logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            height: 100%;
+        }
 
-.nav-logo-img {
-    height: 48px; /* Scales your logo to fit perfectly within the 80px bar height */
-    width: auto;
-    object-fit: contain;
-    filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
-    transition: transform 0.2s ease;
-}
+        .nav-logo-img {
+            height: 48px; 
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.1));
+            transition: transform 0.2s ease;
+        }
 
-.nav-logo-link:hover .nav-logo-img {
-    transform: scale(1.05); /* Micro-interaction when users hover over logo */
-}
+        .nav-logo-link:hover .nav-logo-img { transform: scale(1.05); }
+        .nav-logo-text { font-size: 1.3rem; font-weight: 700; font-style: italic; text-transform: uppercase; color: #ffffff; letter-spacing: 0.5px; }
+        .accent-red { color: #Da2e29; }
+        
+        .nav-links { display: flex; gap: 15px; }
 
-.nav-logo-text {
-    font-size: 1.3rem;
-    font-weight: 700;
-    font-style: italic;
-    text-transform: uppercase;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-}
+        .nav-links a {
+            text-decoration: none; 
+            font-size: 15px; 
+            font-weight: 700; 
+            font-style: italic;
+            text-transform: uppercase; 
+            color: #ffffff; 
+            letter-spacing: 1.2px; 
+            padding: 8px 12px;
+            transition: all 0.2s ease; 
+            position: relative;
+            white-space: nowrap;
+        }
 
-.accent-red {
-    color: #Da2e29;
-}
-
-/* Nav links alignment alignment adjustments */
-.nav-links { 
-    display: flex; 
-    gap: 15px; 
-}
-
-.nav-links a {
-    text-decoration: none; 
-    font-size: 15px; 
-    font-weight: 700; 
-    font-style: italic;
-    text-transform: uppercase; 
-    color: #ffffff; 
-    letter-spacing: 1.2px; 
-    padding: 8px 12px;
-    transition: all 0.2s ease; 
-    position: relative;
-}
-
-.nav-links a.active { color: #Da2e29; }
-.nav-links a::after {
-    content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
-    bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
-}
-.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
-.nav-links a:hover { color: #Da2e29; }
-
-/* Responsive Mobile Compression Layer */
-@media (max-width: 991px) {
-    .nav-container {
-        padding: 0 20px;
-    }
-    .nav-logo-text {
-        display: none; /* Hides text title on small tablets/mobile to ensure links have full width room */
-    }
-    .nav-links a {
-        font-size: 13px;
-        padding: 6px 8px;
-        gap: 8px;
-    }
-}
+        .nav-links a.active { color: #Da2e29; }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
+            bottom: 0; left: 0; background-color: #Da2e29; transform-origin: bottom right; transition: transform 0.25s ease-out;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: bottom left; }
+        .nav-links a:hover { color: #Da2e29; }
 
         /* --- CONTENT WRAPPER --- */
-        main { padding: 140px 50px 50px 50px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
-        h1 { font-size: 4rem; text-transform: uppercase; font-weight: 700; font-style: italic; margin-bottom: 10px; letter-spacing: -1px; color: #ffffff; border-left: 6px solid #Da2e29; padding-left: 20px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); }
-        .subtitle { font-size: 1.1rem; color: #b0b5c0; text-transform: uppercase; letter-spacing: 2px; padding-left: 26px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); margin-bottom: 50px; }
+        main { padding: 140px 40px 60px 40px; max-width: 1250px; margin: 0 auto; position: relative; z-index: 10; box-sizing: border-box; }
+        
+        h1 { 
+            font-size: 4rem; 
+            text-transform: uppercase; 
+            font-weight: 700; 
+            font-style: italic; 
+            margin: 0 0 10px 0; 
+            letter-spacing: -1px; 
+            color: #ffffff; 
+            border-left: 6px solid #Da2e29; 
+            padding-left: 20px; 
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); 
+        }
+        
+        .subtitle { 
+            font-size: 1.1rem; 
+            color: #b0b5c0; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            padding-left: 26px; 
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); 
+            margin: 0 0 50px 0; 
+        }
         
         .dept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .dept-card { background: rgba(12, 14, 18, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 4px; backdrop-filter: blur(10px); transition: border-color 0.2s ease, transform 0.2s ease; }
-        .dept-card:hover { border-color: #Da2e29; transform: translateY(-3px); }
-        .dept-title { font-size: 1.8rem; font-style: italic; text-transform: uppercase; margin: 0 0 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 10px; }
+        
+        .dept-card { 
+            display: block;
+            text-decoration: none; 
+            color: #ffffff;        
+            background: rgba(12, 14, 18, 0.4); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            padding: 30px; 
+            border-radius: 4px; 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; 
+        }
+        
+        .dept-card:hover { 
+            border-color: #Da2e29; 
+            transform: translateY(-3px); 
+            background: rgba(218, 46, 41, 0.02);
+        }
+        
+        .dept-title { 
+            font-size: 1.8rem; 
+            font-style: italic; 
+            text-transform: uppercase; 
+            margin: 0 0 15px 0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+            padding-bottom: 10px; 
+            color: #ffffff;        
+        }
+        
         .dept-card p { font-family: Arial, sans-serif; font-size: 1rem; line-height: 1.6; color: #a0a0a0; margin: 0; }
+
+        /* --- UNIFIED ADAPTIVE RESPONSIVENESS MATRIX --- */
+        @media (max-width: 991px) {
+            .top-navbar { height: auto; padding: 12px 0; }
+            .nav-container { flex-direction: column; gap: 12px; padding: 0 20px; align-items: center; }
+            .nav-logo-text { display: none; }
+            .nav-links { 
+                width: 100%; justify-content: center; 
+                overflow-x: auto; white-space: nowrap;
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .nav-links::-webkit-scrollbar { display: none; }
+            .nav-links a { font-size: 13px; padding: 6px 8px; letter-spacing: 0.5px; }
+
+            main { padding: 160px 20px 40px 20px; }
+            h1 { font-size: 2.8rem; }
+            .subtitle { padding-left: 20px; font-size: 1rem; margin-bottom: 30px; }
+            .dept-grid { gap: 20px; }
+        }
+
+        @media screen and (max-width: 767px) {
+            .geo-shard { display: none !important; }
+            .dept-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="paddock-bg"></div><div class="glow-wash"></div>
-    <div class="geo-shard shard-1" id="shard1"></div><div class="geo-shard shard-2" id="shard2"></div>
-    <div class="geo-shard shard-3" id="shard3"></div><div class="geo-shard shard-4" id="shard4"></div>
-    <div class="geo-shard shard-5" id="shard5"></div><div class="geo-shard shard-6" id="shard6"></div>
-    <div class="geo-shard shard-7" id="shard7"></div><div class="geo-shard shard-8" id="shard8"></div>
+    <!-- 8-Layer Geometric Paddock Elements -->
+    <div class="paddock-bg"></div>
+    <div class="glow-wash"></div>
+    
+    <div class="geo-shard shard-1" id="shard1"></div>
+    <div class="geo-shard shard-2" id="shard2"></div>
+    <div class="geo-shard shard-3" id="shard3"></div>
+    <div class="geo-shard shard-4" id="shard4"></div>
+    <div class="geo-shard shard-5" id="shard5"></div>
+    <div class="geo-shard shard-6" id="shard6"></div>
+    <div class="geo-shard shard-7" id="shard7"></div>
+    <div class="geo-shard shard-8" id="shard8"></div>
 
     <nav class="top-navbar">
-    <div class="nav-container">
-        <a href="index.html" class="nav-logo-link">
-            <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
-            <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
-        </a>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo-link">
+                <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Logo" class="nav-logo-img">
+                <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
+            </a>
 
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About the team</a>
-            <a href="departments.html">Departments</a>
-            <a href="sponsors.html">Sponsors</a>
-            <a href="timeline.html">Timeline</a>
-            <a href="contact.html">Contact us</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About the team</a>
+                <a href="departments.html" class="active">Departments</a>
+                <a href="sponsors.html">Sponsors</a>
+                <a href="timeline.html">Timeline</a>
+                <a href="contact.html">Contact us</a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <main>
         <h1>Our Divisions</h1>
         <div class="subtitle">// Structural operations sub-teams</div>
 
         <div class="dept-grid">
-    <a href="adepartments-detail.html#aerodynamics" class="dept-card">
-        <div class="dept-title">Aerodynamics</div>
-        <p>Focused on optimizing fluid surface structures, drag calculations...</p>
-    </a>
+            <a href="adepartments-detail.html#aerodynamics" class="dept-card">
+                <div class="dept-title">Aerodynamics</div>
+                <p>Focused on optimizing fluid surface structures, drag calculations...</p>
+            </a>
 
- 
-    <a href="pdepartments-detail.html#powertrain" class="dept-card">
-        <div class="dept-title">Powertrain</div>
-        <p>Responsible for engineering the torque outputs, transmission mechanical configurations...</p>
-    </a>
+            <a href="pdepartments-detail.html#powertrain" class="dept-card">
+                <div class="dept-title">Powertrain</div>
+                <p>Responsible for engineering the torque outputs, transmission mechanical configurations...</p>
+            </a>
 
-
-    <a href="edepartments-detail.html#electronics" class="dept-card">
-        <div class="dept-title">Electronics</div>
-        <p>Integrating high-frequency tracking wire looms, ECU management matrices...</p>
-    </a>
-
-      
-    <a href="andepartments-detail.html#autonomous" class="dept-card">
-        <div class="dept-title">Autonomous</div>
-        <p>Developing spatial vision algorithms, automated path-planning loops...</p>
-    </a>
-
-         
-    <a href="fdepartments-detail.html#financial" class="dept-card">
-        <div class="dept-title">Financial</div>
-        <p>Managing operational budget constraints, asset distribution analytics...</p>
-    </a>
-
-             
-    <a href="mdepartments-detail.html#media" class="dept-card">
-        <div class="dept-title">Media</div>
-        <p>Directing digital asset production, press interactions...</p>
-    </a>
-
-               
-    <a href="evdepartments-detail.html#events" class="dept-card">
-        <div class="dept-title">Events</div>
-        <p>Coordinating trackside operations, presentation logistics...</p>
-    </a>
-</div>
+            <a href="edepartments-detail.html#electronics" class="dept-card">
+                <div class="dept-title">Electronics</div>
+                <p>Integrating high-frequency tracking wire looms, ECU management matrices...</p>
+            </a>
+              
+            <a href="andepartments-detail.html#autonomous" class="dept-card">
+                <div class="dept-title">Autonomous</div>
+                <p>Developing spatial vision algorithms, automated path-planning loops...</p>
+            </a>
+                 
+            <a href="fdepartments-detail.html#financial" class="dept-card">
+                <div class="dept-title">Financial</div>
+                <p>Managing operational budget constraints, asset distribution analytics...</p>
+            </a>
+                     
+            <a href="mdepartments-detail.html#media" class="dept-card">
+                <div class="dept-title">Media</div>
+                <p>Directing digital asset production, press interactions...</p>
+            </a>
+                       
+            <a href="evdepartments-detail.html#events" class="dept-card">
+                <div class="dept-title">Events</div>
+                <p>Coordinating trackside operations, presentation logistics...</p>
+            </a>
         </div>
     </main>
 
+    <!-- Parallax Scroll Script -->
     <script>
         function updateMultiLayerPaddock() {
             const totalScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (totalScrollableHeight <= 0) return;
+            if (totalScrollableHeight <= 0 || window.innerWidth <= 767) return;
+            
             const scrollPercent = window.scrollY / totalScrollableHeight;
-            document.getElementById('shard1').style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
-            document.getElementById('shard2').style.transform = `translateX(${scrollPercent * 25}px)`;
-            document.getElementById('shard3').style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
-            document.getElementById('shard4').style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
-            document.getElementById('shard5').style.transform = `translateX(${scrollPercent * -60}px)`;
+
+            const s1 = document.getElementById('shard1');
+            const s2 = document.getElementById('shard2');
+            const s3 = document.getElementById('shard3');
+            const s4 = document.getElementById('shard4');
+            const s5 = document.getElementById('shard5');
             const s6 = document.getElementById('shard6');
-            s6.style.transform = `translateX(${scrollPercent * -30}px)`; s6.style.opacity = `${0.7 + (scrollPercent * 0.3)}`;
-            document.getElementById('shard7').style.transform = `translateX(${scrollPercent * 15}px)`;
-            document.getElementById('shard8').style.transform = `translateX(${scrollPercent * -75}px) skewX(${scrollPercent * -2}deg)`;
+            const s7 = document.getElementById('shard7');
+            const s8 = document.getElementById('shard8');
+
+            if (s1) s1.style.transform = `translateX(${scrollPercent * -45}px) skewX(${scrollPercent * 1}deg)`;
+            if (s2) s2.style.transform = `translateX(${scrollPercent * 25}px)`;
+            if (s3) s3.style.transform = `translateX(${scrollPercent * -15}px) translateY(${scrollPercent * 20}px)`;
+            if (s4) s4.style.transform = `translateX(${scrollPercent * 35}px) scaleX(${1 + scrollPercent * 0.03})`;
+            if (s5) s5.style.transform = `translateX(${scrollPercent * -60}px)`;
+            if (s6) {
+                s6.style.transform = `translateX(${scrollPercent * -30}px)`;
+                s6.style.opacity = `${0.7 + (scrollPercent * 0.3)}`;
+            }
+            if (s7) s7.style.transform = `translateX(${scrollPercent * 15}px)`;
+            if (s8) s8.style.transform = `translateX(${scrollPercent * -75}px) skewX(${scrollPercent * -2}deg)`;
         }
+
         window.addEventListener('scroll', updateMultiLayerPaddock);
         window.addEventListener('resize', updateMultiLayerPaddock);
         document.addEventListener("DOMContentLoaded", updateMultiLayerPaddock);
