@@ -43,61 +43,129 @@
             z-index: -9;
             pointer-events: none;
         }
-  /* --- SOCIAL LINKS SPATIAL MATRIX --- */
-        .social-matrix-row {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 30px;
-            padding-left: 26px;
-        }
+/* --- SOCIAL MEDIA MATRIX SYSTEM --- */
+.social-matrix-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
 
-        .matrix-link {
-            font-size: 1rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-style: italic;
-            color: #b0b5c0; /* Grey Links */
-            text-decoration: none;
-            letter-spacing: 2px;
-            display: inline-flex;
-            align-items: center;
-            transition: color 0.2s ease;
-        }
+.matrix-title {
+  font-size: 2rem;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-align: center;
+}
 
-        .matrix-link span {
-            color: rgba(255, 255, 255, 0.15);
-            margin-right: 6px;
-            transition: color 0.2s ease;
-            font-family: Arial, sans-serif;
-            font-style: normal;
-        }
+.matrix-subtitle {
+  color: #888888;
+  font-size: 0.95rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
 
-        .matrix-link:hover {
-            color: #Da2e29; /* Highlight accent on hover */
-        }
-        
-        .matrix-link:hover span {
-            color: #Da2e29;
-        } 
-        /* --- UNIFIED ADAPTIVE MEDIA RESPONSIVENESS --- */
-        @media (max-width: 991px) {
-            .top-navbar { height: auto; padding: 10px 0; }
-            .nav-container { flex-direction: column; gap: 10px; padding: 0 20px; }
-            .nav-logo-text { display: none; }
-            .nav-links { gap: 6px; flex-wrap: wrap; justify-content: center; }
-            .nav-links a { font-size: 12px; padding: 6px 8px; letter-spacing: 0.5px; }
+.social-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
 
-            main { padding: 140px 20px 40px 20px; }
-            h1 { font-size: 2.8rem; }
-            .subtitle { padding-left: 20px; font-size: 1rem; margin-bottom: 30px; }
-            .comms-box { padding: 35px; }
-            .social-matrix-row { padding-left: 20px; gap: 20px; }
-        }
+.matrix-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
 
-        @media screen and (max-width: 767px) {
-            .social-matrix-row { flex-direction: column; align-items: flex-start; gap: 15px; }
-        }
+/* Default Grey Text & Icon Styling */
+.card-icon {
+  color: #aaaaaa;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.card-info {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.card-info h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #aaaaaa; /* Grey default */
+  margin: 0 0 4px 0;
+  letter-spacing: 0.8px;
+  transition: color 0.3s ease;
+}
+
+.card-info span {
+  font-size: 0.85rem;
+  color: #666666;
+  transition: color 0.3s ease;
+}
+
+.card-arrow {
+  color: #666666;
+  font-size: 1.4rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  transform: translateX(0);
+}
+
+/* --- HOVER EFFECTS (Red Accent Transition) --- */
+.matrix-card:hover {
+  background: rgba(25, 25, 25, 0.95);
+  border-color: #Da2e29;
+  box-shadow: 0 8px 30px rgba(218, 46, 41, 0.15);
+  transform: translateY(-4px);
+}
+
+.matrix-card:hover .card-icon,
+.matrix-card:hover .card-info h3 {
+  color: #Da2e29; /* Red highlight */
+}
+
+.matrix-card:hover .card-icon {
+  transform: scale(1.08);
+}
+
+.matrix-card:hover .card-info span {
+  color: #ffffff;
+}
+
+.matrix-card:hover .card-arrow {
+  color: #Da2e29;
+  transform: translateX(6px);
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media (max-width: 991px) {
+  .social-matrix-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+  }
+  
+  .matrix-card {
+    padding: 18px 20px;
+  }
+}
         /* --- 8-LAYER GEOMETRIC FRACTURES (THE PADDOCK SHARDS) --- */
         .geo-shard {
             position: fixed;
@@ -844,17 +912,62 @@ operates entirely through volunteer commitment, with students dedicating their t
             }
         }
         document.addEventListener("DOMContentLoaded", initializeDynamicTracker);
-         <div class="social-matrix-row">
-            <a href="https://www.instagram.com/utasmotorsport/" target="_blank" class="matrix-link">
-                <span>[</span> Instagram <span>]</span>
-            </a>
-            <a href="https://www.facebook.com/UniversityofTasmaniaMotorsport/" target="_blank" class="matrix-link">
-                <span>[</span> Facebook <span>]</span>
-            </a>
-            <a href="https://au.linkedin.com/company/utasmotorsport" target="_blank" class="matrix-link">
-                <span>[</span> LinkedIn <span>]</span>
-            </a>
+
+        <!-- --- SOCIAL MEDIA MATRIX --- -->
+<section class="social-matrix-section">
+  <div class="social-matrix-container">
+    <h2 class="matrix-title">Connect With <span class="accent-red">UTAS Motorsport</span></h2>
+    <p class="matrix-subtitle">Follow our journey, build updates, and race coverage across our official channels.</p>
+
+    <div class="social-matrix-grid">
+      <!-- Instagram Card -->
+      <a href="https://www.instagram.com/utas_motorsport" target="_blank" rel="noopener noreferrer" class="matrix-card insta">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
         </div>
+        <div class="card-info">
+          <h3>Instagram</h3>
+          <span>@utas_motorsport</span>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+
+      <!-- Facebook Card -->
+      <a href="https://www.facebook.com/UTASMotorsport" target="_blank" rel="noopener noreferrer" class="matrix-card fb">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>Facebook</h3>
+          <span>/UTASMotorsport</span>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+
+      <!-- LinkedIn Card -->
+      <a href="https://www.linkedin.com/company/utas-motorsport" target="_blank" rel="noopener noreferrer" class="matrix-card linkedin">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>LinkedIn</h3>
+          <span>UTAS Motorsport</span>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+    </div>
+  </div>
+</section>
     </script>
 </body>
 </html>
