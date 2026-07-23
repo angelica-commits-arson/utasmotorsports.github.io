@@ -587,6 +587,45 @@ a.matrix-card:focus {
             font-size: 2rem;
         }
     }
+    /* --- MATRIX HEADER & SUBTITLE STYLING FIX --- */
+.matrix-title {
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+  font-style: italic !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  letter-spacing: 1.2px !important;
+  text-align: center !important;
+  margin: 0 0 10px 0 !important;
+}
+
+/* Red accent class wrapper */
+.accent-red {
+  color: #Da2e29 !important;
+  font-style: italic !important;
+}
+
+.matrix-subtitle {
+  color: rgba(255, 255, 255, 0.6) !important; /* Soft muted gray */
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  text-align: center !important;
+  margin: 0 0 40px 0 !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* Mobile responsiveness for heading text */
+@media (max-width: 768px) {
+  .matrix-title {
+    font-size: 1.6rem !important;
+  }
+  
+  .matrix-subtitle {
+    font-size: 0.85rem !important;
+    padding: 0 10px;
+  }
+}
 </style>
 <!-- END: Welcome Hero Block -->
 /* Hardcore map graphics section */
