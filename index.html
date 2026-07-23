@@ -87,66 +87,105 @@
         /* -------------------------------------------------------------
            NAVIGATION BAR STYLING
            ------------------------------------------------------------- */
-        .top-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 70px;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
+       /* --- RESTORE NAVBAR FLEX LAYOUT & LOGO --- */
+.top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+}
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
+.nav-container {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    box-sizing: border-box;
+}
 
-        .nav-links a {
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 700;
-            font-style: italic;
-            text-transform: uppercase;
-            color: #ffffff;
-            letter-spacing: 1.5px;
-            padding: 10px 15px;
-            transition: all 0.2s ease;
-            position: relative;
-        }
+/* Brand Logo Styling */
+.nav-logo-link {
+    display: flex !important;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none !important;
+    height: 100%;
+    flex-shrink: 0;
+}
 
-        .nav-links a.active {
-            color: #Da2e29;
-        }
+.nav-logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.15));
+}
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #Da2e29;
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
-        }
+.nav-logo-text {
+    font-size: 1.35rem;
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 0.8px;
+    text-decoration: none !important;
+}
 
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
+/* Links Wrapper Alignment */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-        .nav-links a:hover {
-            color: #Da2e29;
-        }
+.nav-links a {
+    text-decoration: none !important;
+    font-size: 15px;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 1.2px;
+    padding: 8px 12px;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+    color: #Da2e29 !important;
+}
+
+/* Active Line Indicator */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: calc(100% - 24px);
+    height: 3px;
+    bottom: -2px;
+    left: 12px;
+    background-color: #Da2e29;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
 
         /* -------------------------------------------------------------
            PAGE CONTENT MAIN WRAPPER
@@ -313,17 +352,25 @@ a.matrix-card:focus {
     <div class="geo-shard shard-8" id="shard8"></div>
 
     <!-- Navigation Header -->
-    <nav class="top-navbar">
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About the team</a>
-            <a href="departments.html">Departments</a>
-            <a href="sponsors.html">Sponsors</a>
-            <a href="timeline.html">Timeline</a>
-            <a href="contact.html">Contact us</a>
-        </div>
-    </nav>
-    <style>
+   <nav class="top-navbar">
+  <div class="nav-container">
+    <!-- Brand Logo Block -->
+    <a href="index.html" class="nav-logo-link">
+      <img src="utas-motorsport-logo.png" alt="UTAS Motorsport Crest" class="nav-logo-img">
+      <span class="nav-logo-text">UTAS <span class="accent-red">MOTORSPORT</span></span>
+    </a>
+
+    <!-- Navigation Links -->
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About The Team</a>
+      <a href="departments.html">Departments</a>
+      <a href="sponsors.html">Sponsors</a>
+      <a href="timeline.html">Timeline</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </div>
+</nav>
 /* --- SOCIAL MEDIA MATRIX SYSTEM --- */
 .social-matrix-section {
   width: 100%;
