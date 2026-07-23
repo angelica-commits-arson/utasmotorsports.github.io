@@ -941,30 +941,34 @@ a.matrix-card:focus {
 
 <style>
 /* --- CLEAN MEDIA FRAME FIX --- */
+/* --- FIXED & STABLE MEDIA FRAME --- */
 .media-frame {
-    width: calc(100% - 80px); /* Creates automatic 40px left & right margins */
+    width: calc(100% - 80px);
     max-width: 1200px;
-    margin: 20px auto 40px auto; /* Centered with top clearance for fixed nav */
+    margin: 20px auto 40px auto; /* Tighter gap below countdown */
+    display: block;
+    position: relative;
     border: none !important;
     box-shadow: none !important;
     background: transparent;
     overflow: hidden;
 }
 
-/* Shows the FULL image without cropping top/bottom */
 .media-frame img {
-    width: 100%;
-    height: auto;
-    object-fit: contain !important; /* Preserves full image aspect ratio without cutting off */
-    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 500px; /* Constrains max height so it doesn't take over the screen */
+    object-fit: contain !important; /* Preserves entire image without cutting off */
+    display: block !important;
+    margin: 0 auto;
     border-radius: 6px;
 }
 
-/* Mobile adjustments */
+/* Mobile responsive layout */
 @media (max-width: 768px) {
     .media-frame {
-        width: calc(100% - 32px); /* 16px margins on small screens */
-        margin-top: 90px;
+        width: calc(100% - 32px);
+        margin-top: 15px;
     }
 }
     /* Stylized UI overlay overlaying the asset */
