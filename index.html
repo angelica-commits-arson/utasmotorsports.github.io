@@ -560,27 +560,37 @@ a.matrix-card:focus {
         position: relative;
         z-index: 10;
     }
-    .welcome-hero-container {
-        background: rgba(12, 14, 18, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-right: 4px solid #Da2e29; /* Red accent bar balancing the left logo */
-        padding: 40px;
-        border-radius: 4px;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
+    /* --- HERO / BANNER IMAGE CONTAINER FIX --- */
+.hero-container,
+.banner-image-container {
+    width: 100%;
+    max-width: 1200px; /* Constrains max width to match navbar layout */
+    height: 420px;     /* Sets a clean, reasonable height cap */
+    margin: 100px auto 40px auto; /* 100px top margin clears fixed navbar */
+    overflow: hidden;
+    border-radius: 8px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Forces image to scale down & fit proportionally without stretching */
+.hero-container img,
+.banner-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;         /* Crops top/bottom neatly instead of blowing up */
+    object-position: center;   /* Keeps focus locked on the car/center */
+    display: block;
+}
+
+/* Mobile scaling */
+@media (max-width: 768px) {
+    .hero-container,
+    .banner-image-container {
+        height: 260px;
+        margin-top: 90px;
     }
-    
-    @media (min-width: 768px) {
-        .welcome-hero-container {
-            flex-direction: row;
-            align-items: center;
-            text-align: left;
-        }
+}
     }
     /* Logo Styling */
     .hero-logo-frame {
