@@ -243,6 +243,172 @@
         @media screen and (max-width: 767px) {
             .social-matrix-row { flex-direction: column; align-items: flex-start; gap: 15px; }
         }
+        /* --- FAQ SECTION --- */
+.faq-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.faq-title {
+  font-size: 2rem;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Individual Accordion Item */
+.faq-item {
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid transparent; /* Accent border placeholder */
+  border-radius: 4px;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.faq-item:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  border-left-color: #Da2e29;
+  background: rgba(25, 25, 25, 0.9);
+}
+
+.faq-item[open] {
+  border-left-color: #Da2e29;
+  background: rgba(20, 20, 20, 0.95);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Question Header */
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  list-style: none; /* Removes default browser chevron */
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+/* Hide default marker for WebKit browsers */
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question:hover {
+  color: #Da2e29;
+}
+
+/* Custom +/- Icon */
+.faq-icon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  content: '';
+  position: absolute;
+  background-color: #ffffff;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
+}
+
+/* Horizontal line */
+.faq-icon::before {
+  top: 6px;
+  left: 0;
+  width: 14px;
+  height: 2px;
+}
+
+/* Vertical line */
+.faq-icon::after {
+  top: 0;
+  left: 6px;
+  width: 2px;
+  height: 14px;
+}
+
+/* Icon hover & open states */
+.faq-question:hover .faq-icon::before,
+.faq-question:hover .faq-icon::after {
+  background-color: #Da2e29;
+}
+
+.faq-item[open] .faq-icon::after {
+  transform: rotate(90deg); /* Collapses vertical line into a minus sign */
+  opacity: 0;
+}
+
+.faq-item[open] .faq-icon::before {
+  background-color: #Da2e29;
+}
+
+/* Answer Body with Smooth Height Transition */
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+  padding: 0 24px;
+}
+
+.faq-answer p {
+  overflow: hidden;
+  margin: 0;
+  color: #cccccc;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.faq-item[open] .faq-answer {
+  grid-template-rows: 1fr;
+  padding: 0 24px 20px 24px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .faq-title {
+    font-size: 1.5rem;
+  }
+
+  .faq-question {
+    font-size: 0.95rem;
+    padding: 16px 18px;
+  }
+
+  .faq-answer p {
+    font-size: 0.88rem;
+  }
+
+  .faq-item[open] .faq-answer {
+    padding: 0 18px 16px 18px;
+  }
+}
     </style>
 </head>
 <body>
@@ -273,20 +439,59 @@
                 <a href="departments.html">Departments</a>
                 <a href="sponsors.html">Sponsors</a>
                 <a href="timeline.html">Timeline</a>
-                <a href="contact.html" class="active">Contact us</a>
+                <a href="contact.html">Contact us</a>
             </div>
         </div>
     </nav>
 
     <main>
         <h1>Contact Us</h1>
-        <div class="subtitle">// Establish Telemetry Connection</div>
+        <div class="subtitle">// FAQ's</div>
 
         <div class="comms-box">
-            <p>For operations inquiries, design array collaboration, or media scheduling, clear pathways are monitored across active data vectors. Direct project coordination pipelines remain responsive throughout standard track development cycles.</p>
-            <p>Reach out securely at <span class="telemetry-highlight">team@motorsport-engineering.com</span> or track our status shifts live below.</p>
+            <p>For inquiries, collaborations, or media queries.</p>
+            <p>Reach out at <span class="telemetry-highlight">team@motorsport-engineering.com</span> or track our status shifts live below.</p>
         </div>
 
+        <section class="faq-section">
+  <h2 class="faq-title">Frequently Asked <span class="accent-red">Questions</span></h2>
+
+  <div class="faq-container">
+    <!-- FAQ Item 1 -->
+    <details class="faq-item" open>
+      <summary class="faq-question">
+        <span>Who can join the team?</span>
+        <span class="faq-icon"></span>
+      </summary>
+      <div class="faq-answer">
+        <p>Our team is open to anyone currently studying at UTAS. As long as you have a passion for motorsports and can commit to a few hours a week, you're in.</p>
+      </div>
+    </details>
+
+    <!-- FAQ Item 2 -->
+    <details class="faq-item">
+      <summary class="faq-question">
+        <span>How can new students join the team?</span>
+        <span class="faq-icon"></span>
+      </summary>
+      <div class="faq-answer">
+        <p>Recruitment opens at the start of each semester with more information and formal recruitment at C&S days. We welcome students from all degrees - not just engineers.</p>
+      </div>
+    </details>
+
+    <!-- FAQ Item 3 -->
+    <details class="faq-item">
+      <summary class="faq-question">
+        <span>How do sponsorship opportunities work?</span>
+        <span class="faq-icon"></span>
+      </summary>
+      <div class="faq-answer">
+        <p>We partner with companies through tiered sponsorship levels offering brand exposure, talent recruitment access, and networking. Visit our Sponsors page or drop us a message.</p>
+      </div>
+    </details>
+  </div>
+</section>
+        
         <div class="social-matrix-row">
             <a href="https://www.instagram.com/utasmotorsport/" target="_blank" class="matrix-link">
                 <span>[</span> Instagram <span>]</span>
