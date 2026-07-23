@@ -21,7 +21,24 @@
             position: relative;
             overflow-x: hidden;
         }
+/* --- UNIFIED ADAPTIVE MEDIA RESPONSIVENESS --- */
+        @media (max-width: 991px) {
+            .top-navbar { height: auto; padding: 10px 0; }
+            .nav-container { flex-direction: column; gap: 10px; padding: 0 20px; }
+            .nav-logo-text { display: none; }
+            .nav-links { gap: 6px; flex-wrap: wrap; justify-content: center; }
+            .nav-links a { font-size: 12px; padding: 6px 8px; letter-spacing: 0.5px; }
 
+            main { padding: 140px 20px 40px 20px; }
+            h1 { font-size: 2.8rem; }
+            .subtitle { padding-left: 20px; font-size: 1rem; margin-bottom: 30px; }
+            .comms-box { padding: 35px; }
+            .social-matrix-row { padding-left: 20px; gap: 20px; }
+        }
+
+        @media screen and (max-width: 767px) {
+            .social-matrix-row { flex-direction: column; align-items: flex-start; gap: 15px; }
+        }
         /* -------------------------------------------------------------
            AMBIEINT BACKGROUND LAYERS
            ------------------------------------------------------------- */
@@ -58,81 +75,14 @@
             transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.2, 1), opacity 0.15s linear;
         }
 
-        /* SHARD 1: Deep Red Structural Horizon */
-        .shard-1 {
-            right: 0;
-            width: 65vw;
-            background: rgba(218, 46, 41, 0.03);
-            clip-path: polygon(45% 0%, 100% 0%, 90% 100%, 20% 100%);
-            z-index: -8;
-        }
-
-        /* SHARD 2: Dark Charcoal Shield */
-        .shard-2 {
-            right: 8vw;
-            width: 50vw;
-            background: rgba(10, 11, 14, 0.8);
-            border-left: 1px solid rgba(255, 255, 255, 0.02);
-            clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 10% 100%);
-            z-index: -7;
-        }
-
-        /* SHARD 3: Secondary Red Ambient Track */
-        .shard-3 {
-            right: 2vw;
-            width: 42vw;
-            background: linear-gradient(180deg, rgba(218, 46, 41, 0.1) 0%, rgba(0, 0, 0, 0) 80%);
-            clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 30% 100%);
-            z-index: -6;
-        }
-
-        /* SHARD 4: Heavy Tech Core Wall */
-        .shard-4 {
-            right: 0;
-            width: 35vw;
-            background: #07080a;
-            border-left: 1px solid rgba(218, 46, 41, 0.1);
-            clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%);
-            z-index: -5;
-        }
-
-        /* SHARD 5: High-Contrast Blade Accent */
-        .shard-5 {
-            right: 12vw;
-            width: 20vw;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.01) 0%, rgba(218, 46, 41, 0.05) 100%);
-            clip-path: polygon(0% 0%, 100% 0%, 60% 100%, 20% 100%);
-            z-index: -4;
-        }
-
-        /* SHARD 6: Core Primary Team Red Stripe */
-        .shard-6 {
-            right: 0;
-            width: 25vw;
-            background: linear-gradient(180deg, rgba(218, 46, 41, 0.22) 0%, rgba(15, 3, 3, 0.6) 60%, rgba(0, 0, 0, 0.95) 100%);
-            clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 5% 100%);
-            backdrop-filter: brightness(0.95) contrast(1.05);
-            z-index: -3;
-        }
-
-        /* SHARD 7: Outer Paddock Fractured Shadow Split */
-        .shard-7 {
-            right: -3vw;
-            width: 18vw;
-            background: rgba(5, 6, 8, 0.9);
-            border-left: 1px solid rgba(255, 255, 255, 0.04);
-            clip-path: polygon(45% 0%, 100% 0%, 80% 100%, 0% 100%);
-            z-index: -2;
-        }
-
-        /* SHARD 8: Foreground Speed Vignette Glow */
-        .shard-8 {
-            right: -8vw;
-            width: 15vw;
-            background: linear-gradient(90deg, rgba(218, 46, 41, 0.12) 0%, rgba(0, 0, 0, 0) 100%);
-            clip-path: polygon(60% 0%, 100% 0%, 50% 100%, 0% 100%);
-            z-index: -1;
-        }
+        .shard-1 { right: 0; width: 65vw; background: rgb(218 46 41 / 45%); clip-path: polygon(45% 0%, 100% 0%, 90% 100%, 20% 100%); z-index: -8; }
+        .shard-2 { right: 8vw; width: 50vw; background: rgba(10, 11, 14, 0.8); border-left: 1px solid rgb(121 46 46 / 61%); clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 10% 100%); z-index: -7; }
+        .shard-3 { right: 2vw; width: 42vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.1) 0%, rgb(197 81 81 / 34%) 80%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 30% 100%); z-index: -6; }
+        .shard-4 { right: 0; width: 35vw; background: #07080a; border-left: 1px solid rgb(115 32 29 / 81%); clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%); z-index: -5;}
+        .shard-5 { right: 12vw; width: 20vw; background: linear-gradient(90deg, rgba(255, 255, 255, 0.01) 0%, rgb(165 18 14 / 59%) 100%); clip-path: polygon(0% 0%, 100% 0%, 60% 100%, 20% 100%); z-index: -4;}
+        .shard-6 { right: 0; width: 25vw; background: linear-gradient(180deg, rgba(218, 46, 41, 0.22) 0%, rgb(165 3 3 / 60%) 60%, rgba(0, 0, 0, 0.95) 100%); clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 5% 100%); backdrop-filter: brightness(0.95) contrast(1.05); z-index: -3;}
+        .shard-7 { right: -3vw; width: 18vw; background: rgba(5, 6, 8, 0.9); border-left: 1px solid rgb(199 33 33 / 52%); clip-path: polygon(45% 0%, 100% 0%, 80% 100%, 0% 100%); z-index: -2; }
+        .shard-8 { right: -8vw; width: 15vw; background: linear-gradient(90deg, rgba(218, 46, 41, 0.12) 0%, rgb(183 42 42) 100%); clip-path: polygon(60% 0%, 100% 0%, 50% 100%, 0% 100%); z-index: -1; }
 
         /* -------------------------------------------------------------
            NAVIGATION BAR STYLING
@@ -251,7 +201,7 @@
     <!-- Navigation Header -->
     <nav class="top-navbar">
         <div class="nav-links">
-            <a href="index.html" class="active">Home</a>
+            <a href="index.html">Home</a>
             <a href="about.html">About the team</a>
             <a href="departments.html">Departments</a>
             <a href="sponsors.html">Sponsors</a>
@@ -259,7 +209,129 @@
             <a href="contact.html">Contact us</a>
         </div>
     </nav>
+/* --- SOCIAL MEDIA MATRIX SYSTEM --- */
+.social-matrix-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
 
+.matrix-title {
+  font-size: 2rem;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.matrix-subtitle {
+  color: #888888;
+  font-size: 0.95rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.social-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.matrix-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Default Grey Text & Icon Styling */
+.card-icon {
+  color: #aaaaaa;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.card-info {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.card-info h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #aaaaaa; /* Grey default */
+  margin: 0 0 4px 0;
+  letter-spacing: 0.8px;
+  transition: color 0.3s ease;
+}
+
+.card-info span {
+  font-size: 0.85rem;
+  color: #666666;
+  transition: color 0.3s ease;
+}
+
+.card-arrow {
+  color: #666666;
+  font-size: 1.4rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  transform: translateX(0);
+}
+
+/* --- HOVER EFFECTS (Red Accent Transition) --- */
+.matrix-card:hover {
+  background: rgba(25, 25, 25, 0.95);
+  border-color: #Da2e29;
+  box-shadow: 0 8px 30px rgba(218, 46, 41, 0.15);
+  transform: translateY(-4px);
+}
+
+.matrix-card:hover .card-icon,
+.matrix-card:hover .card-info h3 {
+  color: #Da2e29; /* Red highlight */
+}
+
+.matrix-card:hover .card-icon {
+  transform: scale(1.08);
+}
+
+.matrix-card:hover .card-info span {
+  color: #ffffff;
+}
+
+.matrix-card:hover .card-arrow {
+  color: #Da2e29;
+  transform: translateX(6px);
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media (max-width: 991px) {
+  .social-matrix-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+  }
+  
+  .matrix-card {
+    padding: 18px 20px;
+  }
+}
     <!-- Main Content Grid Component -->
     <main>
         <h1>Welcome to the team</h1>
@@ -660,7 +732,7 @@
 <!-- START: Monochromatic Interactive Image Block -->
 <div class="interactive-media-wrapper">
     <div class="media-frame">
-        <img src="bc8d0619-fff7-484e-baaf-9d86a1906114.jpg" alt="UTAS Motorsport vehicle analytics" class="chroma-shift-img" loading="lazy">
+        <img src="bc8d0619-fff7-484e-baaf-9d86a1906114.jpg" alt="UTAS Motorsport vehicle analytics">
         
         <div class="media-telemetry-overlay">
             <span class="status-node"></span>
@@ -998,6 +1070,62 @@
     }
 
     document.addEventListener("DOMContentLoaded", initializeDynamicTracker);
-</script>
+    </script>
+   </section>
+<!-- --- SOCIAL MEDIA MATRIX --- -->
+<section class="social-matrix-section">
+  <div class="social-matrix-container">
+    <h2 class="matrix-title">Connect With <span class="accent-red">UTAS Motorsport</span></h2>
+    <p class="matrix-subtitle">Follow our journey, build updates, and race coverage across our official channels.</p>
+
+    <div class="social-matrix-grid">
+      <!-- Instagram Card -->
+      <a href="https://www.instagram.com/utas_motorsport" target="_blank" rel="noopener noreferrer" class="matrix-card insta">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>Instagram</h3>
+          <span>@utas_motorsport</span>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+
+      <!-- Facebook Card -->
+      <a href="https://www.facebook.com/UTASMotorsport" target="_blank" rel="noopener noreferrer" class="matrix-card fb">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>Facebook</h3>
+          <span>/UTASMotorsport</span>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+
+      <!-- LinkedIn Card -->
+      <a href="https://www.linkedin.com/company/utas-motorsport" target="_blank" rel="noopener noreferrer" class="matrix-card linkedin">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>LinkedIn</h3>
+          <span>UTAS Motorsport</span>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+    </div>
+  </div>
+</section>
 </body>
 </html>
