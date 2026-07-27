@@ -260,6 +260,47 @@
         .prospect-email-block a:hover {
             color: #Da2e29;
         }
+        /* --- DOWNLOAD BUTTONS STYLING --- */
+.download-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #12151c;
+    border: 1px solid rgba(218, 46, 41, 0.4);
+    color: #ffffff;
+    padding: 16px 28px;
+    font-family: 'Oswald', Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.download-btn:hover {
+    background: #Da2e29;
+    border-color: #Da2e29;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(218, 46, 41, 0.4);
+}
+
+.download-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
 
         /* --- UNIFIED ADAPTIVE MEDIA RESPONSIVENESS (COMPRESSION MATRIX) --- */
         @media (max-width: 991px) {
@@ -471,11 +512,27 @@
                 </div>
             </div>
         </section>
-          <section class="tier-section supporter prospect-section">
-            <div class="tier-header">//Find out more?</div>
+       <!-- --- DOWNLOADABLE RESOURCES SECTION --- -->
+        <section class="tier-section supporter prospect-section">
+            <div class="tier-header">// Partnership Documentation</div>
             <div class="prospect-content">
-                <a href>="Sponsorship package.pdf"</a>
+                <p>Download our official sponsorship documentation to review tier breakdown options, brand placement opportunities, and partner benefits:</p>
+                
+                <div class="download-container">
+                    <!-- Sponsorship Package Download -->
+                    <a href="Sponsorship package.pdf" download class="download-btn">
+                        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        Download Sponsorship Package (PDF)
+                    </a>
+
+                    <!-- Tier Info Sheet Download (If you have a second file) -->
+                    <a href="UTAS Motorsport Tiers sheet.png" download class="download-btn">
+                        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        Download Tier Overview (PDF)
+                    </a>
+                </div>
             </div>
+        </section>
     </main>
 
        <!-- Parallax Scroll Script -->
