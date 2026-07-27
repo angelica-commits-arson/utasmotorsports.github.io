@@ -145,7 +145,40 @@
             text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
             box-sizing: border-box;
         }
+/* --- TEXT-ONLY SPONSOR CARD STYLES --- */
+.sponsor-card.text-sponsor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 16px;
+    text-align: center;
+}
 
+/* Stylized replacement for a logo image */
+.sponsor-text-logo {
+    font-size: 1.4rem;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    
+    /* Adds a subtle metallic gradient effect */
+    background: linear-gradient(180deg, #ffffff 0%, #aaaaaa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Hover effect matching your other cards */
+.sponsor-card.text-sponsor:hover .sponsor-text-logo {
+    background: none;
+    -webkit-text-fill-color: initial;
+    color: #Da2e29; /* Highlighting in team red on hover */
+    transform: scale(1.04);
+}
         /* --- CONTENT WRAPPER ARCHITECTURE --- */
         main { 
             max-width: 1250px; 
@@ -306,10 +339,10 @@
                    <img src="nutsandbolts.png" alt="Nuts and Bolts Tasmania">
                    <div class="sponsor-name">Fastening Solutions</div>
                </div>
-                <div class="sponsor-card">
-                    <h1="Dr Dave Warren">
-                    </h1>
-                </div>
+<div class="sponsor-card text-sponsor">
+    <div class="sponsor-text-logo">Dr. Dave Warren</div>
+    <div class="sponsor-name">Order of Australia Recipient</div>
+</div>
             </div>
             </div>
         </section>
@@ -414,6 +447,13 @@
                     <img src="cgb.png" alt="CGB Precision">
                     <div class="sponsor-name">Precision Mechanical Components</div>
                 </div>
+                <div class="sponsor-card text-sponsor">
+    <div class="sponsor-text-logo">UTAS School of Creative Arts</div>
+    <div class="sponsor-name">A Vibrant and Creative Community</div>
+</div>
+        <div class="sponsor-text-logo">UTAS Engineering Workshop</div>
+    <div class="sponsor-name">The Heart of our Team</div>
+</div>
             </div>
         </section>
 
